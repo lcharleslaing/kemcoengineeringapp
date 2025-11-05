@@ -1,0 +1,59 @@
+{% extends "resources/base.html" %}
+
+{% block page_title %}Roles{% endblock %}
+
+{% block action_buttons %}
+<a href="{% url 'resources:role_create' %}" class="btn btn-primary">Add Role</a>
+{% endblock %}
+
+{% block resources_content %}
+<div class="card bg-base-100 shadow-xl">
+  <div class="card-body">
+    <div class="overflow-x-auto">
+      <table class="table table-zebra">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>People</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for role in roles %}
+          <tr>
+            <td>
+              <a href="{% url 'resources:role_detail' role.pk %}" class="link link-hover font-semibold">
+                {{ role.name }}
+              </a>
+            </td>
+            <td>{{ role.description|truncatewords:10|default:"—" }}</td>
+            <td>{{ role.active_people_count }}</td>
+            <td>
+              {% if role.is_active %}
+              <span class="badge badge-success">Active</span>
+              {% else %}
+              <span class="badge badge-error">Inactive</span>
+              {% endif %}
+            </td>
+            <td>
+              <div class="flex gap-2">
+                <a href="{% url 'resources:role_detail' role.pk %}" class="btn btn-xs btn-ghost">View</a>
+                <a href="{% url 'resources:role_update' role.pk %}" class="btn btn-xs btn-ghost">Edit</a>
+                <a href="{% url 'resources:role_delete' role.pk %}" class="btn btn-xs btn-ghost text-error">Delete</a>
+              </div>
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="5" class="text-center text-base-content/70">No roles found. <a href="{% url 'resources:role_create' %}" class="link">Create one?</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,73 @@
+{% extends "resources/base.html" %}
+
+{% block page_title %}Role: {{ role.name }}{% endblock %}
+
+{% block action_buttons %}
+<a href="{% url 'resources:role_update' role.pk %}" class="btn btn-primary">Edit</a>
+<a href="{% url 'resources:role_list' %}" class="btn btn-ghost">Back to List</a>
+{% endblock %}
+
+{% block resources_content %}
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h2 class="card-title">Role Information</h2>
+      <div class="space-y-4">
+        <div>
+          <label class="label">
+            <span class="label-text font-semibold">Name</span>
+          </label>
+          <p>{{ role.name }}</p>
+        </div>
+        <div>
+          <label class="label">
+            <span class="label-text font-semibold">Description</span>
+          </label>
+          <p>{{ role.description|default:"—" }}</p>
+        </div>
+        <div>
+          <label class="label">
+            <span class="label-text font-semibold">Status</span>
+          </label>
+          {% if role.is_active %}
+          <span class="badge badge-success">Active</span>
+          {% else %}
+          <span class="badge badge-error">Inactive</span>
+          {% endif %}
+        </div>
+        <div>
+          <label class="label">
+            <span class="label-text font-semibold">People with this Role</span>
+          </label>
+          <p class="text-2xl font-bold">{{ role.active_people_count }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h2 class="card-title">People with this Role</h2>
+      {% if people %}
+      <div class="space-y-2">
+        {% for person in people %}
+        <a href="{% url 'resources:person_detail' person.pk %}" class="block p-3 hover:bg-base-200 rounded border border-base-300">
+          <div class="font-semibold">{{ person.full_name }}</div>
+          {% if person.department %}
+          <div class="text-sm text-base-content/70">{{ person.department.name }}</div>
+          {% endif %}
+          {% if person.email %}
+          <div class="text-xs text-base-content/60">{{ person.email }}</div>
+          {% endif %}
+        </a>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p class="text-base-content/70">No people with this role yet.</p>
+      <a href="{% url 'resources:person_create' %}?role={{ role.pk }}" class="btn btn-sm btn-primary mt-4">Add Person</a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
+

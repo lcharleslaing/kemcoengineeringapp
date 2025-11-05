@@ -1,0 +1,59 @@
+{% extends "resources/base.html" %}
+
+{% block page_title %}Departments{% endblock %}
+
+{% block action_buttons %}
+<a href="{% url 'resources:department_create' %}" class="btn btn-primary">Add Department</a>
+{% endblock %}
+
+{% block resources_content %}
+<div class="card bg-base-100 shadow-xl">
+  <div class="card-body">
+    <div class="overflow-x-auto">
+      <table class="table table-zebra">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>People</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for department in departments %}
+          <tr>
+            <td>
+              <a href="{% url 'resources:department_detail' department.pk %}" class="link link-hover font-semibold">
+                {{ department.name }}
+              </a>
+            </td>
+            <td>{{ department.description|truncatewords:10|default:"—" }}</td>
+            <td>{{ department.active_people_count }}</td>
+            <td>
+              {% if department.is_active %}
+              <span class="badge badge-success">Active</span>
+              {% else %}
+              <span class="badge badge-error">Inactive</span>
+              {% endif %}
+            </td>
+            <td>
+              <div class="flex gap-2">
+                <a href="{% url 'resources:department_detail' department.pk %}" class="btn btn-xs btn-ghost">View</a>
+                <a href="{% url 'resources:department_update' department.pk %}" class="btn btn-xs btn-ghost">Edit</a>
+                <a href="{% url 'resources:department_delete' department.pk %}" class="btn btn-xs btn-ghost text-error">Delete</a>
+              </div>
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="5" class="text-center text-base-content/70">No departments found. <a href="{% url 'resources:department_create' %}" class="link">Create one?</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

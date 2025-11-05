@@ -1,0 +1,129 @@
+{% extends "my_calendar/base_calendar.html" %}
+
+{% block calendar_title %}{% if form.instance.pk %}Edit Event{% else %}Create Event{% endif %}{% endblock %}
+{% block calendar_subtitle %}{% if form.instance.pk %}Update event details{% else %}Add a new event to your calendar{% endif %}{% endblock %}
+
+{% block calendar_content %}
+<div class="max-w-2xl mx-auto">
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <form method="post" class="space-y-4">
+        {% csrf_token %}
+        
+        <!-- Title -->
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text font-semibold">Title *</span>
+          </label>
+          {{ form.title }}
+          {% if form.title.errors %}
+            <label class="label">
+              <span class="label-text-alt text-error">{{ form.title.errors.0 }}</span>
+            </label>
+          {% endif %}
+        </div>
+
+        <!-- Start DateTime -->
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text font-semibold">Start Date & Time *</span>
+          </label>
+          {{ form.start_datetime }}
+          {% if form.start_datetime.errors %}
+            <label class="label">
+              <span class="label-text-alt text-error">{{ form.start_datetime.errors.0 }}</span>
+            </label>
+          {% endif %}
+          <label class="label">
+            <span class="label-text-alt">When does this event start?</span>
+          </label>
+        </div>
+
+        <!-- End DateTime -->
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text font-semibold">End Date & Time *</span>
+          </label>
+          {{ form.end_datetime }}
+          {% if form.end_datetime.errors %}
+            <label class="label">
+              <span class="label-text-alt text-error">{{ form.end_datetime.errors.0 }}</span>
+            </label>
+          {% endif %}
+          <label class="label">
+            <span class="label-text-alt">When does this event end?</span>
+          </label>
+        </div>
+
+        <!-- Location -->
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text font-semibold">Location</span>
+          </label>
+          {{ form.location }}
+          {% if form.location.errors %}
+            <label class="label">
+              <span class="label-text-alt text-error">{{ form.location.errors.0 }}</span>
+            </label>
+          {% endif %}
+          <label class="label">
+            <span class="label-text-alt">Where will this event take place? (Optional)</span>
+          </label>
+        </div>
+
+        <!-- Description -->
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text font-semibold">Description</span>
+          </label>
+          {{ form.description }}
+          {% if form.description.errors %}
+            <label class="label">
+              <span class="label-text-alt text-error">{{ form.description.errors.0 }}</span>
+            </label>
+          {% endif %}
+          <label class="label">
+            <span class="label-text-alt">Add additional details about this event (Optional)</span>
+          </label>
+        </div>
+
+        <!-- Form Errors -->
+        {% if form.non_field_errors %}
+          <div class="alert alert-error">
+            {% for error in form.non_field_errors %}
+              <span>{{ error }}</span>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        <!-- Actions -->
+        <div class="divider"></div>
+        <div class="flex gap-2 justify-end">
+          <a href="{% if form.instance.pk %}{% url 'event_detail' form.instance.pk %}{% else %}{% url 'calendar_month' %}{% endif %}" class="btn btn-ghost">
+            Cancel
+          </a>
+          <button type="submit" class="btn btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            {% if form.instance.pk %}Update Event{% else %}Create Event{% endif %}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Help Card -->
+  <div class="card bg-base-200 shadow-xl mt-6">
+    <div class="card-body">
+      <h3 class="card-title text-lg">Tips</h3>
+      <ul class="list-disc list-inside space-y-1 text-sm text-base-content/70">
+        <li>All times are in your local timezone ({{ request.user.date_joined.tzinfo|default:"UTC" }})</li>
+        <li>End time must be after start time</li>
+        <li>Use the description field for meeting notes, links, or reminders</li>
+        <li>You can export events to your calendar app using the ICS export feature</li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}

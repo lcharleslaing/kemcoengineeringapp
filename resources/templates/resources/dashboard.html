@@ -1,0 +1,106 @@
+{% extends "resources/base.html" %}
+
+{% block page_title %}Resources Dashboard{% endblock %}
+
+{% block resources_content %}
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+  <!-- Departments Card -->
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h2 class="card-title">Departments</h2>
+      <p class="text-4xl font-bold text-primary">{{ departments_count }}</p>
+      <p class="text-sm text-base-content/70">Active departments</p>
+      <div class="card-actions justify-end mt-4">
+        <a href="{% url 'resources:department_list' %}" class="btn btn-primary btn-sm">View All</a>
+        <a href="{% url 'resources:department_create' %}" class="btn btn-outline btn-sm">Add New</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Roles Card -->
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h2 class="card-title">Roles</h2>
+      <p class="text-4xl font-bold text-secondary">{{ roles_count }}</p>
+      <p class="text-sm text-base-content/70">Active roles</p>
+      <div class="card-actions justify-end mt-4">
+        <a href="{% url 'resources:role_list' %}" class="btn btn-secondary btn-sm">View All</a>
+        <a href="{% url 'resources:role_create' %}" class="btn btn-outline btn-sm">Add New</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- People Card -->
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h2 class="card-title">People</h2>
+      <p class="text-4xl font-bold text-accent">{{ people_count }}</p>
+      <p class="text-sm text-base-content/70">Active people</p>
+      <div class="card-actions justify-end mt-4">
+        <a href="{% url 'resources:person_list' %}" class="btn btn-accent btn-sm">View All</a>
+        <a href="{% url 'resources:person_create' %}" class="btn btn-outline btn-sm">Add New</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+  <!-- Recent Departments -->
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h2 class="card-title">Recent Departments</h2>
+      {% if recent_departments %}
+      <div class="space-y-2">
+        {% for dept in recent_departments %}
+        <a href="{% url 'resources:department_detail' dept.pk %}" class="block p-2 hover:bg-base-200 rounded">
+          <div class="font-semibold">{{ dept.name }}</div>
+          <div class="text-xs text-base-content/70">{{ dept.created_at|date:"M d, Y" }}</div>
+        </a>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p class="text-base-content/70">No departments yet</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Recent Roles -->
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h2 class="card-title">Recent Roles</h2>
+      {% if recent_roles %}
+      <div class="space-y-2">
+        {% for role in recent_roles %}
+        <a href="{% url 'resources:role_detail' role.pk %}" class="block p-2 hover:bg-base-200 rounded">
+          <div class="font-semibold">{{ role.name }}</div>
+          <div class="text-xs text-base-content/70">{{ role.created_at|date:"M d, Y" }}</div>
+        </a>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p class="text-base-content/70">No roles yet</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Recent People -->
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h2 class="card-title">Recent People</h2>
+      {% if recent_people %}
+      <div class="space-y-2">
+        {% for person in recent_people %}
+        <a href="{% url 'resources:person_detail' person.pk %}" class="block p-2 hover:bg-base-200 rounded">
+          <div class="font-semibold">{{ person.full_name }}</div>
+          <div class="text-xs text-base-content/70">{{ person.created_at|date:"M d, Y" }}</div>
+        </a>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p class="text-base-content/70">No people yet</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
+

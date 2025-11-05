@@ -1,0 +1,27 @@
+# Django Electron App Requirements
+
+# Django Framework
+Django>=5.0.0,<6.0.0
+
+# OpenAI API
+openai>=1.0.0
+
+# Environment management
+python-dotenv>=1.0.0
+
+# Image handling for user profiles
+pillow>=10.0.0
+
+# Railway deployment dependencies
+gunicorn>=21.0.0
+psycopg2-binary>=2.9.0
+whitenoise>=6.0.0
+dj-database-url>=2.0.0
+
+# Optional: Additional Django packages you might want
+# django-cors-headers>=4.0.0  # For CORS if needed
+# djangorestframework>=3.14.0  # For REST API
+# My Budget App Dependencies
+python-dateutil>=2.8.0
+# Optional: for OFX/QFX import
+# ofxparse>=0.21

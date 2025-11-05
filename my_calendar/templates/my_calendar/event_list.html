@@ -1,0 +1,87 @@
+{% extends "my_calendar/base_calendar.html" %}
+
+{% block calendar_title %}All Events{% endblock %}
+{% block calendar_subtitle %}List View{% endblock %}
+
+{% block calendar_content %}
+<div class="card bg-base-100 shadow-xl">
+  <div class="card-body">
+    {% if events %}
+      <div class="overflow-x-auto">
+        <table class="table table-zebra">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Start</th>
+              <th>End</th>
+              <th>Location</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for event in events %}
+              <tr>
+                <td>
+                  <a href="{% url 'event_detail' event.id %}" class="font-semibold hover:text-primary">
+                    {{ event.title }}
+                  </a>
+                  {% if event.is_today %}
+                    <span class="badge badge-primary badge-sm ml-2">Today</span>
+                  {% elif event.is_upcoming %}
+                    <span class="badge badge-info badge-sm ml-2">Upcoming</span>
+                  {% elif event.is_past %}
+                    <span class="badge badge-ghost badge-sm ml-2">Past</span>
+                  {% endif %}
+                </td>
+                <td>{{ event.start_datetime|date:"M d, Y g:i A" }}</td>
+                <td>{{ event.end_datetime|date:"M d, Y g:i A" }}</td>
+                <td>{{ event.location|default:"?" }}</td>
+                <td>
+                  <div class="flex gap-2">
+                    <a href="{% url 'event_detail' event.id %}" class="btn btn-ghost btn-xs">View</a>
+                    <a href="{% url 'event_update' event.id %}" class="btn btn-ghost btn-xs">Edit</a>
+                    <a href="{% url 'event_delete' event.id %}" class="btn btn-ghost btn-xs text-error">Delete</a>
+                  </div>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pagination -->
+      {% if is_paginated %}
+        <div class="flex justify-center mt-6">
+          <div class="join">
+            {% if page_obj.has_previous %}
+              <a href="?page=1" class="join-item btn btn-sm">?</a>
+              <a href="?page={{ page_obj.previous_page_number }}" class="join-item btn btn-sm">?</a>
+            {% endif %}
+            
+            <button class="join-item btn btn-sm btn-active">Page {{ page_obj.number }}</button>
+            
+            {% if page_obj.has_next %}
+              <a href="?page={{ page_obj.next_page_number }}" class="join-item btn btn-sm">?</a>
+              <a href="?page={{ page_obj.paginator.num_pages }}" class="join-item btn btn-sm">?</a>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+    {% else %}
+      <div class="text-center py-12">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-base-content/30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+        <p class="text-base-content/50 mt-4 text-lg">No events yet</p>
+        <p class="text-base-content/30 text-sm">Create your first event to get started</p>
+        <a href="{% url 'event_create' %}" class="btn btn-primary mt-6">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+          </svg>
+          Create Event
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

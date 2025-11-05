@@ -1,0 +1,14 @@
+name: django-electron
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.12
+  - django>=5.0
+  - nodejs>=20.0
+  - npm
+  - pip
+  - pip:
+    - django>=5.0.0
+    - openai>=1.0.0
+    - python-dotenv>=1.0.0

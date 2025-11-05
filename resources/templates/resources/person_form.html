@@ -1,0 +1,144 @@
+{% extends "resources/base.html" %}
+
+{% block page_title %}{{ page_title }}{% endblock %}
+
+{% block action_buttons %}
+<a href="{% url 'resources:person_list' %}" class="btn btn-ghost">Back to List</a>
+{% endblock %}
+
+{% block resources_content %}
+<div class="card bg-base-100 shadow-xl max-w-2xl mx-auto">
+  <div class="card-body">
+    <h2 class="card-title">{{ form_action }} Person</h2>
+    <form method="post">
+      {% csrf_token %}
+      <div class="space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="form-control">
+            <label class="label" for="{{ form.first_name.id_for_label }}">
+              <span class="label-text font-semibold">First Name <span class="text-error">*</span></span>
+            </label>
+            {{ form.first_name }}
+            {% if form.first_name.errors %}
+            <label class="label">
+              <span class="label-text-alt text-error">{{ form.first_name.errors }}</span>
+            </label>
+            {% endif %}
+          </div>
+
+          <div class="form-control">
+            <label class="label" for="{{ form.last_name.id_for_label }}">
+              <span class="label-text font-semibold">Last Name <span class="text-error">*</span></span>
+            </label>
+            {{ form.last_name }}
+            {% if form.last_name.errors %}
+            <label class="label">
+              <span class="label-text-alt text-error">{{ form.last_name.errors }}</span>
+            </label>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="form-control">
+            <label class="label" for="{{ form.email.id_for_label }}">
+              <span class="label-text font-semibold">Email</span>
+            </label>
+            {{ form.email }}
+            {% if form.email.errors %}
+            <label class="label">
+              <span class="label-text-alt text-error">{{ form.email.errors }}</span>
+            </label>
+            {% endif %}
+          </div>
+
+          <div class="form-control">
+            <label class="label" for="{{ form.phone.id_for_label }}">
+              <span class="label-text font-semibold">Phone</span>
+            </label>
+            {{ form.phone }}
+            {% if form.phone.errors %}
+            <label class="label">
+              <span class="label-text-alt text-error">{{ form.phone.errors }}</span>
+            </label>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="form-control">
+            <label class="label" for="{{ form.department.id_for_label }}">
+              <span class="label-text font-semibold">Department</span>
+            </label>
+            {{ form.department }}
+            {% if form.department.errors %}
+            <label class="label">
+              <span class="label-text-alt text-error">{{ form.department.errors }}</span>
+            </label>
+            {% endif %}
+          </div>
+
+          <div class="form-control">
+            <label class="label" for="{{ form.role.id_for_label }}">
+              <span class="label-text font-semibold">Role</span>
+            </label>
+            {{ form.role }}
+            {% if form.role.errors %}
+            <label class="label">
+              <span class="label-text-alt text-error">{{ form.role.errors }}</span>
+            </label>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="form-control">
+          <label class="label" for="{{ form.user.id_for_label }}">
+            <span class="label-text font-semibold">User Account</span>
+          </label>
+          {{ form.user }}
+          <label class="label">
+            <span class="label-text-alt">Link to Django user account (optional)</span>
+          </label>
+          {% if form.user.errors %}
+          <label class="label">
+            <span class="label-text-alt text-error">{{ form.user.errors }}</span>
+          </label>
+          {% endif %}
+        </div>
+
+        <div class="form-control">
+          <label class="label" for="{{ form.notes.id_for_label }}">
+            <span class="label-text font-semibold">Notes</span>
+          </label>
+          {{ form.notes }}
+          {% if form.notes.errors %}
+          <label class="label">
+            <span class="label-text-alt text-error">{{ form.notes.errors }}</span>
+          </label>
+          {% endif %}
+        </div>
+
+        <div class="form-control">
+          <label class="label cursor-pointer">
+            <span class="label-text font-semibold">Active</span>
+            {{ form.is_active }}
+          </label>
+          {% if form.is_active.errors %}
+          <label class="label">
+            <span class="label-text-alt text-error">{{ form.is_active.errors }}</span>
+          </label>
+          {% endif %}
+        </div>
+
+        <div class="form-control mt-6">
+          <div class="flex gap-2">
+            <button type="submit" class="btn btn-primary">{{ form_action }}</button>
+            <a href="{% url 'resources:person_list' %}" class="btn btn-ghost">Cancel</a>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+

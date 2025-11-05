@@ -1,0 +1,64 @@
+{% extends "core/base.html" %}
+
+{% block title %}{{ app.title }}{% endblock %}
+
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="min-h-[70vh] bg-gradient-to-b from-base-200 via-base-300/40 to-base-200 py-16">
+  <div class="container mx-auto px-6 max-w-5xl">
+    <div class="text-center mb-12">
+      <span class="badge badge-lg badge-info badge-outline uppercase tracking-wide mb-4">Coming Soon</span>
+      <h1 class="text-4xl sm:text-5xl font-extrabold mb-4">{{ app.title }}</h1>
+      {% if app.short_description %}
+      <p class="text-lg text-base-content/70 max-w-2xl mx-auto">{{ app.short_description }}</p>
+      {% endif %}
+    </div>
+
+    <div class="card shadow-2xl bg-base-100/95 backdrop-blur">
+      {% if app.hero_image %}
+      <figure class="relative aspect-[16/7] overflow-hidden">
+        <img src="{{ app.hero_image }}" alt="{{ app.title }} hero" class="w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-t from-base-100/80 via-transparent"></div>
+      </figure>
+      {% endif %}
+      <div class="card-body space-y-6">
+        <div>
+          <h2 class="card-title text-2xl">We&rsquo;re crafting something special</h2>
+          <p class="text-base-content/70 leading-relaxed">
+            {% if app.coming_soon_message %}
+              {{ app.coming_soon_message|linebreaksbr }}
+            {% else %}
+              We&rsquo;re putting the finishing touches on this experience. Keep an eye on your dashboard&mdash;as soon as it&rsquo;s ready,
+              you&rsquo;ll be among the first to explore it.
+            {% endif %}
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="p-5 rounded-xl bg-base-200">
+            <h3 class="font-semibold text-base mb-2">Stay Tuned</h3>
+            <p class="text-sm text-base-content/70">Updates will roll out right here. We&rsquo;ll highlight new features the moment they ship.</p>
+          </div>
+          <div class="p-5 rounded-xl bg-base-200">
+            <h3 class="font-semibold text-base mb-2">Your Access</h3>
+            <p class="text-sm text-base-content/70">You&rsquo;re already on the list. When the app unlocks, it will appear as an active card on your dashboard.</p>
+          </div>
+          <div class="p-5 rounded-xl bg-base-200">
+            <h3 class="font-semibold text-base mb-2">Feedback Welcome</h3>
+            <p class="text-sm text-base-content/70">Have ideas you want to hear in the first release? Drop them through your usual feedback channels.</p>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-base-200">
+          <div class="text-sm text-base-content/60">
+            Last updated: {{ app.updated_at|date:"F j, Y" }}
+          </div>
+          <a href="{% url 'dashboard' %}" class="btn btn-outline">Back to Dashboard</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

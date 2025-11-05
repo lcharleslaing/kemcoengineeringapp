@@ -1,0 +1,99 @@
+{% extends "resources/base.html" %}
+
+{% block page_title %}People{% endblock %}
+
+{% block action_buttons %}
+<a href="{% url 'resources:person_create' %}" class="btn btn-primary">Add Person</a>
+{% endblock %}
+
+{% block resources_content %}
+<!-- Filters -->
+<div class="card bg-base-100 shadow-xl mb-6">
+  <div class="card-body">
+    <form method="get" class="flex flex-wrap gap-4">
+      <div class="form-control">
+        <input type="text" name="search" value="{{ search_query }}" placeholder="Search by name or email..." class="input input-bordered" />
+      </div>
+      <div class="form-control">
+        <select name="department" class="select select-bordered">
+          <option value="">All Departments</option>
+          {% for dept in departments %}
+          <option value="{{ dept.pk }}" {% if department_filter == dept.pk|stringformat:"s" %}selected{% endif %}>
+            {{ dept.name }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-control">
+        <select name="role" class="select select-bordered">
+          <option value="">All Roles</option>
+          {% for role in roles %}
+          <option value="{{ role.pk }}" {% if role_filter == role.pk|stringformat:"s" %}selected{% endif %}>
+            {{ role.name }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-control">
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <a href="{% url 'resources:person_list' %}" class="btn btn-ghost btn-sm mt-2">Clear</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- People List -->
+<div class="card bg-base-100 shadow-xl">
+  <div class="card-body">
+    <div class="overflow-x-auto">
+      <table class="table table-zebra">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Department</th>
+            <th>Role</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for person in people %}
+          <tr>
+            <td>
+              <a href="{% url 'resources:person_detail' person.pk %}" class="link link-hover font-semibold">
+                {{ person.full_name }}
+              </a>
+            </td>
+            <td>{{ person.department.name|default:"—" }}</td>
+            <td>{{ person.role.name|default:"—" }}</td>
+            <td>{{ person.email|default:"—" }}</td>
+            <td>{{ person.phone|default:"—" }}</td>
+            <td>
+              {% if person.is_active %}
+              <span class="badge badge-success">Active</span>
+              {% else %}
+              <span class="badge badge-error">Inactive</span>
+              {% endif %}
+            </td>
+            <td>
+              <div class="flex gap-2">
+                <a href="{% url 'resources:person_detail' person.pk %}" class="btn btn-xs btn-ghost">View</a>
+                <a href="{% url 'resources:person_update' person.pk %}" class="btn btn-xs btn-ghost">Edit</a>
+                <a href="{% url 'resources:person_delete' person.pk %}" class="btn btn-xs btn-ghost text-error">Delete</a>
+              </div>
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="7" class="text-center text-base-content/70">No people found. <a href="{% url 'resources:person_create' %}" class="link">Add one?</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

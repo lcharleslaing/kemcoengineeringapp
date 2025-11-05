@@ -1,0 +1,87 @@
+{% extends "core/base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="container mx-auto p-6">
+  <h1 class="text-2xl font-bold mb-6">Dashboard</h1>
+  
+  <!-- Available Apps -->
+  <section class="mb-10">
+    <h2 class="text-xl font-semibold mb-4">Available Apps</h2>
+    <div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+      
+      <!-- My Calendar App -->
+      <a href="{% url 'calendar_month' %}" class="card shadow-lg bg-base-100 hover:shadow-xl transition-shadow duration-200">
+        <div class="card-body">
+          <div class="flex items-center justify-between mb-3">
+            <span class="badge badge-success badge-outline uppercase tracking-wide">Active</span>
+            <svg class="w-8 h-8 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <h3 class="card-title text-lg">My Calendar</h3>
+          <p class="text-sm text-base-content/70">Manage your events and schedule with month, week, and day views.</p>
+          <div class="mt-4">
+            <span class="btn btn-sm btn-primary">Open Calendar</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Resources App (Admin Only) -->
+      {% if user.is_superuser %}
+      <a href="{% url 'resources:dashboard' %}" class="card shadow-lg bg-base-100 hover:shadow-xl transition-shadow duration-200">
+        <div class="card-body">
+          <div class="flex items-center justify-between mb-3">
+            <span class="badge badge-success badge-outline uppercase tracking-wide">Active</span>
+            <svg class="w-8 h-8 text-secondary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+          </div>
+          <h3 class="card-title text-lg">Resources</h3>
+          <p class="text-sm text-base-content/70">Manage departments, roles, and people. For administrators only.</p>
+          <div class="mt-4">
+            <span class="btn btn-sm btn-secondary">Open Resources</span>
+          </div>
+        </div>
+      </a>
+      {% endif %}
+
+    </div>
+  </section>
+  
+  <section class="mb-10">
+    <h2 class="text-xl font-semibold mb-4">Featured Apps</h2>
+    {% if apps %}
+    <div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+      {% for app in apps %}
+      <a href="{% url 'dashboard_app_detail' app.slug %}" class="card shadow-lg bg-base-100 hover:shadow-xl transition-shadow duration-200">
+        <div class="card-body">
+          <div class="flex items-center justify-between mb-3">
+            <span class="badge badge-info badge-outline uppercase tracking-wide">Coming Soon</span>
+            <svg class="w-5 h-5 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.5 4.5L21 12l-7.5 7.5M21 12H3" />
+            </svg>
+          </div>
+          <h3 class="card-title text-lg">{{ app.title }}</h3>
+          {% if app.short_description %}
+          <p class="text-sm text-base-content/70">{{ app.short_description }}</p>
+          {% endif %}
+          <div class="mt-4">
+            <span class="btn btn-sm btn-primary btn-ghost">Preview</span>
+          </div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="p-6 bg-base-100 rounded-xl border border-dashed border-base-300">
+      <p class="text-base-content/60">No apps are available to you yet. Check back soon!</p>
+    </div>
+    {% endif %}
+  </section>
+  
+</div>
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends "core/base.html" %}
+
+{% block title %}Site Settings{% endblock %}
+
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="container mx-auto px-6 py-12">
+  <div class="max-w-3xl mx-auto">
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body space-y-6">
+        <div>
+          <h1 class="text-3xl font-bold mb-2">Site Settings</h1>
+          <p class="text-base-content/70">
+            Control registration policies and future global configuration from one place.
+          </p>
+        </div>
+
+        <form method="post" class="space-y-8">
+          {% csrf_token %}
+          <div class="form-control w-full">
+            <span class="label-text text-lg font-semibold">{{ form.registration_requires_invite.label }}</span>
+            {% if form.registration_requires_invite.help_text %}
+              <span class="label-text-alt text-base-content/60 mt-1 block">
+                {{ form.registration_requires_invite.help_text }}
+              </span>
+            {% endif %}
+            <div class="mt-5 grid gap-4 sm:grid-cols-2">
+              {% for choice in form.registration_requires_invite.field.choices %}
+                <label class="label cursor-pointer items-center justify-between rounded-xl border border-base-300 px-5 py-4 shadow-sm hover:border-primary hover:bg-base-200/60 transition">
+                  <span class="label-text font-medium">{{ choice.1 }}</span>
+                  <input 
+                    type="radio" 
+                    name="{{ form.registration_requires_invite.name }}" 
+                    value="{{ choice.0 }}" 
+                    class="radio radio-primary"
+                    {% if form.registration_requires_invite.value == choice.0 %}checked{% endif %}
+                  />
+                </label>
+              {% endfor %}
+            </div>
+            {% if form.registration_requires_invite.errors %}
+              <span class="label-text-alt text-error mt-3 block">
+                {{ form.registration_requires_invite.errors|join:", " }}
+              </span>
+            {% endif %}
+          </div>
+
+          <div class="card-actions justify-end gap-3">
+            <a href="{% url 'dashboard' %}" class="btn btn-ghost">Cancel</a>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+
+        <div class="rounded-lg bg-base-200 p-4 text-sm text-base-content/70">
+          <p><strong>Registration status:</strong>
+            {% if settings_obj.registration_requires_invite %}
+              Invite-only
+            {% else %}
+              Open
+            {% endif %}
+          </p>
+          <p class="mt-1">Last updated: {{ settings_obj.updated_at|date:"F j, Y g:i a" }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

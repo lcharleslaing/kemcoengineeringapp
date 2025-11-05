@@ -1,0 +1,73 @@
+{% extends "my_calendar/base_calendar.html" %}
+{% load calendar_filters %}
+
+{% block calendar_title %}Week {{ week }}, {{ year }}{% endblock %}
+{% block calendar_subtitle %}Week View{% endblock %}
+
+{% block calendar_content %}
+<div class="card bg-base-100 shadow-xl">
+  <div class="card-body p-4">
+    <!-- Navigation -->
+    <div class="flex justify-between items-center mb-4">
+      <a href="{% url 'calendar_week' prev_year prev_week %}" class="btn btn-ghost btn-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        Previous
+      </a>
+      
+      <h2 class="text-xl font-bold">Week {{ week }}, {{ year }}</h2>
+      
+      <a href="{% url 'calendar_week' next_year next_week %}" class="btn btn-ghost btn-sm">
+        Next
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+
+    <!-- Week Grid -->
+    <div class="overflow-x-auto">
+      <div class="grid grid-cols-1 md:grid-cols-7 gap-4 p-1">
+        {% for day in week_days %}
+          <div class="card bg-base-200 {% if day == today %}ring-4 ring-primary{% endif %}">
+            <div class="card-body p-3">
+              <h3 class="font-semibold text-center mb-2 {% if day == today %}text-primary{% endif %}">
+                {{ day|date:"D" }}<br>
+                <span class="text-2xl">{{ day|date:"d" }}</span>
+              </h3>
+              
+              <!-- Events for this day -->
+              {% if day in events_by_date %}
+                <div class="space-y-2">
+                  {% for event in events_by_date|get_item:day %}
+                    <a href="{% url 'event_detail' event.id %}" class="event-block bg-base-100 hover:bg-base-300 transition-colors block">
+                      <div class="font-semibold text-sm">{{ event.title }}</div>
+                      <div class="text-xs text-base-content/70">
+                        {{ event.start_datetime|date:"g:i A" }}{% if event.end_datetime %} - {{ event.end_datetime|date:"g:i A" }}{% endif %}
+                      </div>
+                      {% if event.location %}
+                        <div class="text-xs text-base-content/50 mt-1">
+                          ?? {{ event.location }}
+                        </div>
+                      {% endif %}
+                    </a>
+                  {% endfor %}
+                </div>
+              {% else %}
+                <div class="text-center text-base-content/50 text-sm py-4">
+                  No events
+                </div>
+              {% endif %}
+              
+              <a href="{% url 'event_create' %}?date={{ day }}" class="btn btn-sm btn-ghost mt-2 w-full">
+                + Add Event
+              </a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

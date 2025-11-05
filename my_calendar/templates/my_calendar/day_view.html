@@ -1,0 +1,111 @@
+{% extends "my_calendar/base_calendar.html" %}
+
+{% block calendar_title %}{{ date|date:"F d, Y" }}{% endblock %}
+{% block calendar_subtitle %}Day View{% endblock %}
+
+{% block calendar_content %}
+<div class="card bg-base-100 shadow-xl">
+  <div class="card-body p-4">
+    <!-- Navigation -->
+    <div class="flex justify-between items-center mb-4">
+      <a href="{% url 'calendar_day' prev_year prev_month prev_day %}" class="btn btn-ghost btn-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        Previous
+      </a>
+      
+      <h2 class="text-xl font-bold">
+        {{ date|date:"l, F d, Y" }}
+        {% if date == today %}
+          <span class="badge badge-primary ml-2">Today</span>
+        {% endif %}
+      </h2>
+      
+      <a href="{% url 'calendar_day' next_year next_month next_day %}" class="btn btn-ghost btn-sm">
+        Next
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+
+    <!-- Quick Add Button -->
+    <div class="mb-4">
+      <a href="{% url 'event_create' %}?date={{ date }}" class="btn btn-primary btn-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+        </svg>
+        Add Event
+      </a>
+    </div>
+
+    <!-- Events List -->
+    {% if events %}
+      <div class="space-y-3">
+        {% for event in events %}
+          <div class="event-block bg-base-200 hover:bg-base-300 transition-colors">
+            <div class="flex justify-between items-start">
+              <div class="flex-1">
+                <h3 class="font-bold text-lg">{{ event.title }}</h3>
+                <div class="text-sm text-base-content/70 mt-1">
+                  ?? {{ event.start_datetime|date:"g:i A" }} - {{ event.end_datetime|date:"g:i A" }}
+                  ({{ event.duration }})
+                </div>
+                {% if event.location %}
+                  <div class="text-sm text-base-content/70 mt-1">
+                    ?? {{ event.location }}
+                  </div>
+                {% endif %}
+                {% if event.description %}
+                  <div class="text-sm mt-2">
+                    {{ event.description|truncatewords:30 }}
+                  </div>
+                {% endif %}
+              </div>
+              <div class="flex gap-2">
+                <a href="{% url 'event_detail' event.id %}" class="btn btn-ghost btn-sm">View</a>
+                <a href="{% url 'event_update' event.id %}" class="btn btn-ghost btn-sm">Edit</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="text-center py-12">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-base-content/30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+        <p class="text-base-content/50 mt-4">No events scheduled for this day</p>
+        <a href="{% url 'event_create' %}?date={{ date }}" class="btn btn-primary btn-sm mt-4">
+          Create First Event
+        </a>
+      </div>
+    {% endif %}
+
+    <!-- Time Grid (Optional - shows hourly breakdown) -->
+    <div class="mt-6 border-t pt-4">
+      <h3 class="font-semibold mb-3">Hourly View</h3>
+      <div class="space-y-0">
+        {% for hour in hours %}
+          <div class="hour-row flex">
+            <div class="w-20 text-sm text-base-content/70">
+              {% if hour == 0 %}12:00 AM{% elif hour < 12 %}{{ hour }}:00 AM{% elif hour == 12 %}12:00 PM{% else %}{{ hour|add:"-12" }}:00 PM{% endif %}
+            </div>
+            <div class="flex-1">
+              <!-- Events at this hour -->
+              {% for event in events %}
+                {% if event.start_datetime.hour == hour %}
+                  <a href="{% url 'event_detail' event.id %}" class="inline-block bg-primary text-primary-content px-3 py-1 rounded text-sm">
+                    {{ event.title }}
+                  </a>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends "my_calendar/base_calendar.html" %}
+{% load calendar_filters %}
+
+{% block calendar_title %}{{ month_name }} {{ year }}{% endblock %}
+{% block calendar_subtitle %}Month View{% endblock %}
+
+{% block calendar_content %}
+<div class="card bg-base-100 shadow-xl">
+  <div class="card-body p-4">
+    <!-- Navigation -->
+    <div class="flex justify-between items-center mb-4">
+      <a href="{% url 'calendar_month' prev_year prev_month %}" class="btn btn-ghost btn-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        Previous
+      </a>
+      
+      <h2 class="text-xl font-bold">{{ month_name }} {{ year }}</h2>
+      
+      <a href="{% url 'calendar_month' next_year next_month %}" class="btn btn-ghost btn-sm">
+        Next
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+
+    <!-- Calendar Grid with Headers -->
+    <div class="calendar-grid">
+      <!-- Weekday Headers -->
+      {% for weekday in weekday_abbr %}
+        <div class="week-day-header">{{ weekday }}</div>
+      {% endfor %}
+      
+      <!-- Calendar Days -->
+      {% for week in weeks %}
+        {% for day_num, day_date in week %}
+          <div class="calendar-day {% if day_date == today %}today{% endif %} {% if day_num == 0 %}bg-base-300{% endif %}">
+            {% if day_num > 0 %}
+              <div class="mb-2">
+                <span class="day-number {% if day_date == today %}text-primary font-bold{% endif %}">
+                  {{ day_num }}
+                </span>
+              </div>
+              
+              <!-- Events for this day -->
+              {% if day_date in events_by_date %}
+                <div class="space-y-1">
+                  {% for event in events_by_date|get_item:day_date %}
+                    <a href="{% url 'event_detail' event.id %}" class="event-chip bg-primary text-primary-content block">
+                      {{ event.start_datetime|date:"g:i A" }} {{ event.title }}
+                    </a>
+                  {% endfor %}
+                </div>
+              {% endif %}
+            {% endif %}
+          </div>
+        {% endfor %}
+      {% endfor %}
+    </div> <!-- End calendar-grid -->
+
+    <!-- Legend -->
+    <div class="mt-4 flex items-center gap-4 text-sm text-base-content/70">
+      <div class="flex items-center gap-2">
+        <div class="w-4 h-4 border-2 border-primary"></div>
+        <span>Today</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <div class="w-4 h-4 bg-primary rounded"></div>
+        <span>Event</span>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

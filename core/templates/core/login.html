@@ -1,0 +1,61 @@
+{% extends "core/base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center bg-base-200">
+  <div class="card w-full max-w-md bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h2 class="card-title text-center text-2xl font-bold mb-6">Welcome Back</h2>
+      
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }} mb-4">
+            <span>{{ message }}</span>
+          </div>
+        {% endfor %}
+      {% endif %}
+      
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-control w-full mb-4">
+          <label class="label">
+            <span class="label-text">Username</span>
+          </label>
+          <input 
+            type="text" 
+            name="username" 
+            placeholder="Enter your username"
+            class="input input-bordered w-full" 
+            required 
+          />
+        </div>
+        
+        <div class="form-control w-full mb-6">
+          <label class="label">
+            <span class="label-text">Password</span>
+          </label>
+          <input 
+            type="password" 
+            name="password" 
+            placeholder="Enter your password"
+            class="input input-bordered w-full" 
+            required 
+          />
+        </div>
+        
+        <div class="form-control mt-6">
+          <button type="submit" class="btn btn-primary w-full">Login</button>
+        </div>
+      </form>
+      
+      <div class="divider">OR</div>
+      
+      <div class="text-center">
+        <p class="text-sm text-base-content/70">Don't have an account?</p>
+        <a href="{% url 'register' %}" class="btn btn-outline btn-sm mt-2">Create Account</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

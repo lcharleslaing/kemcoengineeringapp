@@ -1,0 +1,68 @@
+{
+  "name": "leecharleslaingdotnet",
+  "version": "1.0.0",
+  "description": "LeeCharlesLaing.net - A Django web application wrapped in Electron for desktop deployment",
+  "main": "main.js",
+  "scripts": {
+    "prestart": "bash cleanup_port.sh || true",
+    "start": "electron . --no-sandbox --disable-setuid-sandbox",
+    "poststart": "bash cleanup_port.sh || true",
+    "django": "bash run_django.sh",
+    "dev": "NODE_ENV=development npm start",
+    "build": "electron-builder",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cleanup": "bash cleanup_port.sh || true",
+    "conda": "conda activate django && npm start"
+  },
+  "keywords": [
+    "django",
+    "electron",
+    "desktop",
+    "python",
+    "web"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^39.0.0"
+  },
+  "build": {
+    "appId": "com.yourcompany.django-electron-app",
+    "productName": "Django Electron App",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "loading.html",
+      "myproject/**/*",
+      "core/**/*",
+      "manage.py",
+      "db.sqlite3"
+    ],
+    "extraResources": [
+      {
+        "from": "myproject",
+        "to": "myproject"
+      },
+      {
+        "from": "core",
+        "to": "core"
+      },
+      "manage.py",
+      "db.sqlite3"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "assets/icon.icns"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "assets/icon.png"
+    }
+  }
+}
