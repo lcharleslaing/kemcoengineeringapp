@@ -25,3 +25,6 @@ dj-database-url>=2.0.0
 python-dateutil>=2.8.0
 # Optional: for OFX/QFX import
 # ofxparse>=0.21
+
+# Excel file handling for KOM import
+openpyxl>=3.1.0

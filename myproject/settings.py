@@ -47,11 +47,11 @@ INSTALLED_APPS = [
     "core",
     "my_calendar",
     "resources",
+    "customer",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",  # Works in both dev and production
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -60,6 +60,10 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+# Only add WhiteNoise in production
+if not DEBUG:
+    MIDDLEWARE.insert(1, "whitenoise.middleware.WhiteNoiseMiddleware")
 
 ROOT_URLCONF = "myproject.urls"
 
@@ -134,13 +138,17 @@ USE_TZ = True  # Keep timezone-aware datetimes
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
+# Static files finders - tells Django where to look for static files
+# STATICFILES_DIRS = [
+#     BASE_DIR / "static",
+# ]
+
 # WhiteNoise configuration for serving static files
-# In development, Django's runserver serves static files automatically
+# In development, Django's runserver serves static files automatically via staticfiles_urlpatterns
 # WhiteNoise will handle static files in production
-# Use simpler storage in development, manifest storage in production
 if DEBUG:
     # In development, don't use WhiteNoise storage - let Django serve directly
     STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'

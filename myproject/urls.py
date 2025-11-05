@@ -26,14 +26,22 @@ urlpatterns = [
     path("settings/", include("site_settings.urls")),
     path("calendar/", include("my_calendar.urls")),
     path("resources/", include("resources.urls")),
+    path("customer/", include("customer.urls")),
     path("", include("core.urls")),
 ]
 
 # Serve static and media files during development
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-urlpatterns += staticfiles_urlpatterns()  # Serves static files from all apps
-
-# CRITICAL: Serve media files - use explicit path matching
-urlpatterns += [
-    path('media/<path:path>', serve, {'document_root': settings.MEDIA_ROOT}),
-]
+if settings.DEBUG:
+    from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+    urlpatterns += staticfiles_urlpatterns()  # Serves static files from all apps
+    
+    # Also serve static files directly (backup method)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    
+    # CRITICAL: Serve media files - use explicit path matching
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+else:
+    # In production, serve media files explicitly
+    urlpatterns += [
+        path('media/<path:path>', serve, {'document_root': settings.MEDIA_ROOT}),
+    ]

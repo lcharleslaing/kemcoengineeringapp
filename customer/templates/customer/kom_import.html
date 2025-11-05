@@ -1,0 +1,43 @@
+{% extends "core/base.html" %}
+
+{% block title %}Import KOM Form{% endblock %}
+
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="container mx-auto p-6 max-w-2xl">
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h2 class="card-title text-2xl mb-4">Import KOM Form</h2>
+      
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }} mb-4">
+            <span>{{ message }}</span>
+          </div>
+        {% endfor %}
+      {% endif %}
+
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="form-control w-full mb-6">
+          <label class="label">
+            <span class="label-text font-semibold">Select KOM Excel File</span>
+          </label>
+          <input type="file" name="kom_file" accept=".xlsx,.xls" class="file-input file-input-bordered w-full" required />
+          <label class="label">
+            <span class="label-text-alt">Upload the KOM Excel file (.xlsx or .xls format)</span>
+          </label>
+        </div>
+
+        <div class="card-actions justify-end">
+          <a href="{% url 'customer:kom_list' %}" class="btn btn-outline">Cancel</a>
+          <button type="submit" class="btn btn-primary">Import KOM</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

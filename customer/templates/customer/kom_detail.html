@@ -1,0 +1,565 @@
+{% extends "core/base.html" %}
+
+{% block title %}KOM Form - {{ kom.proposal_number }}{% endblock %}
+
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="container mx-auto p-6">
+  <div class="mb-6 flex items-center justify-between">
+    <div>
+      <h1 class="text-3xl font-bold">KOM Form - Proposal #{{ kom.proposal_number|default:"N/A" }}</h1>
+      <p class="text-base-content/70 mt-1">{{ kom.project_name|default:"No Project Name" }}</p>
+      <p class="text-sm text-base-content/60 mt-1">Source: {{ kom.source_file|default:"-" }} | Created: {{ kom.created_at|date:"M d, Y H:i" }}</p>
+    </div>
+    <a href="{% url 'customer:kom_list' %}" class="btn btn-outline">Back to List</a>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    
+    <!-- TO BE COMPLETED BY SALES -->
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title text-xl mb-4">TO BE COMPLETED BY SALES</h2>
+        
+        <div class="grid grid-cols-2 gap-4">
+          <div><span class="font-semibold">Proposal #:</span> {{ kom.proposal_number|default:"-" }}</div>
+          <div><span class="font-semibold">Proposal Date:</span> {{ kom.proposal_date|date:"M d, Y"|default:"-" }}</div>
+          <div><span class="font-semibold">Sales Rep:</span> {{ kom.sales_rep|default:"-" }}</div>
+          <div><span class="font-semibold">Date of OC:</span> {{ kom.date_of_oc|date:"M d, Y"|default:"-" }}</div>
+          <div><span class="font-semibold">Industry:</span> {{ kom.industry|default:"-" }}{% if kom.industry_subcategory %} - {{ kom.industry_subcategory }}{% endif %}</div>
+          <div><span class="font-semibold">Discount:</span> {% if kom.discount %}{{ kom.discount }}%{% else %}-{% endif %}</div>
+          <div><span class="font-semibold">PO#:</span> {{ kom.po_number|default:"-" }}</div>
+        </div>
+        
+        <div class="divider my-4"></div>
+        
+        <h3 class="font-semibold mb-2">Commissions</h3>
+        <div class="space-y-2">
+          <div><span class="font-semibold">Comm #1 (Inside):</span> {% if kom.comm_1_inside_percent %}{{ kom.comm_1_inside_percent }}%{% else %}-{% endif %} {% if kom.comm_1_inside_name %}- {{ kom.comm_1_inside_name }}{% endif %}</div>
+          <div><span class="font-semibold">Comm #2 (Inside):</span> {% if kom.comm_2_inside_percent %}{{ kom.comm_2_inside_percent }}%{% else %}-{% endif %} {% if kom.comm_2_inside_name %}- {{ kom.comm_2_inside_name }}{% endif %}</div>
+          <div><span class="font-semibold">Comm (Outside):</span> {% if kom.comm_outside_amount %}${{ kom.comm_outside_amount|floatformat:2 }}{% else %}-{% endif %} {% if kom.comm_outside_name %}- {{ kom.comm_outside_name }}{% endif %}</div>
+        </div>
+        
+        <div class="divider my-4"></div>
+        
+        <div class="space-y-2">
+          <div><span class="font-semibold">Consultant:</span> {{ kom.consultant|default:"-" }}</div>
+          <div><span class="font-semibold">Contractor Name:</span> {{ kom.contractor_name|default:"-" }}</div>
+          <div><span class="font-semibold">Desired Delivery:</span> {{ kom.desired_delivery|default:"-" }}</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- BILL TO -->
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title text-xl mb-4">BILL TO</h2>
+        <div class="space-y-2">
+          <div><span class="font-semibold">Name:</span> {{ kom.bill_to_name|default:"-" }}</div>
+          <div><span class="font-semibold">Company:</span> {{ kom.bill_to_company|default:"-" }}</div>
+          <div><span class="font-semibold">Address:</span> {{ kom.bill_to_address|default:"" }}{% if kom.bill_to_city %}<br>{{ kom.bill_to_city }}{% endif %}{% if kom.bill_to_state %}, {{ kom.bill_to_state }}{% endif %} {% if kom.bill_to_zip %}{{ kom.bill_to_zip }}{% endif %}</div>
+          <div><span class="font-semibold">Phone:</span> {{ kom.bill_to_phone|default:"-" }}</div>
+          <div><span class="font-semibold">Email:</span> {{ kom.bill_to_email|default:"-" }}</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- SHIP TO -->
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title text-xl mb-4">SHIP TO</h2>
+        <div class="space-y-2">
+          <div><span class="font-semibold">Name:</span> {{ kom.ship_to_name|default:"-" }}</div>
+          <div><span class="font-semibold">Company:</span> {{ kom.ship_to_company|default:"-" }}</div>
+          <div><span class="font-semibold">Address:</span> {{ kom.ship_to_address|default:"" }}{% if kom.ship_to_city %}<br>{{ kom.ship_to_city }}{% endif %}{% if kom.ship_to_state %}, {{ kom.ship_to_state }}{% endif %} {% if kom.ship_to_zip %}{{ kom.ship_to_zip }}{% endif %}</div>
+          <div><span class="font-semibold">Phone:</span> {{ kom.ship_to_phone|default:"-" }}</div>
+          <div><span class="font-semibold">Email:</span> {{ kom.ship_to_email|default:"-" }}</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- TAX INFORMATION -->
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title text-xl mb-4">TAX INFORMATION</h2>
+        <div class="space-y-2">
+          <div><span class="font-semibold">Tax Exempt?:</span> <span class="badge {% if kom.tax_exempt %}badge-success{% else %}badge-error{% endif %}">{% if kom.tax_exempt %}YES{% else %}NO{% endif %}</span></div>
+          <div><span class="font-semibold">Exempt Cert in Hand?:</span> <span class="badge {% if kom.exempt_cert_in_hand %}badge-success{% else %}badge-error{% endif %}">{% if kom.exempt_cert_in_hand %}YES{% else %}NO{% endif %}</span></div>
+          <div><span class="font-semibold">Confirm Tax Status Noted Above:</span> <span class="badge {% if kom.confirm_tax_status_noted %}badge-success{% else %}badge-error{% endif %}">{% if kom.confirm_tax_status_noted %}YES{% else %}NO{% endif %}</span></div>
+          <div><span class="font-semibold">Customer in Sage?:</span> <span class="badge {% if kom.customer_in_sage %}badge-success{% else %}badge-error{% endif %}">{% if kom.customer_in_sage %}YES{% else %}NO{% endif %}</span></div>
+          {% if kom.tax_action_who %}<div><span class="font-semibold">Tax Action WHO:</span> {{ kom.tax_action_who }}</div>{% endif %}
+          {% if kom.tax_action_when %}<div><span class="font-semibold">Tax Action WHEN:</span> {{ kom.tax_action_when|date:"M d, Y" }}</div>{% endif %}
+        </div>
+      </div>
+    </div>
+    
+    <!-- SHIPPING -->
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title text-xl mb-4">SHIPPING</h2>
+        <div class="space-y-2">
+          <div><span class="font-semibold">Freight:</span> {{ kom.freight|default:"-" }}</div>
+          <div><span class="font-semibold">International:</span> <span class="badge {% if kom.international %}badge-success{% else %}badge-error{% endif %}">{% if kom.international %}YES{% else %}NO{% endif %}</span></div>
+          {% if kom.international_freight_method %}<div><span class="font-semibold">If Int'l, Freight Method:</span> {{ kom.international_freight_method }}</div>{% endif %}
+          {% if kom.shipping_instructions %}<div><span class="font-semibold">Instructions:</span> {{ kom.shipping_instructions }}</div>{% endif %}
+        </div>
+      </div>
+    </div>
+    
+    <!-- SPECIFICATIONS -->
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title text-xl mb-4">SPECIFICATIONS AND TERMS & CONDITIONS</h2>
+        <div class="space-y-2">
+          <div><span class="font-semibold">Specifications?:</span> <span class="badge {% if kom.specifications_provided %}badge-success{% else %}badge-error{% endif %}">{% if kom.specifications_provided %}YES{% else %}NO{% endif %}</span></div>
+          <div><span class="font-semibold">Agreed to?:</span> <span class="badge {% if kom.specifications_agreed %}badge-success{% else %}badge-error{% endif %}">{% if kom.specifications_agreed %}YES{% else %}NO{% endif %}</span></div>
+          <div><span class="font-semibold">LIQUIDATED DAMAGES?:</span> <span class="badge {% if kom.liquidated_damages %}badge-success{% else %}badge-error{% endif %}">{% if kom.liquidated_damages %}YES{% else %}NO{% endif %}</span></div>
+          {% if kom.liquidated_damages_rate_cap %}<div><span class="font-semibold">If yes, rate & cap?:</span> {{ kom.liquidated_damages_rate_cap }}</div>{% endif %}
+          <div><span class="font-semibold">Passivation?:</span> <span class="badge {% if kom.passivation %}badge-success{% else %}badge-error{% endif %}">{% if kom.passivation %}YES{% else %}NO{% endif %}</span></div>
+          {% if kom.passivation_in_out_both %}<div><span class="font-semibold">In/Out/Both?:</span> {{ kom.passivation_in_out_both }}</div>{% endif %}
+        </div>
+      </div>
+    </div>
+    
+    <!-- APPROVAL PRINTS -->
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title text-xl mb-4">APPROVAL PRINTS REQ'D?</h2>
+        <div class="space-y-2">
+          <div><span class="font-semibold">Req'd?:</span> <span class="badge {% if kom.approval_prints_required %}badge-success{% else %}badge-error{% endif %}">{% if kom.approval_prints_required %}YES{% else %}NO{% endif %}</span></div>
+          <div><span class="font-semibold">Electrical?:</span> <span class="badge {% if kom.approval_prints_electrical %}badge-success{% else %}badge-error{% endif %}">{% if kom.approval_prints_electrical %}YES{% else %}NO{% endif %}</span></div>
+          {% if kom.approval_prints_ll_mech %}<div><span class="font-semibold">LL & Mech:</span> {{ kom.approval_prints_ll_mech }}</div>{% endif %}
+          {% if kom.approval_prints_elect %}<div><span class="font-semibold">Elect:</span> {{ kom.approval_prints_elect }}</div>{% endif %}
+          <div><span class="font-semibold">Should Engineering Order Prior to Approval?:</span> <span class="badge {% if kom.engineering_order_prior_to_approval %}badge-success{% else %}badge-error{% endif %}">{% if kom.engineering_order_prior_to_approval %}YES{% else %}NO{% endif %}</span></div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- PROJECT INFO -->
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title text-xl mb-4">PROJECT INFO</h2>
+        <div class="space-y-2">
+          <div><span class="font-semibold">Project Name:</span> {{ kom.project_name|default:"-" }}</div>
+          <div><span class="font-semibold">Project Type:</span> {{ kom.project_type|default:"-" }}</div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  
+  <!-- Payment Milestones -->
+  <div class="card bg-base-100 shadow-xl mt-6">
+    <div class="card-body">
+      <h2 class="card-title text-xl mb-4">Payment Milestones</h2>
+      
+      <div class="overflow-x-auto">
+        <table class="table table-zebra w-full">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Event</th>
+              <th>% Due</th>
+              <th>Terms</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>{{ kom.payment_milestone_1_event|default:"-" }}</td>
+              <td>{% if kom.payment_milestone_1_percent %}{{ kom.payment_milestone_1_percent }}%{% else %}-{% endif %}</td>
+              <td>{{ kom.payment_milestone_1_terms|default:"-" }}</td>
+              <td>{{ kom.payment_milestone_1_notes|default:"-" }}</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>{{ kom.payment_milestone_2_event|default:"-" }}</td>
+              <td>{% if kom.payment_milestone_2_percent %}{{ kom.payment_milestone_2_percent }}%{% else %}-{% endif %}</td>
+              <td>{{ kom.payment_milestone_2_terms|default:"-" }}</td>
+              <td>{{ kom.payment_milestone_2_notes|default:"-" }}</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>{{ kom.payment_milestone_3_event|default:"-" }}</td>
+              <td>{% if kom.payment_milestone_3_percent %}{{ kom.payment_milestone_3_percent }}%{% else %}-{% endif %}</td>
+              <td>{{ kom.payment_milestone_3_terms|default:"-" }}</td>
+              <td>{{ kom.payment_milestone_3_notes|default:"-" }}</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>{{ kom.payment_milestone_4_event|default:"-" }}</td>
+              <td>{% if kom.payment_milestone_4_percent %}{{ kom.payment_milestone_4_percent }}%{% else %}-{% endif %}</td>
+              <td>{{ kom.payment_milestone_4_terms|default:"-" }}</td>
+              <td>{{ kom.payment_milestone_4_notes|default:"-" }}</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>{{ kom.payment_milestone_5_event|default:"-" }}</td>
+              <td>{% if kom.payment_milestone_5_percent %}{{ kom.payment_milestone_5_percent }}%{% else %}-{% endif %}</td>
+              <td>{{ kom.payment_milestone_5_terms|default:"-" }}</td>
+              <td>{{ kom.payment_milestone_5_notes|default:"-" }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+  <!-- EQUIPMENT SECTION -->
+  <div class="card bg-base-100 shadow-xl mt-6">
+    <div class="card-body">
+      <h2 class="card-title text-xl mb-4">EQUIPMENT</h2>
+      
+      <!-- Heaters -->
+      <div class="mb-6">
+        <h3 class="font-semibold text-lg mb-3">HTR - 1</h3>
+        <div class="grid grid-cols-3 gap-4">
+          <div><span class="font-semibold">Qty:</span> {{ kom.htr_1_qty|default:"-" }}</div>
+          <div><span class="font-semibold">Type:</span> {{ kom.htr_1_type|default:"-" }}</div>
+          <div><span class="font-semibold">Emissions:</span> {{ kom.htr_1_emissions|default:"-" }}</div>
+          <div><span class="font-semibold">Size:</span> {{ kom.htr_1_size|default:"-" }}</div>
+          <div><span class="font-semibold">Pump/Grav:</span> {{ kom.htr_1_pump_grav|default:"-" }}</div>
+          <div><span class="font-semibold">Mat'l:</span> {{ kom.htr_1_material|default:"-" }}</div>
+        </div>
+      </div>
+      
+      <div class="mb-6">
+        <h3 class="font-semibold text-lg mb-3">HTR - 2</h3>
+        <div class="grid grid-cols-3 gap-4">
+          <div><span class="font-semibold">Qty:</span> {{ kom.htr_2_qty|default:"-" }}</div>
+          <div><span class="font-semibold">Type:</span> {{ kom.htr_2_type|default:"-" }}</div>
+          <div><span class="font-semibold">Emissions:</span> {{ kom.htr_2_emissions|default:"-" }}</div>
+          <div><span class="font-semibold">Size:</span> {{ kom.htr_2_size|default:"-" }}</div>
+          <div><span class="font-semibold">Pump/Grav:</span> {{ kom.htr_2_pump_grav|default:"-" }}</div>
+          <div><span class="font-semibold">Mat'l:</span> {{ kom.htr_2_material|default:"-" }}</div>
+        </div>
+      </div>
+      
+      <!-- Stack Economizer -->
+      <div class="mb-6">
+        <h3 class="font-semibold text-lg mb-3">STK ECON</h3>
+        <div class="grid grid-cols-3 gap-4">
+          <div><span class="font-semibold">Size (BHP):</span> {{ kom.stk_econ_size_bhp|default:"-" }}</div>
+          <div><span class="font-semibold">Pump/Grav:</span> {{ kom.stk_econ_pump_grav|default:"-" }}</div>
+          <div><span class="font-semibold">Mat'l:</span> {{ kom.stk_econ_material|default:"-" }}</div>
+        </div>
+      </div>
+      
+      <!-- Stack(s) -->
+      <div class="mb-6">
+        <h3 class="font-semibold text-lg mb-3">STACK(S)</h3>
+        <div class="grid grid-cols-3 gap-4">
+          <div><span class="font-semibold">Length (ft):</span> {{ kom.stack_length_ft|default:"-" }}</div>
+          <div><span class="font-semibold">TOTAL:</span> {{ kom.stack_total|default:"-" }}</div>
+          <div><span class="font-semibold">Cap(s)?:</span> <span class="badge {% if kom.stack_caps %}badge-success{% else %}badge-error{% endif %}">{% if kom.stack_caps %}YES{% else %}NO{% endif %}</span></div>
+        </div>
+      </div>
+      
+      <!-- HR -->
+      <div class="mb-6">
+        <h3 class="font-semibold text-lg mb-3">HR</h3>
+        <div class="grid grid-cols-4 gap-4">
+          <div><span class="font-semibold"># Sections:</span> {{ kom.hr_sections|default:"-" }}</div>
+          <div><span class="font-semibold">Diam (in):</span> {{ kom.hr_diam_in|default:"-" }}</div>
+          <div><span class="font-semibold">Tubes:</span> {{ kom.hr_tubes|default:"-" }}</div>
+          <div><span class="font-semibold">Mat'l:</span> {{ kom.hr_material|default:"-" }}</div>
+        </div>
+      </div>
+      
+      <!-- Tanks -->
+      <div class="mb-6">
+        <h3 class="font-semibold text-lg mb-3">TANKS</h3>
+        <div class="mb-4">
+          <h4 class="font-semibold mb-2">Tank 1</h4>
+          <div class="grid grid-cols-5 gap-4">
+            <div><span class="font-semibold">Type:</span> {{ kom.tank_1_type|default:"-" }}</div>
+            <div><span class="font-semibold">Dia (in):</span> {{ kom.tank_1_dia_in|default:"-" }}</div>
+            <div><span class="font-semibold">Ht (ft):</span> {{ kom.tank_1_ht_ft|default:"-" }}</div>
+            <div><span class="font-semibold">GA:</span> {{ kom.tank_1_ga|default:"-" }}</div>
+            <div><span class="font-semibold">Mat'l:</span> {{ kom.tank_1_material|default:"-" }}</div>
+          </div>
+        </div>
+        <div class="mb-4">
+          <h4 class="font-semibold mb-2">Tank 2</h4>
+          <div class="grid grid-cols-5 gap-4">
+            <div><span class="font-semibold">Type:</span> {{ kom.tank_2_type|default:"-" }}</div>
+            <div><span class="font-semibold">Dia (in):</span> {{ kom.tank_2_dia_in|default:"-" }}</div>
+            <div><span class="font-semibold">Ht (ft):</span> {{ kom.tank_2_ht_ft|default:"-" }}</div>
+            <div><span class="font-semibold">GA:</span> {{ kom.tank_2_ga|default:"-" }}</div>
+            <div><span class="font-semibold">Mat'l:</span> {{ kom.tank_2_material|default:"-" }}</div>
+          </div>
+        </div>
+        <div class="mb-4">
+          <h4 class="font-semibold mb-2">Tank 3</h4>
+          <div class="grid grid-cols-5 gap-4">
+            <div><span class="font-semibold">Type:</span> {{ kom.tank_3_type|default:"-" }}</div>
+            <div><span class="font-semibold">Dia (in):</span> {{ kom.tank_3_dia_in|default:"-" }}</div>
+            <div><span class="font-semibold">Ht (ft):</span> {{ kom.tank_3_ht_ft|default:"-" }}</div>
+            <div><span class="font-semibold">GA:</span> {{ kom.tank_3_ga|default:"-" }}</div>
+            <div><span class="font-semibold">Mat'l:</span> {{ kom.tank_3_material|default:"-" }}</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Pumps -->
+      <div class="mb-6">
+        <h3 class="font-semibold text-lg mb-3">PUMPS</h3>
+        <div class="mb-2">
+          <span class="font-semibold">Packaging:</span> {{ kom.pump_packaging|default:"-" }} | 
+          <span class="font-semibold">Piping Material:</span> {{ kom.pump_piping_material|default:"-" }}
+        </div>
+        <div class="mb-4">
+          <h4 class="font-semibold mb-2">Pump 1</h4>
+          <div class="grid grid-cols-4 gap-4">
+            <div><span class="font-semibold">Type:</span> {{ kom.pump_1_type|default:"-" }}</div>
+            <div><span class="font-semibold">Qty:</span> {{ kom.pump_1_qty|default:"-" }}</div>
+            <div><span class="font-semibold">Flow (gpm):</span> {{ kom.pump_1_flow_gpm|default:"-" }}</div>
+            <div><span class="font-semibold">TDH (ft):</span> {{ kom.pump_1_tdh_ft|default:"-" }}</div>
+          </div>
+        </div>
+        <div class="mb-4">
+          <h4 class="font-semibold mb-2">Pump 2</h4>
+          <div class="grid grid-cols-4 gap-4">
+            <div><span class="font-semibold">Type:</span> {{ kom.pump_2_type|default:"-" }}</div>
+            <div><span class="font-semibold">Qty:</span> {{ kom.pump_2_qty|default:"-" }}</div>
+            <div><span class="font-semibold">Flow (gpm):</span> {{ kom.pump_2_flow_gpm|default:"-" }}</div>
+            <div><span class="font-semibold">TDH (ft):</span> {{ kom.pump_2_tdh_ft|default:"-" }}</div>
+          </div>
+        </div>
+        <div class="mb-4">
+          <h4 class="font-semibold mb-2">Pump 3</h4>
+          <div class="grid grid-cols-4 gap-4">
+            <div><span class="font-semibold">Type:</span> {{ kom.pump_3_type|default:"-" }}</div>
+            <div><span class="font-semibold">Qty:</span> {{ kom.pump_3_qty|default:"-" }}</div>
+            <div><span class="font-semibold">Flow (gpm):</span> {{ kom.pump_3_flow_gpm|default:"-" }}</div>
+            <div><span class="font-semibold">TDH (ft):</span> {{ kom.pump_3_tdh_ft|default:"-" }}</div>
+          </div>
+        </div>
+        <div class="mb-4">
+          <h4 class="font-semibold mb-2">Pump 4</h4>
+          <div class="grid grid-cols-4 gap-4">
+            <div><span class="font-semibold">Type:</span> {{ kom.pump_4_type|default:"-" }}</div>
+            <div><span class="font-semibold">Qty:</span> {{ kom.pump_4_qty|default:"-" }}</div>
+            <div><span class="font-semibold">Flow (gpm):</span> {{ kom.pump_4_flow_gpm|default:"-" }}</div>
+            <div><span class="font-semibold">TDH (ft):</span> {{ kom.pump_4_tdh_ft|default:"-" }}</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Steam Heaters -->
+      <div class="mb-6">
+        <h3 class="font-semibold text-lg mb-3">Steam Heaters</h3>
+        <div class="mb-4">
+          <h4 class="font-semibold mb-2">Steam Heater 1</h4>
+          <div class="grid grid-cols-4 gap-4">
+            <div><span class="font-semibold">Dia(in) x L(in):</span> {% if kom.steam_heater_1_dia_in %}{{ kom.steam_heater_1_dia_in }} x {{ kom.steam_heater_1_length_in }}{% else %}-{% endif %}</div>
+            <div><span class="font-semibold">Mat'l:</span> {{ kom.steam_heater_1_material|default:"-" }}</div>
+            <div><span class="font-semibold">Valve Type:</span> {{ kom.steam_heater_1_valve_type|default:"-" }}</div>
+          </div>
+        </div>
+        <div class="mb-4">
+          <h4 class="font-semibold mb-2">Steam Heater 2</h4>
+          <div class="grid grid-cols-4 gap-4">
+            <div><span class="font-semibold">Dia(in) x L(in):</span> {% if kom.steam_heater_2_dia_in %}{{ kom.steam_heater_2_dia_in }} x {{ kom.steam_heater_2_length_in }}{% else %}-{% endif %}</div>
+            <div><span class="font-semibold">Mat'l:</span> {{ kom.steam_heater_2_material|default:"-" }}</div>
+            <div><span class="font-semibold">Valve Type:</span> {{ kom.steam_heater_2_valve_type|default:"-" }}</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Softener -->
+      <div class="mb-6">
+        <h3 class="font-semibold text-lg mb-3">SOFTENER</h3>
+        <div class="grid grid-cols-3 gap-4">
+          <div><span class="font-semibold">ASME Coded?:</span> <span class="badge {% if kom.softener_asme_coded %}badge-success{% else %}badge-error{% endif %}">{% if kom.softener_asme_coded %}YES{% else %}NO{% endif %}</span></div>
+          <div><span class="font-semibold">Tank Mat'l:</span> {{ kom.softener_tank_material|default:"-" }}</div>
+          <div><span class="font-semibold">Face Plumbing Mat'l:</span> {{ kom.softener_face_plumbing_material|default:"-" }}</div>
+        </div>
+      </div>
+      
+      <!-- Panel(s) -->
+      <div class="mb-6">
+        <h3 class="font-semibold text-lg mb-3">PANEL(S)</h3>
+        <div class="grid grid-cols-3 gap-4">
+          <div><span class="font-semibold">Qty:</span> {{ kom.panel_qty|default:"-" }}</div>
+          <div><span class="font-semibold">PLC(s):</span> {{ kom.panel_plc|default:"-" }}</div>
+          <div><span class="font-semibold">SPLIT VOLT:</span> {{ kom.panel_split_volt|default:"-" }}</div>
+        </div>
+      </div>
+      
+      <!-- Other Equipment -->
+      <div class="mb-6">
+        <h3 class="font-semibold text-lg mb-3">OTHER</h3>
+        <div class="grid grid-cols-2 gap-4">
+          <div><span class="font-semibold">Vent Condenser:</span> <span class="badge {% if kom.other_vent_condenser %}badge-success{% else %}badge-error{% endif %}">{% if kom.other_vent_condenser %}YES{% else %}NO{% endif %}</span></div>
+          <div><span class="font-semibold">Shaker Screen:</span> <span class="badge {% if kom.other_shaker_screen %}badge-success{% else %}badge-error{% endif %}">{% if kom.other_shaker_screen %}YES{% else %}NO{% endif %}</span></div>
+        </div>
+      </div>
+      
+      <!-- Utilities -->
+      <div class="mb-6">
+        <h3 class="font-semibold text-lg mb-3">UTILITIES</h3>
+        <div class="grid grid-cols-2 gap-4">
+          <div><span class="font-semibold">City Water Meter (in.):</span> {{ kom.city_water_meter_in|default:"-" }}</div>
+          <div><span class="font-semibold">Electrical:</span> {{ kom.electrical|default:"-" }}</div>
+          <div><span class="font-semibold">Fuel Type:</span> {{ kom.fuel_type|default:"-" }}</div>
+          <div><span class="font-semibold">Gas Pressure:</span> {{ kom.gas_pressure_psi|default:"-" }}</div>
+          <div><span class="font-semibold">Onsite Gas Supply Diameter (in.):</span> {{ kom.onsite_gas_supply_diameter_in|default:"-" }}</div>
+          <div><span class="font-semibold">Gas Train Orientation:</span> {{ kom.gas_train_orientation|default:"-" }}</div>
+          <div><span class="font-semibold">Does this match what is in the proposal?:</span> <span class="badge {% if kom.utilities_match_proposal %}badge-success{% else %}badge-error{% endif %}">{% if kom.utilities_match_proposal %}YES{% else %}NO{% endif %}</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Line Items -->
+  {% if kom.line_items.all %}
+  <div class="card bg-base-100 shadow-xl mt-6">
+    <div class="card-body">
+      <h2 class="card-title text-xl mb-4">Line Items</h2>
+      
+      <div class="overflow-x-auto">
+        <table class="table table-zebra w-full">
+          <thead>
+            <tr>
+              <th>Item #</th>
+              <th>Description</th>
+              <th>Value 1</th>
+              <th>Value 2</th>
+              <th>Value 3</th>
+              <th>Value 4</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in kom.line_items.all %}
+            <tr>
+              <td>{{ item.item_number|default:"-" }}</td>
+              <td>{{ item.description|default:"-" }}</td>
+              <td>{% if item.value_1 %}${{ item.value_1|floatformat:2 }}{% else %}-{% endif %}</td>
+              <td>{% if item.value_2 %}${{ item.value_2|floatformat:2 }}{% else %}-{% endif %}</td>
+              <td>{% if item.value_3 %}${{ item.value_3|floatformat:2 }}{% else %}-{% endif %}</td>
+              <td>{% if item.value_4 %}${{ item.value_4|floatformat:2 }}{% else %}-{% endif %}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+  
+  <!-- Labor Hours -->
+  <div class="card bg-base-100 shadow-xl mt-6">
+    <div class="card-body">
+      <h2 class="card-title text-xl mb-4">LABOR HOURS</h2>
+      <div class="grid grid-cols-3 gap-4">
+        <div><span class="font-semibold">Pkg:</span> {{ kom.labor_pkg|default:"-" }}</div>
+        <div><span class="font-semibold">Fab:</span> {{ kom.labor_fab|default:"-" }}</div>
+        <div><span class="font-semibold">Wiring:</span> {{ kom.labor_wiring|default:"-" }}</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Equipment Required -->
+  {% if kom.equipment_required.all %}
+  <div class="card bg-base-100 shadow-xl mt-6">
+    <div class="card-body">
+      <h2 class="card-title text-xl mb-4">EQUIPMENT REQUIRED</h2>
+      
+      <div class="overflow-x-auto">
+        <table class="table table-zebra w-full">
+          <thead>
+            <tr>
+              <th>Equipment Type</th>
+              <th>Qty</th>
+              <th>KN</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for eq in kom.equipment_required.all %}
+            <tr>
+              <td>{{ eq.equipment_type|default:"-" }}</td>
+              <td>{{ eq.qty|default:"-" }}</td>
+              <td>{{ eq.kn_number|default:"-" }}</td>
+              <td>{{ eq.description|default:"-" }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+  
+  <!-- CAPITAL -->
+  <div class="card bg-base-100 shadow-xl mt-6">
+    <div class="card-body">
+      <h2 class="card-title text-xl mb-4">CAPITAL</h2>
+      <div class="grid grid-cols-3 gap-4">
+        <div><span class="font-semibold">Sell Price:</span> {% if kom.capital_sell_price %}${{ kom.capital_sell_price|floatformat:2 }}{% else %}-{% endif %}</div>
+        <div><span class="font-semibold">Equip Cost:</span> {% if kom.capital_equip_cost %}${{ kom.capital_equip_cost|floatformat:2 }}{% else %}-{% endif %}</div>
+        <div><span class="font-semibold">Freight:</span> {% if kom.capital_freight %}${{ kom.capital_freight|floatformat:2 }}{% else %}-{% endif %}</div>
+        <div><span class="font-semibold">StartUp Cost:</span> {% if kom.capital_startup_cost %}${{ kom.capital_startup_cost|floatformat:2 }}{% else %}-{% endif %}</div>
+        <div><span class="font-semibold">Protect Cost:</span> {% if kom.capital_protect_cost %}${{ kom.capital_protect_cost|floatformat:2 }}{% else %}-{% endif %}</div>
+        <div><span class="font-semibold">Net Revenue:</span> {% if kom.capital_net_revenue %}${{ kom.capital_net_revenue|floatformat:2 }}{% else %}-{% endif %}</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- INSTALL -->
+  <div class="card bg-base-100 shadow-xl mt-6">
+    <div class="card-body">
+      <h2 class="card-title text-xl mb-4">INSTALL</h2>
+      <div class="grid grid-cols-3 gap-4">
+        <div><span class="font-semibold">Sell Price:</span> {% if kom.install_sell_price %}${{ kom.install_sell_price|floatformat:2 }}{% else %}-{% endif %}</div>
+        <div><span class="font-semibold">Install Cost:</span> {% if kom.install_cost %}${{ kom.install_cost|floatformat:2 }}{% else %}-{% endif %}</div>
+        <div><span class="font-semibold"># of Trips:</span> {{ kom.install_trips|default:"-" }}</div>
+        <div><span class="font-semibold"># of Days:</span> {{ kom.install_days|default:"-" }}</div>
+        <div><span class="font-semibold">Net Revenue:</span> {% if kom.install_net_revenue %}${{ kom.install_net_revenue|floatformat:2 }}{% else %}-{% endif %}</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- TO BE COMPLETED BY ENG -->
+  <div class="card bg-base-100 shadow-xl mt-6">
+    <div class="card-body">
+      <h2 class="card-title text-xl mb-4">TO BE COMPLETED BY ENG</h2>
+      <div class="grid grid-cols-3 gap-4">
+        <div><span class="font-semibold">Weld In&Out?:</span> <span class="badge {% if kom.eng_weld_in_out %}badge-success{% else %}badge-error{% endif %}">{% if kom.eng_weld_in_out %}YES{% else %}NO{% endif %}</span></div>
+        <div><span class="font-semibold">Height Greater than 20'?:</span> <span class="badge {% if kom.eng_height_greater_than_20ft %}badge-success{% else %}badge-error{% endif %}">{% if kom.eng_height_greater_than_20ft %}YES{% else %}NO{% endif %}</span></div>
+        <div><span class="font-semibold">Crane Req'd?:</span> <span class="badge {% if kom.eng_crane_reqd %}badge-success{% else %}badge-error{% endif %}">{% if kom.eng_crane_reqd %}YES{% else %}NO{% endif %}</span></div>
+        <div><span class="font-semibold">Hi Temp Htr?:</span> <span class="badge {% if kom.eng_hi_temp_htr %}badge-success{% else %}badge-error{% endif %}">{% if kom.eng_hi_temp_htr %}YES{% else %}NO{% endif %}</span></div>
+        <div><span class="font-semibold">Large HP or Excessive LL Pumps?:</span> <span class="badge {% if kom.eng_large_hp_or_excessive_ll_pumps %}badge-success{% else %}badge-error{% endif %}">{% if kom.eng_large_hp_or_excessive_ll_pumps %}YES{% else %}NO{% endif %}</span></div>
+        <div><span class="font-semibold">Generator Need?:</span> <span class="badge {% if kom.eng_generator_need %}badge-success{% else %}badge-error{% endif %}">{% if kom.eng_generator_need %}YES{% else %}NO{% endif %}</span></div>
+        <div><span class="font-semibold">Special Testing Reqd?:</span> <span class="badge {% if kom.eng_special_testing_reqd %}badge-success{% else %}badge-error{% endif %}">{% if kom.eng_special_testing_reqd %}YES{% else %}NO{% endif %}</span></div>
+        <div><span class="font-semibold">Extra Fork Lift or Scissor Lift Reqd?:</span> <span class="badge {% if kom.eng_extra_forklift_or_scissor_lift_reqd %}badge-success{% else %}badge-error{% endif %}">{% if kom.eng_extra_forklift_or_scissor_lift_reqd %}YES{% else %}NO{% endif %}</span></div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- OTHER INFO -->
+  {% if kom.notes or kom.other_info %}
+  <div class="card bg-base-100 shadow-xl mt-6">
+    <div class="card-body">
+      <h2 class="card-title text-xl mb-4">OTHER INFO</h2>
+      {% if kom.notes %}
+      <div class="mb-4">
+        <span class="font-semibold">Notes:</span>
+        <div class="mt-2">{{ kom.notes|linebreaks }}</div>
+      </div>
+      {% endif %}
+      {% if kom.other_info %}
+      <div>
+        <span class="font-semibold">Other Info:</span>
+        <div class="mt-2">{{ kom.other_info|linebreaks }}</div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  {% endif %}
+  
+</div>
+{% endblock %}

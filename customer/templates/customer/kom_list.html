@@ -1,0 +1,68 @@
+{% extends "core/base.html" %}
+
+{% block title %}KOM Forms{% endblock %}
+
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="container mx-auto p-6">
+  <div class="mb-6 flex items-center justify-between">
+    <h1 class="text-3xl font-bold">KOM Forms</h1>
+    <a href="{% url 'customer:kom_import' %}" class="btn btn-primary">
+      <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+      </svg>
+      Import KOM
+    </a>
+  </div>
+
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} mb-4">
+        <span>{{ message }}</span>
+      </div>
+    {% endfor %}
+  {% endif %}
+
+  {% if kom_forms %}
+    <div class="overflow-x-auto">
+      <table class="table table-zebra w-full">
+        <thead>
+          <tr>
+            <th>Proposal #</th>
+            <th>Proposal Date</th>
+            <th>Project Name</th>
+            <th>Sales Rep</th>
+            <th>Company (Bill To)</th>
+            <th>Created</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for kom in kom_forms %}
+          <tr>
+            <td>{{ kom.proposal_number|default:"-" }}</td>
+            <td>{{ kom.proposal_date|date:"M d, Y"|default:"-" }}</td>
+            <td>{{ kom.project_name|default:"-" }}</td>
+            <td>{{ kom.sales_rep|default:"-" }}</td>
+            <td>{{ kom.bill_to_company|default:"-" }}</td>
+            <td>{{ kom.created_at|date:"M d, Y" }}</td>
+            <td>
+              <a href="{% url 'customer:kom_detail' kom.pk %}" class="btn btn-sm btn-primary">View</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body text-center">
+        <p class="text-lg">No KOM forms imported yet.</p>
+        <a href="{% url 'customer:kom_import' %}" class="btn btn-primary mt-4">Import Your First KOM</a>
+      </div>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}
+
