@@ -1,18 +1,43 @@
 {% extends "core/base.html" %}
+{% load kom_filters %}
 
 {% block title %}KOM Form - {{ kom.proposal_number }}{% endblock %}
 
 {% block content %}
 {% include 'navbar.html' %}
 
-<div class="container mx-auto p-6">
+<style>
+  @media print {
+    .no-print { display: none !important; }
+    body { background: #fff !important; }
+    .container { padding: 0 !important; }
+    .card { box-shadow: none !important; border: 0 !important; }
+  }
+</style>
+
+<div class="container mx-auto p-6" id="print-root">
   <div class="mb-6 flex items-center justify-between">
     <div>
       <h1 class="text-3xl font-bold">KOM Form - Proposal #{{ kom.proposal_number|default:"N/A" }}</h1>
       <p class="text-base-content/70 mt-1">{{ kom.project_name|default:"No Project Name" }}</p>
       <p class="text-sm text-base-content/60 mt-1">Source: {{ kom.source_file|default:"-" }} | Created: {{ kom.created_at|date:"M d, Y H:i" }}</p>
     </div>
-    <a href="{% url 'customer:kom_list' %}" class="btn btn-outline">Back to List</a>
+    <div class="flex gap-2 no-print">
+      {% if kom.file_path %}
+      <button onclick="openKOMFile({{ kom.pk }})" class="btn btn-primary">Open File</button>
+      {% endif %}
+      <form method="post" action="{% url 'project_notes:save_equipment_line_items' kom.pk %}" style="display: inline;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-success">Equipment & Line Items Save to Notes</button>
+      </form>
+      <button onclick="window.print()" class="btn">Print</button>
+      <button onclick="exportKOM()" class="btn btn-primary">Export to Text</button>
+      <form method="post" action="{% url 'customer:kom_delete' kom.pk %}" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this KOM form? This will also delete the associated file and all related data. This action cannot be undone.');">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-error">Delete KOM</button>
+      </form>
+      <a href="{% url 'customer:kom_list' %}" class="btn btn-outline">Back to List</a>
+    </div>
   </div>
 
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -23,61 +48,73 @@
         <h2 class="card-title text-xl mb-4">TO BE COMPLETED BY SALES</h2>
         
         <div class="grid grid-cols-2 gap-4">
-          <div><span class="font-semibold">Proposal #:</span> {{ kom.proposal_number|default:"-" }}</div>
-          <div><span class="font-semibold">Proposal Date:</span> {{ kom.proposal_date|date:"M d, Y"|default:"-" }}</div>
-          <div><span class="font-semibold">Sales Rep:</span> {{ kom.sales_rep|default:"-" }}</div>
-          <div><span class="font-semibold">Date of OC:</span> {{ kom.date_of_oc|date:"M d, Y"|default:"-" }}</div>
-          <div><span class="font-semibold">Industry:</span> {{ kom.industry|default:"-" }}{% if kom.industry_subcategory %} - {{ kom.industry_subcategory }}{% endif %}</div>
-          <div><span class="font-semibold">Discount:</span> {% if kom.discount %}{{ kom.discount }}%{% else %}-{% endif %}</div>
-          <div><span class="font-semibold">PO#:</span> {{ kom.po_number|default:"-" }}</div>
+          {% if kom.proposal_number|has_value %}<div><span class="font-semibold">Proposal #:</span> {{ kom.proposal_number }}</div>{% endif %}
+          {% if kom.proposal_date %}<div><span class="font-semibold">Proposal Date:</span> {{ kom.proposal_date|date:"M d, Y" }}</div>{% endif %}
+          {% if kom.sales_rep|has_value %}<div><span class="font-semibold">Sales Rep:</span> {{ kom.sales_rep }}</div>{% endif %}
+          {% if kom.date_of_oc %}<div><span class="font-semibold">Date of OC:</span> {{ kom.date_of_oc|date:"M d, Y" }}</div>{% endif %}
+          {% if kom.industry|has_value %}<div><span class="font-semibold">Industry:</span> {{ kom.industry }}{% if kom.industry_subcategory|has_value %} - {{ kom.industry_subcategory }}{% endif %}</div>{% endif %}
+          {% if kom.discount %}<div><span class="font-semibold">Discount:</span> {{ kom.discount }}%</div>{% endif %}
+          {% if kom.po_number|has_value %}<div><span class="font-semibold">PO#:</span> {{ kom.po_number }}</div>{% endif %}
         </div>
         
         <div class="divider my-4"></div>
         
+        {% if kom.comm_1_inside_percent or kom.comm_1_inside_name|has_value or kom.comm_2_inside_percent or kom.comm_2_inside_name|has_value or kom.comm_outside_amount or kom.comm_outside_name|has_value %}
+        <div class="divider my-4"></div>
         <h3 class="font-semibold mb-2">Commissions</h3>
         <div class="space-y-2">
-          <div><span class="font-semibold">Comm #1 (Inside):</span> {% if kom.comm_1_inside_percent %}{{ kom.comm_1_inside_percent }}%{% else %}-{% endif %} {% if kom.comm_1_inside_name %}- {{ kom.comm_1_inside_name }}{% endif %}</div>
-          <div><span class="font-semibold">Comm #2 (Inside):</span> {% if kom.comm_2_inside_percent %}{{ kom.comm_2_inside_percent }}%{% else %}-{% endif %} {% if kom.comm_2_inside_name %}- {{ kom.comm_2_inside_name }}{% endif %}</div>
-          <div><span class="font-semibold">Comm (Outside):</span> {% if kom.comm_outside_amount %}${{ kom.comm_outside_amount|floatformat:2 }}{% else %}-{% endif %} {% if kom.comm_outside_name %}- {{ kom.comm_outside_name }}{% endif %}</div>
+          {% if kom.comm_1_inside_percent or kom.comm_1_inside_name|has_value %}<div><span class="font-semibold">Comm #1 (Inside):</span> {% if kom.comm_1_inside_percent %}{{ kom.comm_1_inside_percent }}%{% endif %}{% if kom.comm_1_inside_name|has_value %} - {{ kom.comm_1_inside_name }}{% endif %}</div>{% endif %}
+          {% if kom.comm_2_inside_percent or kom.comm_2_inside_name|has_value %}<div><span class="font-semibold">Comm #2 (Inside):</span> {% if kom.comm_2_inside_percent %}{{ kom.comm_2_inside_percent }}%{% endif %}{% if kom.comm_2_inside_name|has_value %} - {{ kom.comm_2_inside_name }}{% endif %}</div>{% endif %}
+          {% if kom.comm_outside_amount or kom.comm_outside_name|has_value %}<div><span class="font-semibold">Comm (Outside):</span> {% if kom.comm_outside_amount %}${{ kom.comm_outside_amount|floatformat:2 }}{% endif %}{% if kom.comm_outside_name|has_value %} - {{ kom.comm_outside_name }}{% endif %}</div>{% endif %}
         </div>
+        {% endif %}
         
+        {% if kom.consultant|has_value or kom.contractor_name|has_value or kom.desired_delivery|has_value %}
         <div class="divider my-4"></div>
-        
         <div class="space-y-2">
-          <div><span class="font-semibold">Consultant:</span> {{ kom.consultant|default:"-" }}</div>
-          <div><span class="font-semibold">Contractor Name:</span> {{ kom.contractor_name|default:"-" }}</div>
-          <div><span class="font-semibold">Desired Delivery:</span> {{ kom.desired_delivery|default:"-" }}</div>
+          {% if kom.consultant|has_value %}<div><span class="font-semibold">Consultant:</span> {{ kom.consultant }}</div>{% endif %}
+          {% if kom.contractor_name|has_value %}<div><span class="font-semibold">Contractor Name:</span> {{ kom.contractor_name }}</div>{% endif %}
+          {% if kom.desired_delivery|has_value %}<div><span class="font-semibold">Desired Delivery:</span> {{ kom.desired_delivery }}</div>{% endif %}
         </div>
+        {% endif %}
       </div>
     </div>
     
     <!-- BILL TO -->
+    {% if kom.bill_to_name|has_value or kom.bill_to_company|has_value or kom.bill_to_address|has_value or kom.bill_to_city|has_value or kom.bill_to_state|has_value or kom.bill_to_zip|has_value or kom.bill_to_phone|has_value or kom.bill_to_email|has_value %}
     <div class="card bg-base-100 shadow-xl">
       <div class="card-body">
         <h2 class="card-title text-xl mb-4">BILL TO</h2>
         <div class="space-y-2">
-          <div><span class="font-semibold">Name:</span> {{ kom.bill_to_name|default:"-" }}</div>
-          <div><span class="font-semibold">Company:</span> {{ kom.bill_to_company|default:"-" }}</div>
-          <div><span class="font-semibold">Address:</span> {{ kom.bill_to_address|default:"" }}{% if kom.bill_to_city %}<br>{{ kom.bill_to_city }}{% endif %}{% if kom.bill_to_state %}, {{ kom.bill_to_state }}{% endif %} {% if kom.bill_to_zip %}{{ kom.bill_to_zip }}{% endif %}</div>
-          <div><span class="font-semibold">Phone:</span> {{ kom.bill_to_phone|default:"-" }}</div>
-          <div><span class="font-semibold">Email:</span> {{ kom.bill_to_email|default:"-" }}</div>
+          {% if kom.bill_to_name|has_value %}<div><span class="font-semibold">Name:</span> {{ kom.bill_to_name }}</div>{% endif %}
+          {% if kom.bill_to_company|has_value %}<div><span class="font-semibold">Company:</span> {{ kom.bill_to_company }}</div>{% endif %}
+          {% if kom.bill_to_address|has_value or kom.bill_to_city|has_value or kom.bill_to_state|has_value or kom.bill_to_zip|has_value %}
+          <div><span class="font-semibold">Address:</span> {% if kom.bill_to_address|has_value %}{{ kom.bill_to_address }}{% endif %}{% if kom.bill_to_city|has_value %}<br>{{ kom.bill_to_city }}{% endif %}{% if kom.bill_to_state|has_value %}, {{ kom.bill_to_state }}{% endif %}{% if kom.bill_to_zip|has_value %} {{ kom.bill_to_zip }}{% endif %}</div>
+          {% endif %}
+          {% if kom.bill_to_phone|has_value %}<div><span class="font-semibold">Phone:</span> {{ kom.bill_to_phone }}</div>{% endif %}
+          {% if kom.bill_to_email|has_value %}<div><span class="font-semibold">Email:</span> {{ kom.bill_to_email }}</div>{% endif %}
         </div>
       </div>
     </div>
+    {% endif %}
     
     <!-- SHIP TO -->
+    {% if kom.ship_to_name|has_value or kom.ship_to_company|has_value or kom.ship_to_address|has_value or kom.ship_to_city|has_value or kom.ship_to_state|has_value or kom.ship_to_zip|has_value or kom.ship_to_phone|has_value or kom.ship_to_email|has_value %}
     <div class="card bg-base-100 shadow-xl">
       <div class="card-body">
         <h2 class="card-title text-xl mb-4">SHIP TO</h2>
         <div class="space-y-2">
-          <div><span class="font-semibold">Name:</span> {{ kom.ship_to_name|default:"-" }}</div>
-          <div><span class="font-semibold">Company:</span> {{ kom.ship_to_company|default:"-" }}</div>
-          <div><span class="font-semibold">Address:</span> {{ kom.ship_to_address|default:"" }}{% if kom.ship_to_city %}<br>{{ kom.ship_to_city }}{% endif %}{% if kom.ship_to_state %}, {{ kom.ship_to_state }}{% endif %} {% if kom.ship_to_zip %}{{ kom.ship_to_zip }}{% endif %}</div>
-          <div><span class="font-semibold">Phone:</span> {{ kom.ship_to_phone|default:"-" }}</div>
-          <div><span class="font-semibold">Email:</span> {{ kom.ship_to_email|default:"-" }}</div>
+          {% if kom.ship_to_name|has_value %}<div><span class="font-semibold">Name:</span> {{ kom.ship_to_name }}</div>{% endif %}
+          {% if kom.ship_to_company|has_value %}<div><span class="font-semibold">Company:</span> {{ kom.ship_to_company }}</div>{% endif %}
+          {% if kom.ship_to_address|has_value or kom.ship_to_city|has_value or kom.ship_to_state|has_value or kom.ship_to_zip|has_value %}
+          <div><span class="font-semibold">Address:</span> {% if kom.ship_to_address|has_value %}{{ kom.ship_to_address }}{% endif %}{% if kom.ship_to_city|has_value %}<br>{{ kom.ship_to_city }}{% endif %}{% if kom.ship_to_state|has_value %}, {{ kom.ship_to_state }}{% endif %}{% if kom.ship_to_zip|has_value %} {{ kom.ship_to_zip }}{% endif %}</div>
+          {% endif %}
+          {% if kom.ship_to_phone|has_value %}<div><span class="font-semibold">Phone:</span> {{ kom.ship_to_phone }}</div>{% endif %}
+          {% if kom.ship_to_email|has_value %}<div><span class="font-semibold">Email:</span> {{ kom.ship_to_email }}</div>{% endif %}
         </div>
       </div>
     </div>
+    {% endif %}
     
     <!-- TAX INFORMATION -->
     <div class="card bg-base-100 shadow-xl">
@@ -562,4 +599,169 @@
   {% endif %}
   
 </div>
+
+<script>
+// Ctrl+P should trigger print of this page (native print dialog). Keep default behavior but ensure consistent.
+document.addEventListener('keydown', function(e) {
+  if ((e.ctrlKey || e.metaKey) && (e.key === 'p' || e.key === 'P')) {
+    // Allow native print; just ensure we focus printable root
+    // Some browsers intercept automatically; this is a no-op helper
+    setTimeout(() => { window.print(); }, 0);
+  }
+});
+
+// Function to open KOM file using Electron IPC
+function openKOMFile(pk) {
+  // Build URL correctly - get the base URL and append the PK
+  const baseUrl = "{% url 'customer:kom_open_file' 999999 %}";
+  const url = baseUrl.replace('999999', pk.toString());
+  
+  console.log('Opening KOM file, PK:', pk, 'URL:', url);
+  
+  // Check if we're in Electron
+  if (typeof require !== 'undefined') {
+    try {
+      // Fetch the file path from the server
+      fetch(url, {
+        method: 'GET',
+        headers: {
+          'X-CSRFToken': '{{ csrf_token }}'
+        }
+      })
+      .then(response => {
+        console.log('Response status:', response.status);
+        if (!response.ok) {
+          return response.json().then(data => {
+            throw new Error(data.error || `HTTP ${response.status}`);
+          });
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('File path response:', data);
+        if (data.success && data.file_path) {
+          // Use Electron IPC to open the file
+          const { ipcRenderer } = require('electron');
+          console.log('Invoking Electron IPC with path:', data.file_path);
+          ipcRenderer.invoke('open-file', data.file_path).then(result => {
+            console.log('IPC result:', result);
+            if (!result.success) {
+              alert('Error opening file: ' + (result.error || 'Unknown error'));
+            }
+          }).catch(error => {
+            console.error('Error opening file via IPC:', error);
+            alert('Error opening file: ' + error.message);
+          });
+        } else {
+          const errorMsg = data.error || 'File path not available';
+          console.error('Server error:', errorMsg, data);
+          alert('Error: ' + errorMsg + (data.stored_path ? '\nStored path: ' + data.stored_path : ''));
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching file path:', error);
+        // Try to get more details about the error
+        let errorMsg = error.message;
+        if (error.message === 'Failed to fetch') {
+          errorMsg = 'Failed to connect to server. Please check:\n1. Django server is running\n2. You are logged in\n3. You have admin permissions\n\nOriginal error: ' + error.message;
+        }
+        alert('Error: ' + errorMsg);
+      });
+    } catch (error) {
+      console.error('Electron IPC not available:', error);
+      alert('Error: Electron IPC not available - ' + error.message);
+    }
+  } else {
+    // Not in Electron, try to open via URL
+    console.log('Not in Electron, redirecting to:', url);
+    window.location.href = url;
+  }
+}
+
+async function exportKOM() {
+  const exportUrl = "{% url 'customer:kom_export_text' kom.pk %}";
+  
+  try {
+    // Fetch the text export
+    const response = await fetch(exportUrl);
+    const text = await response.text();
+    
+    // Copy to clipboard
+    try {
+      await navigator.clipboard.writeText(text);
+      alert('✅ KOM data exported and copied to clipboard!\n\nYou can now paste it anywhere, or use the print dialog.');
+    } catch (clipboardError) {
+      // Fallback for older browsers
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      textArea.style.position = 'fixed';
+      textArea.style.left = '-999999px';
+      document.body.appendChild(textArea);
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        alert('✅ KOM data exported and copied to clipboard!\n\nYou can now paste it anywhere, or use the print dialog.');
+      } catch (fallbackError) {
+        alert('⚠️ Could not copy to clipboard automatically. Opening in new window for manual copy.');
+      }
+      document.body.removeChild(textArea);
+    }
+    
+    // Open in new window for viewing and printing
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write(`
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>KOM Export - Proposal #{{ kom.proposal_number|default:"N/A" }}</title>
+        <style>
+          body {
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 100%;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+          }
+          @media print {
+            body {
+              padding: 0;
+            }
+            @page {
+              margin: 1cm;
+            }
+          }
+        </style>
+      </head>
+      <body>
+        <pre>${text.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</pre>
+        <script>
+          window.onload = function() {
+            // Auto-select all text for easy copying
+            const selection = window.getSelection();
+            const range = document.createRange();
+            range.selectNodeContents(document.body);
+            selection.removeAllRanges();
+            selection.addRange(range);
+          };
+        <\/script>
+      </body>
+      </html>
+    `);
+    printWindow.document.close();
+    
+    // Wait a moment then focus the window
+    setTimeout(() => {
+      printWindow.focus();
+      // Optionally auto-print (commented out - user can use Ctrl+P)
+      // printWindow.print();
+    }, 500);
+    
+  } catch (error) {
+    console.error('Export error:', error);
+    alert('❌ Error exporting KOM data: ' + error.message);
+  }
+}
+</script>
 {% endblock %}

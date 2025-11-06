@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     "my_calendar",
     "resources",
     "customer",
+    "inventor",
+    "project_notes",
 ]
 
 MIDDLEWARE = [

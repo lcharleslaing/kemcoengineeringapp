@@ -1,0 +1,566 @@
+{% extends "core/base.html" %}
+
+{% block title %}Job #{{ job.job_number }} - Notes{% endblock %}
+
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="container mx-auto p-6">
+  <!-- Print-Only Report Layout -->
+  <div class="print-report">
+    <!-- Print Header -->
+    <div class="print-header">
+      <h1>Job #{{ job.job_number }} - Project Notes</h1>
+      <div class="print-meta">
+        {% if job.customer_name %}<div><strong>Customer:</strong> {{ job.customer_name }}</div>{% endif %}
+        {% if job.project_name %}<div><strong>Project:</strong> {{ job.project_name }}</div>{% endif %}
+        <div class="print-date"><strong>Printed:</strong> <span id="printDate"></span></div>
+      </div>
+    </div>
+    
+    <!-- Equipment & Line Items Notes -->
+    {% if equipment_notes %}
+    <div class="print-section">
+      <h2>Equipment & Line Items Notes</h2>
+      {% for eq_note in equipment_notes %}
+      <div class="print-note">
+        <div class="note-meta">Added by {{ eq_note.created_by.get_full_name|default:eq_note.created_by.username }} on {{ eq_note.created_at|date:"M d, Y H:i" }}</div>
+        
+        {% if eq_note.equipment_data %}
+        <div class="equipment-section">
+          <h3>Equipment</h3>
+          {% for eq_type, eq_info in eq_note.equipment_data.items %}
+          <div class="equipment-item">
+            <strong>{{ eq_type }}:</strong>
+            <div class="equipment-details">
+              {% if eq_info.qty is not None %}<span>Qty: {{ eq_info.qty }}</span>{% endif %}
+              {% if eq_info.kn_number %}<span>KN: {{ eq_info.kn_number }}</span>{% endif %}
+              {% if eq_info.description %}<span>Description: {{ eq_info.description }}</span>{% endif %}
+              {% if eq_info.type %}<span>Type: {{ eq_info.type }}</span>{% endif %}
+              {% if eq_info.emissions %}<span>Emissions: {{ eq_info.emissions }}</span>{% endif %}
+              {% if eq_info.size %}<span>Size: {{ eq_info.size }}</span>{% endif %}
+              {% if eq_info.pump_grav %}<span>Pump/Grav: {{ eq_info.pump_grav }}</span>{% endif %}
+              {% if eq_info.material %}<span>Material: {{ eq_info.material }}</span>{% endif %}
+              {% if eq_info.dia_in is not None %}<span>Dia (in): {{ eq_info.dia_in }}</span>{% endif %}
+              {% if eq_info.ht_ft is not None %}<span>Ht (ft): {{ eq_info.ht_ft }}</span>{% endif %}
+              {% if eq_info.ga %}<span>GA: {{ eq_info.ga }}</span>{% endif %}
+              {% if eq_info.flow_gpm is not None %}<span>Flow (gpm): {{ eq_info.flow_gpm }}</span>{% endif %}
+              {% if eq_info.tdh_ft is not None %}<span>TDH (ft): {{ eq_info.tdh_ft }}</span>{% endif %}
+              {% if eq_info.packaging %}<span>Packaging: {{ eq_info.packaging }}</span>{% endif %}
+              {% if eq_info.piping_material %}<span>Piping Material: {{ eq_info.piping_material }}</span>{% endif %}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+        
+        {% if eq_note.line_items_data %}
+        <div class="line-items-section">
+          <h3>Line Items (Engineering/Drafting Work)</h3>
+          {% for item in eq_note.line_items_data %}
+          <div class="line-item">
+            {% if item.item_number %}<strong>{{ item.item_number }}:</strong>{% endif %}
+            {{ item.description }}
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+    
+    <!-- General Notes -->
+    {% if notes %}
+    <div class="print-section">
+      <h2>General Notes</h2>
+      {% for note in notes %}
+      <div class="print-note">
+        {% if note.title %}<h3>{{ note.title }}</h3>{% endif %}
+        <div class="note-content">{{ note.content|linebreaks }}</div>
+        <div class="note-meta">Added by {{ note.created_by.get_full_name|default:note.created_by.username }} on {{ note.created_at|date:"M d, Y H:i" }}</div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+  
+  <div class="mb-6 flex items-center justify-between">
+    <div>
+      <h1 class="text-3xl font-bold">Job #{{ job.job_number }}</h1>
+      <p class="text-base-content/70 mt-1">Customer: {{ job.customer_name|default:"No Customer" }}</p>
+      <p class="text-base-content/70">Project: {{ job.project_name|default:"No Project Name" }}</p>
+    </div>
+    <div class="flex gap-2 no-print">
+      <button id="printNotesBtn" class="btn btn-primary">Print Notes</button>
+      <a href="{% url 'project_notes:job_edit' job.job_number %}" class="btn btn-secondary">Edit Job</a>
+      <form method="post" action="{% url 'project_notes:job_delete' job.job_number %}" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete Job #{{ job.job_number }}? This will also delete all associated notes.');">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-error">Delete Job</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add Note Form -->
+  <div class="card bg-base-100 shadow-xl mb-6 no-print">
+    <div class="card-body">
+      <h2 class="card-title text-xl mb-4">Add Note</h2>
+      <form method="post" action="{% url 'project_notes:add_note' job.job_number %}">
+        {% csrf_token %}
+        <div class="form-control mb-4">
+          <label class="label">
+            <span class="label-text">Title (optional)</span>
+          </label>
+          <input type="text" name="title" class="input input-bordered" placeholder="Note title">
+        </div>
+        <div class="form-control mb-4">
+          <label class="label">
+            <span class="label-text">Content *</span>
+          </label>
+          <textarea name="content" class="textarea textarea-bordered h-24" placeholder="Enter note content..." required></textarea>
+        </div>
+        <input type="hidden" name="note_type" value="general">
+        <button type="submit" class="btn btn-primary">Add Note</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Equipment Notes -->
+  {% if equipment_notes %}
+  <div class="card bg-base-100 shadow-xl mb-6">
+    <div class="card-body">
+      <h2 class="card-title text-xl mb-4">Equipment & Line Items Notes</h2>
+      {% for eq_note in equipment_notes %}
+      <div class="border-b border-base-300 pb-4 mb-4 last:border-0 last:pb-0 last:mb-0">
+        <div class="flex justify-between items-start mb-2">
+          <div>
+            <span class="text-sm text-base-content/60">Added by {{ eq_note.created_by.get_full_name|default:eq_note.created_by.username }} on {{ eq_note.created_at|date:"M d, Y H:i" }}</span>
+            {% if eq_note.updated_at != eq_note.created_at %}
+            <span class="text-sm text-base-content/50"> | Updated: {{ eq_note.updated_at|date:"M d, Y H:i" }}</span>
+            {% endif %}
+          </div>
+          <div class="flex gap-2 no-print">
+            {% if eq_note.created_by == user or user.is_superuser %}
+            <form method="post" action="{% url 'project_notes:delete_equipment_note' eq_note.pk %}" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this equipment note?');">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-sm btn-error">Delete</button>
+            </form>
+            {% endif %}
+          </div>
+        </div>
+        
+        {% if eq_note.equipment_data %}
+        <div class="mb-3">
+          <h3 class="font-semibold mb-2">Equipment:</h3>
+          <div class="ml-4 space-y-2">
+            {% for eq_type, eq_info in eq_note.equipment_data.items %}
+            <div class="border-l-2 border-base-300 pl-3">
+              <strong>{{ eq_type }}:</strong>
+              <div class="ml-2 space-y-1 mt-1">
+                {% if eq_info.qty is not None %}<div>Qty: {{ eq_info.qty }}</div>{% endif %}
+                {% if eq_info.kn_number %}<div>KN: {{ eq_info.kn_number }}</div>{% endif %}
+                {% if eq_info.description %}<div>Description: {{ eq_info.description }}</div>{% endif %}
+                {% if eq_info.type %}<div>Type: {{ eq_info.type }}</div>{% endif %}
+                {% if eq_info.emissions %}<div>Emissions: {{ eq_info.emissions }}</div>{% endif %}
+                {% if eq_info.size %}<div>Size: {{ eq_info.size }}</div>{% endif %}
+                {% if eq_info.pump_grav %}<div>Pump/Grav: {{ eq_info.pump_grav }}</div>{% endif %}
+                {% if eq_info.material %}<div>Material: {{ eq_info.material }}</div>{% endif %}
+                {% if eq_info.dia_in is not None %}<div>Dia (in): {{ eq_info.dia_in }}</div>{% endif %}
+                {% if eq_info.ht_ft is not None %}<div>Ht (ft): {{ eq_info.ht_ft }}</div>{% endif %}
+                {% if eq_info.ga %}<div>GA: {{ eq_info.ga }}</div>{% endif %}
+                {% if eq_info.flow_gpm is not None %}<div>Flow (gpm): {{ eq_info.flow_gpm }}</div>{% endif %}
+                {% if eq_info.tdh_ft is not None %}<div>TDH (ft): {{ eq_info.tdh_ft }}</div>{% endif %}
+                {% if eq_info.packaging %}<div>Packaging: {{ eq_info.packaging }}</div>{% endif %}
+                {% if eq_info.piping_material %}<div>Piping Material: {{ eq_info.piping_material }}</div>{% endif %}
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+        
+        {% if eq_note.line_items_data %}
+        <div>
+          <h3 class="font-semibold mb-2">Line Items (Engineering/Drafting Work):</h3>
+          <div class="ml-4 space-y-1">
+            {% for item in eq_note.line_items_data %}
+            <div>
+              {% if item.item_number %}<strong>{{ item.item_number }}:</strong>{% endif %}
+              {{ item.description }}
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- General Notes -->
+  {% if notes %}
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h2 class="card-title text-xl mb-4">General Notes</h2>
+      {% for note in notes %}
+      <div class="border-b border-base-300 pb-4 mb-4 last:border-0 last:pb-0 last:mb-0">
+        <div class="flex justify-between items-start mb-2">
+          <div>
+            {% if note.title %}<h3 class="font-semibold mb-2">{{ note.title }}</h3>{% endif %}
+            <p class="text-base-content/80 mb-2">{{ note.content|linebreaks }}</p>
+            <span class="text-sm text-base-content/60">Added by {{ note.created_by.get_full_name|default:note.created_by.username }} on {{ note.created_at|date:"M d, Y H:i" }}</span>
+            {% if note.updated_at != note.created_at %}
+            <span class="text-sm text-base-content/50"> | Updated: {{ note.updated_at|date:"M d, Y H:i" }}</span>
+            {% endif %}
+          </div>
+          <div class="flex gap-2 no-print">
+            {% if note.created_by == user or user.is_superuser %}
+            <a href="{% url 'project_notes:edit_note' note.pk %}" class="btn btn-sm btn-primary">Edit</a>
+            <form method="post" action="{% url 'project_notes:delete_note' note.pk %}" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this note?');">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-sm btn-error">Delete</button>
+            </form>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% else %}
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <p class="text-base-content/60 text-center py-8">No notes yet. Add one above!</p>
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="mt-6 no-print">
+    <a href="{% url 'project_notes:job_list' %}" class="btn btn-outline">Back to Jobs List</a>
+  </div>
+</div>
+
+<style>
+  /* Hide print report on screen */
+  @media screen {
+    .print-report {
+      display: none !important;
+    }
+    .print-header {
+      display: none;
+    }
+  }
+  
+  /* Print Styles - Custom Report Layout */
+  @media print {
+    /* Hide all screen elements */
+    .no-print,
+    nav,
+    header,
+    footer,
+    .card,
+    .btn,
+    form,
+    .mb-6.flex {
+      display: none !important;
+    }
+    
+    /* Show only print report */
+    .print-report {
+      display: block !important;
+    }
+    
+    /* Page setup - Force Letter size (8.5x11 inches) */
+    @page {
+      margin: 0.75in;
+      size: letter portrait !important;
+      size: 8.5in 11in !important;
+    }
+    
+    /* Additional enforcement */
+    @page :first {
+      size: letter portrait !important;
+      size: 8.5in 11in !important;
+    }
+    
+    @page :left {
+      size: letter portrait !important;
+      size: 8.5in 11in !important;
+    }
+    
+    @page :right {
+      size: letter portrait !important;
+      size: 8.5in 11in !important;
+    }
+    
+    html, body {
+      width: 8.5in;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      font-size: 11pt;
+      line-height: 1.4;
+      color: #000;
+      background: #fff;
+    }
+    
+    .container {
+      max-width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+    
+    /* Print Header */
+    .print-header {
+      border-bottom: 2px solid #000;
+      padding-bottom: 0.5em;
+      margin-bottom: 1em;
+    }
+    
+    .print-header h1 {
+      font-size: 20pt;
+      font-weight: bold;
+      margin: 0 0 0.5em 0;
+      padding: 0;
+    }
+    
+    .print-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5em;
+      font-size: 10pt;
+      color: #333;
+    }
+    
+    .print-meta div {
+      margin: 0;
+    }
+    
+    .print-date {
+      margin-left: auto;
+    }
+    
+    /* Sections */
+    .print-section {
+      margin-bottom: 1.5em;
+      page-break-inside: avoid;
+    }
+    
+    .print-section h2 {
+      font-size: 14pt;
+      font-weight: bold;
+      margin: 1em 0 0.75em 0;
+      padding-bottom: 0.25em;
+      border-bottom: 1px solid #666;
+      page-break-after: avoid;
+    }
+    
+    /* Individual Notes */
+    .print-note {
+      margin-bottom: 1em;
+      padding-bottom: 0.75em;
+      border-bottom: 1px solid #ddd;
+      page-break-inside: avoid;
+    }
+    
+    .print-note:last-child {
+      border-bottom: none;
+    }
+    
+    .note-meta {
+      font-size: 9pt;
+      color: #666;
+      margin-bottom: 0.5em;
+      font-style: italic;
+    }
+    
+    /* Equipment Section */
+    .equipment-section {
+      margin: 0.75em 0;
+    }
+    
+    .equipment-section h3 {
+      font-size: 12pt;
+      font-weight: bold;
+      margin: 0.5em 0 0.4em 0;
+      color: #333;
+    }
+    
+    .equipment-item {
+      margin: 0.5em 0 0.5em 1em;
+      padding-left: 0.5em;
+      border-left: 2px solid #999;
+    }
+    
+    .equipment-item strong {
+      font-size: 11pt;
+      display: block;
+      margin-bottom: 0.25em;
+    }
+    
+    .equipment-details {
+      font-size: 10pt;
+      line-height: 1.5;
+    }
+    
+    .equipment-details span {
+      display: inline-block;
+      margin-right: 1em;
+      margin-bottom: 0.2em;
+    }
+    
+    /* Line Items Section */
+    .line-items-section {
+      margin: 0.75em 0;
+    }
+    
+    .line-items-section h3 {
+      font-size: 12pt;
+      font-weight: bold;
+      margin: 0.5em 0 0.4em 0;
+      color: #333;
+    }
+    
+    .line-item {
+      font-size: 10pt;
+      margin: 0.3em 0 0.3em 1em;
+      line-height: 1.5;
+    }
+    
+    .line-item strong {
+      margin-right: 0.5em;
+    }
+    
+    /* General Notes Content */
+    .note-content {
+      font-size: 11pt;
+      line-height: 1.6;
+      margin: 0.5em 0;
+      white-space: pre-wrap;
+    }
+    
+    .print-note h3 {
+      font-size: 12pt;
+      font-weight: bold;
+      margin: 0.5em 0 0.4em 0;
+      color: #333;
+    }
+    
+    /* Page breaks */
+    .print-section {
+      page-break-inside: avoid;
+    }
+    
+    .print-note {
+      page-break-inside: avoid;
+    }
+  }
+  
+  /* Screen-only styles */
+  @media screen {
+    .print-header {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  // Set print date when printing
+  window.addEventListener('beforeprint', function() {
+    const now = new Date();
+    const dateStr = now.toLocaleDateString('en-US', { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+    document.getElementById('printDate').textContent = dateStr;
+  });
+  
+  // Override print to ensure Letter size
+  window.addEventListener('beforeprint', function() {
+    // Add a style element to force page size
+    let style = document.getElementById('print-page-size');
+    if (!style) {
+      style = document.createElement('style');
+      style.id = 'print-page-size';
+      style.textContent = '@page { size: letter portrait; size: 8.5in 11in; }';
+      document.head.appendChild(style);
+    }
+  });
+  
+  // Custom print function to ensure Letter size
+  document.addEventListener('DOMContentLoaded', function() {
+    // Function to force Letter size
+    function forceLetterSize() {
+      // Remove any existing style
+      let existingStyle = document.getElementById('force-letter-size');
+      if (existingStyle) {
+        existingStyle.remove();
+      }
+      
+      // Create new style with very explicit Letter size
+      let style = document.createElement('style');
+      style.id = 'force-letter-size';
+      style.textContent = `
+        @page {
+          size: letter portrait !important;
+          size: 8.5in 11in !important;
+          margin: 0.75in !important;
+        }
+        @media print {
+          @page {
+            size: letter portrait !important;
+            size: 8.5in 11in !important;
+            margin: 0.75in !important;
+          }
+        }
+      `;
+      document.head.appendChild(style);
+      
+      // Also try to set it via CSS custom property
+      document.documentElement.style.setProperty('--print-page-size', 'letter');
+    }
+    
+    const printBtn = document.getElementById('printNotesBtn');
+    if (printBtn) {
+      printBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        forceLetterSize();
+        
+        // Multiple attempts to ensure it's set
+        setTimeout(function() {
+          forceLetterSize();
+          setTimeout(function() {
+            window.print();
+          }, 100);
+        }, 50);
+      });
+    }
+    
+    // Also handle Ctrl+P
+    document.addEventListener('keydown', function(e) {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+        e.preventDefault();
+        forceLetterSize();
+        
+        setTimeout(function() {
+          forceLetterSize();
+          setTimeout(function() {
+            window.print();
+          }, 100);
+        }, 50);
+      }
+    });
+    
+    // Set on beforeprint event
+    window.addEventListener('beforeprint', function() {
+      forceLetterSize();
+    });
+  });
+</script>
+
+{% endblock %}
+

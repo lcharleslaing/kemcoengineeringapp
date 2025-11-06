@@ -1,0 +1,5625 @@
+{
+  "timestamp": "2025-11-06T08:19:44.413791",
+  "files_analyzed": 9,
+  "analyses": [
+    {
+      "filename": "35371 KOM AND OC FORM.xlsx",
+      "filepath": "F:/Brakebush Brothers/Hartwell, GA/35371/35371 KOM AND OC FORM.xlsx",
+      "max_row": 165,
+      "max_col": 23,
+      "sections": [
+        {
+          "row": 1,
+          "col": 1,
+          "text": "TO BE COMPLETED BY SALES",
+          "keyword": "TO BE COMPLETED BY SALES"
+        },
+        {
+          "row": 10,
+          "col": 4,
+          "text": "BILL TO:",
+          "keyword": "BILL TO"
+        },
+        {
+          "row": 10,
+          "col": 7,
+          "text": "SHIP TO:",
+          "keyword": "SHIP TO"
+        },
+        {
+          "row": 18,
+          "col": 3,
+          "text": "Brakebush Brothers",
+          "keyword": "OTHER"
+        },
+        {
+          "row": 18,
+          "col": 7,
+          "text": "Brakebush Brothers",
+          "keyword": "OTHER"
+        },
+        {
+          "row": 26,
+          "col": 1,
+          "text": "Tax Exempt?",
+          "keyword": "TAX"
+        },
+        {
+          "row": 28,
+          "col": 1,
+          "text": "TO BE COMPLETED BY ACCT",
+          "keyword": "TO BE COMPLETED BY ACCT"
+        },
+        {
+          "row": 30,
+          "col": 5,
+          "text": "Confirm Tax Status Noted Above:",
+          "keyword": "TAX"
+        },
+        {
+          "row": 32,
+          "col": 1,
+          "text": "Payment Milestones",
+          "keyword": "PAYMENT MILESTONES"
+        },
+        {
+          "row": 41,
+          "col": 1,
+          "text": "TO BE COMPLETED BY SALES",
+          "keyword": "TO BE COMPLETED BY SALES"
+        },
+        {
+          "row": 47,
+          "col": 1,
+          "text": "SHIPPING",
+          "keyword": "SHIPPING"
+        },
+        {
+          "row": 52,
+          "col": 1,
+          "text": "SPECIFICATIONS AND TERMS & COND",
+          "keyword": "SPECIFICATIONS"
+        },
+        {
+          "row": 53,
+          "col": 3,
+          "text": "Specifications?",
+          "keyword": "SPECIFICATIONS"
+        },
+        {
+          "row": 57,
+          "col": 1,
+          "text": "APPROVAL PRINTS REQ'D?",
+          "keyword": "APPROVAL PRINTS"
+        },
+        {
+          "row": 60,
+          "col": 1,
+          "text": "EQUIPMENT",
+          "keyword": "EQUIPMENT"
+        },
+        {
+          "row": 61,
+          "col": 1,
+          "text": "HTR - 1",
+          "keyword": "HTR - 1"
+        },
+        {
+          "row": 63,
+          "col": 3,
+          "text": "x106BTU/hr",
+          "keyword": "HR"
+        },
+        {
+          "row": 65,
+          "col": 1,
+          "text": "HTR - 2",
+          "keyword": "HTR - 2"
+        },
+        {
+          "row": 67,
+          "col": 3,
+          "text": "x106BTU/hr",
+          "keyword": "HR"
+        },
+        {
+          "row": 69,
+          "col": 1,
+          "text": "STK ECON",
+          "keyword": "STK ECON"
+        },
+        {
+          "row": 71,
+          "col": 1,
+          "text": "STACK(S)",
+          "keyword": "STACK"
+        },
+        {
+          "row": 73,
+          "col": 1,
+          "text": "HR",
+          "keyword": "HR"
+        },
+        {
+          "row": 75,
+          "col": 1,
+          "text": "TANKS",
+          "keyword": "TANKS"
+        },
+        {
+          "row": 83,
+          "col": 1,
+          "text": "PUMPS",
+          "keyword": "PUMPS"
+        },
+        {
+          "row": 93,
+          "col": 1,
+          "text": "Steam Heaters",
+          "keyword": "STEAM HEATERS"
+        },
+        {
+          "row": 98,
+          "col": 1,
+          "text": "SOFTENER",
+          "keyword": "SOFTENER"
+        },
+        {
+          "row": 101,
+          "col": 1,
+          "text": "PANEL(S)",
+          "keyword": "PANEL"
+        },
+        {
+          "row": 104,
+          "col": 1,
+          "text": "OTHER",
+          "keyword": "OTHER"
+        },
+        {
+          "row": 107,
+          "col": 1,
+          "text": "UTILITIES",
+          "keyword": "UTILITIES"
+        },
+        {
+          "row": 115,
+          "col": 1,
+          "text": "OTHER INFO",
+          "keyword": "OTHER"
+        },
+        {
+          "row": 118,
+          "col": 2,
+          "text": "No panel view.",
+          "keyword": "PANEL"
+        },
+        {
+          "row": 123,
+          "col": 1,
+          "text": "Project Name:",
+          "keyword": "PROJECT NAME"
+        },
+        {
+          "row": 125,
+          "col": 1,
+          "text": "TO BE COMPLETED BY APPS",
+          "keyword": "TO BE COMPLETED BY APPS"
+        },
+        {
+          "row": 137,
+          "col": 4,
+          "text": "Heater Control Panel",
+          "keyword": "PANEL"
+        },
+        {
+          "row": 138,
+          "col": 4,
+          "text": "30\" Dia x 10' L, FOE, Stack Section",
+          "keyword": "STACK"
+        },
+        {
+          "row": 139,
+          "col": 4,
+          "text": "30\" LP Stack Cap",
+          "keyword": "STACK"
+        },
+        {
+          "row": 141,
+          "col": 1,
+          "text": "LABOR HOURS",
+          "keyword": "LABOR HOURS"
+        },
+        {
+          "row": 141,
+          "col": 7,
+          "text": "EQUIPMENT REQD",
+          "keyword": "EQUIPMENT"
+        },
+        {
+          "row": 142,
+          "col": 2,
+          "text": "HR:",
+          "keyword": "HR"
+        },
+        {
+          "row": 147,
+          "col": 1,
+          "text": "CAPITAL",
+          "keyword": "CAPITAL"
+        },
+        {
+          "row": 147,
+          "col": 7,
+          "text": "INSTALL",
+          "keyword": "INSTALL"
+        },
+        {
+          "row": 151,
+          "col": 7,
+          "text": "Install Cost:",
+          "keyword": "INSTALL"
+        },
+        {
+          "row": 159,
+          "col": 1,
+          "text": "TO BE COMPLETED BY ENG",
+          "keyword": "TO BE COMPLETED BY ENG"
+        },
+        {
+          "row": 163,
+          "col": 5,
+          "text": "Large HP or Excessive LL Pumps?",
+          "keyword": "PUMPS"
+        }
+      ],
+      "tanks": [
+        {
+          "row": 77,
+          "marker": "#1:",
+          "cells": {
+            "3": "HW",
+            "5": "84",
+            "7": "15",
+            "9": "STD",
+            "11": "304"
+          }
+        },
+        {
+          "row": 79,
+          "marker": "#2:",
+          "cells": {
+            "3": "HW",
+            "5": "84",
+            "7": "15",
+            "9": "STD",
+            "11": "304"
+          }
+        },
+        {
+          "row": 81,
+          "marker": "#3:",
+          "cells": {}
+        }
+      ],
+      "line_items": [
+        {
+          "row": 127,
+          "item_number": "35371-01",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 49550
+            }
+          ],
+          "description": "18 MMBTU DCWH, TE+, Pumped"
+        },
+        {
+          "row": 128,
+          "item_number": "35371-02",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 8447
+            }
+          ],
+          "description": "Heater FGR Ducting"
+        },
+        {
+          "row": 129,
+          "item_number": "35371-03",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 2243
+            }
+          ],
+          "description": "Heater Inlet"
+        },
+        {
+          "row": 130,
+          "item_number": "35371-04",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 13344
+            }
+          ],
+          "description": "Heater Discharge Pump Skid"
+        },
+        {
+          "row": 131,
+          "item_number": "35371-05",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 5490.5
+            },
+            {
+              "col": 9,
+              "value": 5075
+            },
+            {
+              "col": 10,
+              "value": 415.5
+            }
+          ],
+          "description": "Hot Water Makeup Valve Nest"
+        },
+        {
+          "row": 132,
+          "item_number": "35371-06",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 4124.5
+            },
+            {
+              "col": 9,
+              "value": 3709
+            },
+            {
+              "col": 10,
+              "value": 415.5
+            }
+          ],
+          "description": "Heater Recirculation Valve Nest"
+        },
+        {
+          "row": 133,
+          "item_number": "35371-07",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 12326
+            },
+            {
+              "col": 8,
+              "value": 728
+            },
+            {
+              "col": 9,
+              "value": 11598
+            }
+          ],
+          "description": "84\" x 15' Hot Water Tank \"A\""
+        },
+        {
+          "row": 134,
+          "item_number": "35371-08",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 12326
+            },
+            {
+              "col": 8,
+              "value": 728
+            },
+            {
+              "col": 9,
+              "value": 11598
+            }
+          ],
+          "description": "84\" x 15' Hot Water Tank \"B\""
+        },
+        {
+          "row": 135,
+          "item_number": "35371-09",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 6844
+            }
+          ],
+          "description": "Heater Recirculation Pump Skid"
+        },
+        {
+          "row": 136,
+          "item_number": "35371-10",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 26769
+            }
+          ],
+          "description": "Hot Water Pump Skid"
+        },
+        {
+          "row": 137,
+          "item_number": "35371-11",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 20383
+            },
+            {
+              "col": 8,
+              "value": 810
+            },
+            {
+              "col": 9,
+              "value": 3052
+            },
+            {
+              "col": 10,
+              "value": 16521
+            }
+          ],
+          "description": "Heater Control Panel"
+        },
+        {
+          "row": 138,
+          "item_number": "1047287",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 1143.32
+            },
+            {
+              "col": 10,
+              "value": 739.54
+            },
+            {
+              "col": 11,
+              "value": 403.78
+            }
+          ],
+          "description": "30\" Dia x 10' L, FOE, Stack Section"
+        },
+        {
+          "row": 139,
+          "item_number": "1058623",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 1372.69
+            },
+            {
+              "col": 9,
+              "value": 2516
+            },
+            {
+              "col": 10,
+              "value": 968.91
+            },
+            {
+              "col": 11,
+              "value": 403.78
+            }
+          ],
+          "description": "30\" LP Stack Cap"
+        }
+      ],
+      "sample_data": {
+        "proposal_number": "35371",
+        "htr1_type": "TE-100+, NSF",
+        "htr1_size": "x106BTU/hr",
+        "labor_pkg": "213",
+        "equipment_qty": "Burner:"
+      }
+    },
+    {
+      "filename": "KOM AND OC FORM - 35042.xlsx",
+      "filepath": "F:/Whitewater Processing/West Harrison, IN/35042/KOM AND OC FORM - 35042.xlsx",
+      "max_row": 165,
+      "max_col": 23,
+      "sections": [
+        {
+          "row": 1,
+          "col": 1,
+          "text": "TO BE COMPLETED BY SALES",
+          "keyword": "TO BE COMPLETED BY SALES"
+        },
+        {
+          "row": 10,
+          "col": 4,
+          "text": "BILL TO:",
+          "keyword": "BILL TO"
+        },
+        {
+          "row": 10,
+          "col": 7,
+          "text": "SHIP TO:",
+          "keyword": "SHIP TO"
+        },
+        {
+          "row": 26,
+          "col": 1,
+          "text": "Tax Exempt?",
+          "keyword": "TAX"
+        },
+        {
+          "row": 28,
+          "col": 1,
+          "text": "TO BE COMPLETED BY ACCT",
+          "keyword": "TO BE COMPLETED BY ACCT"
+        },
+        {
+          "row": 30,
+          "col": 5,
+          "text": "Confirm Tax Status Noted Above:",
+          "keyword": "TAX"
+        },
+        {
+          "row": 32,
+          "col": 1,
+          "text": "Payment Milestones",
+          "keyword": "PAYMENT MILESTONES"
+        },
+        {
+          "row": 41,
+          "col": 1,
+          "text": "TO BE COMPLETED BY SALES",
+          "keyword": "TO BE COMPLETED BY SALES"
+        },
+        {
+          "row": 47,
+          "col": 1,
+          "text": "SHIPPING",
+          "keyword": "SHIPPING"
+        },
+        {
+          "row": 50,
+          "col": 3,
+          "text": "Confirm ship to Address;  Notify 48 hours prior to shipping",
+          "keyword": "SHIP TO"
+        },
+        {
+          "row": 52,
+          "col": 1,
+          "text": "SPECIFICATIONS AND TERMS & COND",
+          "keyword": "SPECIFICATIONS"
+        },
+        {
+          "row": 53,
+          "col": 3,
+          "text": "Specifications?",
+          "keyword": "SPECIFICATIONS"
+        },
+        {
+          "row": 57,
+          "col": 1,
+          "text": "APPROVAL PRINTS REQ'D?",
+          "keyword": "APPROVAL PRINTS"
+        },
+        {
+          "row": 60,
+          "col": 1,
+          "text": "EQUIPMENT",
+          "keyword": "EQUIPMENT"
+        },
+        {
+          "row": 61,
+          "col": 1,
+          "text": "HTR - 1",
+          "keyword": "HTR - 1"
+        },
+        {
+          "row": 63,
+          "col": 3,
+          "text": "x106BTU/hr",
+          "keyword": "HR"
+        },
+        {
+          "row": 65,
+          "col": 1,
+          "text": "HTR - 2",
+          "keyword": "HTR - 2"
+        },
+        {
+          "row": 67,
+          "col": 3,
+          "text": "x106BTU/hr",
+          "keyword": "HR"
+        },
+        {
+          "row": 69,
+          "col": 1,
+          "text": "STK ECON",
+          "keyword": "STK ECON"
+        },
+        {
+          "row": 71,
+          "col": 1,
+          "text": "STACK(S)",
+          "keyword": "STACK"
+        },
+        {
+          "row": 73,
+          "col": 1,
+          "text": "HR",
+          "keyword": "HR"
+        },
+        {
+          "row": 75,
+          "col": 1,
+          "text": "TANKS",
+          "keyword": "TANKS"
+        },
+        {
+          "row": 83,
+          "col": 1,
+          "text": "PUMPS",
+          "keyword": "PUMPS"
+        },
+        {
+          "row": 93,
+          "col": 1,
+          "text": "Steam Heaters",
+          "keyword": "STEAM HEATERS"
+        },
+        {
+          "row": 98,
+          "col": 1,
+          "text": "SOFTENER",
+          "keyword": "SOFTENER"
+        },
+        {
+          "row": 101,
+          "col": 1,
+          "text": "PANEL(S)",
+          "keyword": "PANEL"
+        },
+        {
+          "row": 104,
+          "col": 1,
+          "text": "OTHER",
+          "keyword": "OTHER"
+        },
+        {
+          "row": 107,
+          "col": 1,
+          "text": "UTILITIES",
+          "keyword": "UTILITIES"
+        },
+        {
+          "row": 115,
+          "col": 1,
+          "text": "OTHER INFO",
+          "keyword": "OTHER"
+        },
+        {
+          "row": 117,
+          "col": 6,
+          "text": "2.  Credit, W-9, and Tax exempt forms have been sent to customer for completion.",
+          "keyword": "TAX"
+        },
+        {
+          "row": 119,
+          "col": 6,
+          "text": "4.  Softener removed from scope.  It may be added once plant knows water hardness.",
+          "keyword": "SOFTENER"
+        },
+        {
+          "row": 125,
+          "col": 1,
+          "text": "Project Name:",
+          "keyword": "PROJECT NAME"
+        },
+        {
+          "row": 127,
+          "col": 1,
+          "text": "TO BE COMPLETED BY APPS",
+          "keyword": "TO BE COMPLETED BY APPS"
+        },
+        {
+          "row": 136,
+          "col": 4,
+          "text": "Heater Control Panel",
+          "keyword": "PANEL"
+        },
+        {
+          "row": 137,
+          "col": 4,
+          "text": "18\" Dia x 10' L, FBE, Stack Section \"A\"",
+          "keyword": "STACK"
+        },
+        {
+          "row": 138,
+          "col": 4,
+          "text": "18\" Dia x 10' L, FBE, Stack Section \"B\"",
+          "keyword": "STACK"
+        },
+        {
+          "row": 139,
+          "col": 4,
+          "text": "18\" Dia x 5' L, FOE, Stack Section",
+          "keyword": "STACK"
+        },
+        {
+          "row": 141,
+          "col": 1,
+          "text": "LABOR HOURS",
+          "keyword": "LABOR HOURS"
+        },
+        {
+          "row": 141,
+          "col": 7,
+          "text": "EQUIPMENT REQD",
+          "keyword": "EQUIPMENT"
+        },
+        {
+          "row": 142,
+          "col": 2,
+          "text": "HR:",
+          "keyword": "HR"
+        },
+        {
+          "row": 147,
+          "col": 1,
+          "text": "CAPITAL",
+          "keyword": "CAPITAL"
+        },
+        {
+          "row": 147,
+          "col": 7,
+          "text": "INSTALL",
+          "keyword": "INSTALL"
+        },
+        {
+          "row": 151,
+          "col": 7,
+          "text": "Install Cost:",
+          "keyword": "INSTALL"
+        },
+        {
+          "row": 159,
+          "col": 1,
+          "text": "TO BE COMPLETED BY ENG",
+          "keyword": "TO BE COMPLETED BY ENG"
+        },
+        {
+          "row": 163,
+          "col": 5,
+          "text": "Large HP or Excessive LL Pumps?",
+          "keyword": "PUMPS"
+        }
+      ],
+      "tanks": [
+        {
+          "row": 77,
+          "marker": "#1:",
+          "cells": {
+            "3": "HW",
+            "5": "84\"",
+            "7": "12",
+            "9": "STD",
+            "11": "316"
+          }
+        },
+        {
+          "row": 79,
+          "marker": "#2:",
+          "cells": {}
+        },
+        {
+          "row": 81,
+          "marker": "#3:",
+          "cells": {}
+        }
+      ],
+      "line_items": [
+        {
+          "row": 129,
+          "item_number": "35042-01",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 24693
+            }
+          ],
+          "description": "5.5 MMBTU DCWH, TE+, Pumped"
+        },
+        {
+          "row": 130,
+          "item_number": "35042-02",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 2048
+            }
+          ],
+          "description": "Heater Inlet"
+        },
+        {
+          "row": 131,
+          "item_number": "35042-03",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 20030
+            }
+          ],
+          "description": "Heater Discharge Pump Skid"
+        },
+        {
+          "row": 132,
+          "item_number": "35042-04",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 6057
+            },
+            {
+              "col": 9,
+              "value": 340
+            },
+            {
+              "col": 10,
+              "value": 5717
+            }
+          ],
+          "description": "Hot Water Makeup Valve Nest"
+        },
+        {
+          "row": 133,
+          "item_number": "35042-05",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 2587
+            },
+            {
+              "col": 9,
+              "value": 340
+            },
+            {
+              "col": 10,
+              "value": 2247
+            }
+          ],
+          "description": "Heater Recirculation Valve Nest"
+        },
+        {
+          "row": 134,
+          "item_number": "35042-06",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 14329
+            }
+          ],
+          "description": "84\" x 12' Hot Water Tank"
+        },
+        {
+          "row": 135,
+          "item_number": "35042-07",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 23994
+            }
+          ],
+          "description": "Hot Water Pump Skid"
+        },
+        {
+          "row": 136,
+          "item_number": "35042-08",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 18694
+            },
+            {
+              "col": 8,
+              "value": 11903
+            },
+            {
+              "col": 9,
+              "value": 687
+            },
+            {
+              "col": 10,
+              "value": 3052
+            },
+            {
+              "col": 11,
+              "value": 3052
+            }
+          ],
+          "description": "Heater Control Panel"
+        },
+        {
+          "row": 138,
+          "item_number": "1043244",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 9,
+              "value": 2554
+            }
+          ],
+          "description": "18\" Dia x 10' L, FBE, Stack Section \"B\""
+        }
+      ],
+      "sample_data": {
+        "proposal_number": "35042B-DCWH",
+        "htr1_type": "TE-100+, NSF",
+        "htr1_size": "x106BTU/hr",
+        "labor_pkg": "103.05",
+        "equipment_qty": "Burner:"
+      }
+    },
+    {
+      "filename": "KOM AND OC FORM - 35411-R4.xlsx",
+      "filepath": "F:/Domino's/Edison, NJ/35411/KOM AND OC FORM - 35411-R4.xlsx",
+      "max_row": 157,
+      "max_col": 23,
+      "sections": [
+        {
+          "row": 1,
+          "col": 1,
+          "text": "TO BE COMPLETED BY SALES",
+          "keyword": "TO BE COMPLETED BY SALES"
+        },
+        {
+          "row": 10,
+          "col": 4,
+          "text": "BILL TO:",
+          "keyword": "BILL TO"
+        },
+        {
+          "row": 10,
+          "col": 7,
+          "text": "SHIP TO:",
+          "keyword": "SHIP TO"
+        },
+        {
+          "row": 26,
+          "col": 1,
+          "text": "Tax Exempt?",
+          "keyword": "TAX"
+        },
+        {
+          "row": 28,
+          "col": 1,
+          "text": "TO BE COMPLETED BY ACCT",
+          "keyword": "TO BE COMPLETED BY ACCT"
+        },
+        {
+          "row": 30,
+          "col": 5,
+          "text": "Confirm Tax Status Noted Above:",
+          "keyword": "TAX"
+        },
+        {
+          "row": 32,
+          "col": 1,
+          "text": "Payment Milestones",
+          "keyword": "PAYMENT MILESTONES"
+        },
+        {
+          "row": 41,
+          "col": 1,
+          "text": "TO BE COMPLETED BY SALES",
+          "keyword": "TO BE COMPLETED BY SALES"
+        },
+        {
+          "row": 47,
+          "col": 1,
+          "text": "SHIPPING",
+          "keyword": "SHIPPING"
+        },
+        {
+          "row": 50,
+          "col": 3,
+          "text": "Contact customer with shipping cost",
+          "keyword": "SHIPPING"
+        },
+        {
+          "row": 52,
+          "col": 1,
+          "text": "SPECIFICATIONS AND TERMS & COND",
+          "keyword": "SPECIFICATIONS"
+        },
+        {
+          "row": 53,
+          "col": 3,
+          "text": "Specifications?",
+          "keyword": "SPECIFICATIONS"
+        },
+        {
+          "row": 57,
+          "col": 1,
+          "text": "APPROVAL PRINTS REQ'D?",
+          "keyword": "APPROVAL PRINTS"
+        },
+        {
+          "row": 60,
+          "col": 1,
+          "text": "EQUIPMENT",
+          "keyword": "EQUIPMENT"
+        },
+        {
+          "row": 61,
+          "col": 1,
+          "text": "HTR - 1",
+          "keyword": "HTR - 1"
+        },
+        {
+          "row": 63,
+          "col": 3,
+          "text": "x106BTU/hr",
+          "keyword": "HR"
+        },
+        {
+          "row": 65,
+          "col": 1,
+          "text": "HTR - 2",
+          "keyword": "HTR - 2"
+        },
+        {
+          "row": 67,
+          "col": 3,
+          "text": "x106BTU/hr",
+          "keyword": "HR"
+        },
+        {
+          "row": 69,
+          "col": 1,
+          "text": "STK ECON",
+          "keyword": "STK ECON"
+        },
+        {
+          "row": 71,
+          "col": 1,
+          "text": "STACK(S)",
+          "keyword": "STACK"
+        },
+        {
+          "row": 73,
+          "col": 1,
+          "text": "HR",
+          "keyword": "HR"
+        },
+        {
+          "row": 75,
+          "col": 1,
+          "text": "TANKS",
+          "keyword": "TANKS"
+        },
+        {
+          "row": 83,
+          "col": 1,
+          "text": "PUMPS",
+          "keyword": "PUMPS"
+        },
+        {
+          "row": 93,
+          "col": 1,
+          "text": "Steam Heaters",
+          "keyword": "STEAM HEATERS"
+        },
+        {
+          "row": 98,
+          "col": 1,
+          "text": "SOFTENER",
+          "keyword": "SOFTENER"
+        },
+        {
+          "row": 101,
+          "col": 1,
+          "text": "PANEL(S)",
+          "keyword": "PANEL"
+        },
+        {
+          "row": 104,
+          "col": 1,
+          "text": "OTHER",
+          "keyword": "OTHER"
+        },
+        {
+          "row": 107,
+          "col": 1,
+          "text": "UTILITIES",
+          "keyword": "UTILITIES"
+        },
+        {
+          "row": 115,
+          "col": 1,
+          "text": "OTHER INFO",
+          "keyword": "OTHER"
+        },
+        {
+          "row": 123,
+          "col": 1,
+          "text": "Project Name:",
+          "keyword": "PROJECT NAME"
+        },
+        {
+          "row": 125,
+          "col": 1,
+          "text": "TO BE COMPLETED BY APPS",
+          "keyword": "TO BE COMPLETED BY APPS"
+        },
+        {
+          "row": 133,
+          "col": 1,
+          "text": "LABOR HOURS",
+          "keyword": "LABOR HOURS"
+        },
+        {
+          "row": 133,
+          "col": 7,
+          "text": "EQUIPMENT REQD",
+          "keyword": "EQUIPMENT"
+        },
+        {
+          "row": 134,
+          "col": 2,
+          "text": "HR:",
+          "keyword": "HR"
+        },
+        {
+          "row": 139,
+          "col": 1,
+          "text": "CAPITAL",
+          "keyword": "CAPITAL"
+        },
+        {
+          "row": 139,
+          "col": 7,
+          "text": "INSTALL",
+          "keyword": "INSTALL"
+        },
+        {
+          "row": 143,
+          "col": 7,
+          "text": "Install Cost:",
+          "keyword": "INSTALL"
+        },
+        {
+          "row": 151,
+          "col": 1,
+          "text": "TO BE COMPLETED BY ENG",
+          "keyword": "TO BE COMPLETED BY ENG"
+        },
+        {
+          "row": 155,
+          "col": 5,
+          "text": "Large HP or Excessive LL Pumps?",
+          "keyword": "PUMPS"
+        }
+      ],
+      "tanks": [
+        {
+          "row": 77,
+          "marker": "#1:",
+          "cells": {
+            "3": "HW",
+            "5": "72",
+            "7": "16",
+            "11": "316"
+          }
+        },
+        {
+          "row": 79,
+          "marker": "#2:",
+          "cells": {}
+        },
+        {
+          "row": 81,
+          "marker": "#3:",
+          "cells": {}
+        }
+      ],
+      "line_items": [
+        {
+          "row": 127,
+          "item_number": "35411-01",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 13173
+            }
+          ],
+          "description": "72\"x16' Hot water Tank"
+        }
+      ],
+      "sample_data": {
+        "proposal_number": "35411-R4",
+        "htr1_type": "",
+        "htr1_size": "x106BTU/hr",
+        "labor_pkg": "",
+        "equipment_qty": "Install Cost:"
+      }
+    },
+    {
+      "filename": "KOM AND OC FORM - 35167.xlsx",
+      "filepath": "F:/Jennie-O Turkey Store/Willmar, MN/35167/KOM AND OC FORM - 35167.xlsx",
+      "max_row": 165,
+      "max_col": 23,
+      "sections": [
+        {
+          "row": 1,
+          "col": 1,
+          "text": "TO BE COMPLETED BY SALES",
+          "keyword": "TO BE COMPLETED BY SALES"
+        },
+        {
+          "row": 10,
+          "col": 4,
+          "text": "BILL TO:",
+          "keyword": "BILL TO"
+        },
+        {
+          "row": 10,
+          "col": 7,
+          "text": "SHIP TO:",
+          "keyword": "SHIP TO"
+        },
+        {
+          "row": 26,
+          "col": 1,
+          "text": "Tax Exempt?",
+          "keyword": "TAX"
+        },
+        {
+          "row": 28,
+          "col": 1,
+          "text": "TO BE COMPLETED BY ACCT",
+          "keyword": "TO BE COMPLETED BY ACCT"
+        },
+        {
+          "row": 30,
+          "col": 5,
+          "text": "Confirm Tax Status Noted Above:",
+          "keyword": "TAX"
+        },
+        {
+          "row": 32,
+          "col": 1,
+          "text": "Payment Milestones",
+          "keyword": "PAYMENT MILESTONES"
+        },
+        {
+          "row": 41,
+          "col": 1,
+          "text": "TO BE COMPLETED BY SALES",
+          "keyword": "TO BE COMPLETED BY SALES"
+        },
+        {
+          "row": 47,
+          "col": 1,
+          "text": "SHIPPING",
+          "keyword": "SHIPPING"
+        },
+        {
+          "row": 52,
+          "col": 1,
+          "text": "SPECIFICATIONS AND TERMS & COND",
+          "keyword": "SPECIFICATIONS"
+        },
+        {
+          "row": 53,
+          "col": 3,
+          "text": "Specifications?",
+          "keyword": "SPECIFICATIONS"
+        },
+        {
+          "row": 57,
+          "col": 1,
+          "text": "APPROVAL PRINTS REQ'D?",
+          "keyword": "APPROVAL PRINTS"
+        },
+        {
+          "row": 60,
+          "col": 1,
+          "text": "EQUIPMENT",
+          "keyword": "EQUIPMENT"
+        },
+        {
+          "row": 61,
+          "col": 1,
+          "text": "HTR - 1",
+          "keyword": "HTR - 1"
+        },
+        {
+          "row": 63,
+          "col": 3,
+          "text": "x106BTU/hr",
+          "keyword": "HR"
+        },
+        {
+          "row": 65,
+          "col": 1,
+          "text": "HTR - 2",
+          "keyword": "HTR - 2"
+        },
+        {
+          "row": 67,
+          "col": 3,
+          "text": "x106BTU/hr",
+          "keyword": "HR"
+        },
+        {
+          "row": 69,
+          "col": 1,
+          "text": "STK ECON",
+          "keyword": "STK ECON"
+        },
+        {
+          "row": 71,
+          "col": 1,
+          "text": "STACK(S)",
+          "keyword": "STACK"
+        },
+        {
+          "row": 73,
+          "col": 1,
+          "text": "HR",
+          "keyword": "HR"
+        },
+        {
+          "row": 75,
+          "col": 1,
+          "text": "TANKS",
+          "keyword": "TANKS"
+        },
+        {
+          "row": 83,
+          "col": 1,
+          "text": "PUMPS",
+          "keyword": "PUMPS"
+        },
+        {
+          "row": 93,
+          "col": 1,
+          "text": "Steam Heaters",
+          "keyword": "STEAM HEATERS"
+        },
+        {
+          "row": 98,
+          "col": 1,
+          "text": "SOFTENER",
+          "keyword": "SOFTENER"
+        },
+        {
+          "row": 101,
+          "col": 1,
+          "text": "PANEL(S)",
+          "keyword": "PANEL"
+        },
+        {
+          "row": 104,
+          "col": 1,
+          "text": "OTHER",
+          "keyword": "OTHER"
+        },
+        {
+          "row": 107,
+          "col": 1,
+          "text": "UTILITIES",
+          "keyword": "UTILITIES"
+        },
+        {
+          "row": 115,
+          "col": 1,
+          "text": "OTHER INFO",
+          "keyword": "OTHER"
+        },
+        {
+          "row": 116,
+          "col": 3,
+          "text": "**matches job#32483 for the majority of the design, includes a combustion chamber manway, 316SS pumps, inlet silencer, panel flanged disconnect, panelview HMI, panel A/C, Stratix Ethernet Switch, 25kAIC SCCR, among others per the specification\n**includes bid specification, see separate specification document for our exceptions\n**replacing old Hydrofire heaters",
+          "keyword": "PUMPS"
+        },
+        {
+          "row": 119,
+          "col": 1,
+          "text": "Project Name:",
+          "keyword": "PROJECT NAME"
+        },
+        {
+          "row": 122,
+          "col": 1,
+          "text": "TO BE COMPLETED BY APPS",
+          "keyword": "TO BE COMPLETED BY APPS"
+        },
+        {
+          "row": 128,
+          "col": 4,
+          "text": "Heater Control Panel",
+          "keyword": "PANEL"
+        },
+        {
+          "row": 129,
+          "col": 4,
+          "text": "18\" Dia x 10' L, FOE, Stack Section",
+          "keyword": "STACK"
+        },
+        {
+          "row": 134,
+          "col": 1,
+          "text": "LABOR HOURS",
+          "keyword": "LABOR HOURS"
+        },
+        {
+          "row": 134,
+          "col": 7,
+          "text": "EQUIPMENT REQD",
+          "keyword": "EQUIPMENT"
+        },
+        {
+          "row": 135,
+          "col": 2,
+          "text": "HR:",
+          "keyword": "HR"
+        },
+        {
+          "row": 140,
+          "col": 1,
+          "text": "CAPITAL",
+          "keyword": "CAPITAL"
+        },
+        {
+          "row": 140,
+          "col": 7,
+          "text": "INSTALL",
+          "keyword": "INSTALL"
+        },
+        {
+          "row": 144,
+          "col": 7,
+          "text": "Install Cost:",
+          "keyword": "INSTALL"
+        },
+        {
+          "row": 159,
+          "col": 1,
+          "text": "TO BE COMPLETED BY ENG",
+          "keyword": "TO BE COMPLETED BY ENG"
+        },
+        {
+          "row": 163,
+          "col": 5,
+          "text": "Large HP or Excessive LL Pumps?",
+          "keyword": "PUMPS"
+        }
+      ],
+      "tanks": [
+        {
+          "row": 77,
+          "marker": "#1:",
+          "cells": {}
+        },
+        {
+          "row": 79,
+          "marker": "#2:",
+          "cells": {}
+        },
+        {
+          "row": 81,
+          "marker": "#3:",
+          "cells": {}
+        }
+      ],
+      "line_items": [
+        {
+          "row": 124,
+          "item_number": "35167-01",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 21905
+            }
+          ],
+          "description": "5.5MMBTU DCWH, TE+, Pumped"
+        },
+        {
+          "row": 125,
+          "item_number": "35167-02",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 2048
+            }
+          ],
+          "description": "Heater Inlet Nest"
+        },
+        {
+          "row": 126,
+          "item_number": "35167-03",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 9350
+            }
+          ],
+          "description": "Heater Discharge Pump Skid"
+        },
+        {
+          "row": 127,
+          "item_number": "35167-04",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 4097
+            }
+          ],
+          "description": "Hot Water Makeup Valve Nest"
+        },
+        {
+          "row": 128,
+          "item_number": "35167-05",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 33886
+            },
+            {
+              "col": 8,
+              "value": 810
+            },
+            {
+              "col": 9,
+              "value": 2028
+            },
+            {
+              "col": 10,
+              "value": 31048
+            }
+          ],
+          "description": "Heater Control Panel"
+        },
+        {
+          "row": 129,
+          "item_number": "1033367",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 967
+            }
+          ],
+          "description": "18\" Dia x 10' L, FOE, Stack Section"
+        }
+      ],
+      "sample_data": {
+        "proposal_number": "35167-R2B",
+        "htr1_type": "TE-100+, NSF",
+        "htr1_size": "x106BTU/hr",
+        "labor_pkg": "",
+        "equipment_qty": ""
+      }
+    },
+    {
+      "filename": "35359 KOM AND OC FORM.xlsx",
+      "filepath": "F:/Pinty's Delicious Foods/Oakville, ON/35359/35359 KOM AND OC FORM.xlsx",
+      "max_row": 161,
+      "max_col": 23,
+      "sections": [
+        {
+          "row": 1,
+          "col": 1,
+          "text": "TO BE COMPLETED BY SALES",
+          "keyword": "TO BE COMPLETED BY SALES"
+        },
+        {
+          "row": 10,
+          "col": 4,
+          "text": "BILL TO:",
+          "keyword": "BILL TO"
+        },
+        {
+          "row": 10,
+          "col": 7,
+          "text": "SHIP TO:",
+          "keyword": "SHIP TO"
+        },
+        {
+          "row": 26,
+          "col": 1,
+          "text": "Tax Exempt?",
+          "keyword": "TAX"
+        },
+        {
+          "row": 28,
+          "col": 1,
+          "text": "TO BE COMPLETED BY ACCT",
+          "keyword": "TO BE COMPLETED BY ACCT"
+        },
+        {
+          "row": 30,
+          "col": 5,
+          "text": "Confirm Tax Status Noted Above:",
+          "keyword": "TAX"
+        },
+        {
+          "row": 32,
+          "col": 1,
+          "text": "Payment Milestones",
+          "keyword": "PAYMENT MILESTONES"
+        },
+        {
+          "row": 41,
+          "col": 1,
+          "text": "TO BE COMPLETED BY SALES",
+          "keyword": "TO BE COMPLETED BY SALES"
+        },
+        {
+          "row": 47,
+          "col": 1,
+          "text": "SHIPPING",
+          "keyword": "SHIPPING"
+        },
+        {
+          "row": 52,
+          "col": 1,
+          "text": "SPECIFICATIONS AND TERMS & COND",
+          "keyword": "SPECIFICATIONS"
+        },
+        {
+          "row": 53,
+          "col": 3,
+          "text": "Specifications?",
+          "keyword": "SPECIFICATIONS"
+        },
+        {
+          "row": 57,
+          "col": 1,
+          "text": "APPROVAL PRINTS REQ'D?",
+          "keyword": "APPROVAL PRINTS"
+        },
+        {
+          "row": 60,
+          "col": 1,
+          "text": "EQUIPMENT",
+          "keyword": "EQUIPMENT"
+        },
+        {
+          "row": 61,
+          "col": 1,
+          "text": "HTR - 1",
+          "keyword": "HTR - 1"
+        },
+        {
+          "row": 63,
+          "col": 3,
+          "text": "x106BTU/hr",
+          "keyword": "HR"
+        },
+        {
+          "row": 65,
+          "col": 1,
+          "text": "HTR - 2",
+          "keyword": "HTR - 2"
+        },
+        {
+          "row": 67,
+          "col": 3,
+          "text": "x106BTU/hr",
+          "keyword": "HR"
+        },
+        {
+          "row": 69,
+          "col": 1,
+          "text": "STK ECON",
+          "keyword": "STK ECON"
+        },
+        {
+          "row": 71,
+          "col": 1,
+          "text": "STACK(S)",
+          "keyword": "STACK"
+        },
+        {
+          "row": 73,
+          "col": 1,
+          "text": "HR",
+          "keyword": "HR"
+        },
+        {
+          "row": 75,
+          "col": 1,
+          "text": "TANKS",
+          "keyword": "TANKS"
+        },
+        {
+          "row": 83,
+          "col": 1,
+          "text": "PUMPS",
+          "keyword": "PUMPS"
+        },
+        {
+          "row": 93,
+          "col": 1,
+          "text": "Steam Heaters",
+          "keyword": "STEAM HEATERS"
+        },
+        {
+          "row": 98,
+          "col": 1,
+          "text": "SOFTENER",
+          "keyword": "SOFTENER"
+        },
+        {
+          "row": 101,
+          "col": 1,
+          "text": "PANEL(S)",
+          "keyword": "PANEL"
+        },
+        {
+          "row": 104,
+          "col": 1,
+          "text": "OTHER",
+          "keyword": "OTHER"
+        },
+        {
+          "row": 107,
+          "col": 1,
+          "text": "UTILITIES",
+          "keyword": "UTILITIES"
+        },
+        {
+          "row": 115,
+          "col": 1,
+          "text": "OTHER INFO",
+          "keyword": "OTHER"
+        },
+        {
+          "row": 123,
+          "col": 1,
+          "text": "Project Name:",
+          "keyword": "PROJECT NAME"
+        },
+        {
+          "row": 125,
+          "col": 1,
+          "text": "TO BE COMPLETED BY APPS",
+          "keyword": "TO BE COMPLETED BY APPS"
+        },
+        {
+          "row": 132,
+          "col": 4,
+          "text": "Heater Control Panel",
+          "keyword": "PANEL"
+        },
+        {
+          "row": 133,
+          "col": 4,
+          "text": "24\" Dia x 10' L, FBE, Stack Section",
+          "keyword": "STACK"
+        },
+        {
+          "row": 134,
+          "col": 4,
+          "text": "24\" Dia x 10' L, FOE, Stack Section",
+          "keyword": "STACK"
+        },
+        {
+          "row": 135,
+          "col": 4,
+          "text": "24\" LP Stack Cap",
+          "keyword": "STACK"
+        },
+        {
+          "row": 137,
+          "col": 1,
+          "text": "LABOR HOURS",
+          "keyword": "LABOR HOURS"
+        },
+        {
+          "row": 137,
+          "col": 7,
+          "text": "EQUIPMENT REQD",
+          "keyword": "EQUIPMENT"
+        },
+        {
+          "row": 138,
+          "col": 2,
+          "text": "HR:",
+          "keyword": "HR"
+        },
+        {
+          "row": 143,
+          "col": 1,
+          "text": "CAPITAL",
+          "keyword": "CAPITAL"
+        },
+        {
+          "row": 143,
+          "col": 7,
+          "text": "INSTALL",
+          "keyword": "INSTALL"
+        },
+        {
+          "row": 147,
+          "col": 7,
+          "text": "Install Cost:",
+          "keyword": "INSTALL"
+        },
+        {
+          "row": 155,
+          "col": 1,
+          "text": "TO BE COMPLETED BY ENG",
+          "keyword": "TO BE COMPLETED BY ENG"
+        },
+        {
+          "row": 159,
+          "col": 5,
+          "text": "Large HP or Excessive LL Pumps?",
+          "keyword": "PUMPS"
+        }
+      ],
+      "tanks": [
+        {
+          "row": 77,
+          "marker": "#1:",
+          "cells": {}
+        },
+        {
+          "row": 79,
+          "marker": "#2:",
+          "cells": {}
+        },
+        {
+          "row": 81,
+          "marker": "#3:",
+          "cells": {}
+        }
+      ],
+      "line_items": [
+        {
+          "row": 127,
+          "item_number": "35359-01",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 31446
+            }
+          ],
+          "description": "9.9 MMBTU DCWH, TE+, Gravity"
+        },
+        {
+          "row": 128,
+          "item_number": "35359-02",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 1511
+            }
+          ],
+          "description": "Heater Inlet"
+        },
+        {
+          "row": 129,
+          "item_number": "35359-03",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 4540
+            },
+            {
+              "col": 8,
+              "value": 375
+            },
+            {
+              "col": 9,
+              "value": 4165
+            }
+          ],
+          "description": "Hot Water Makeup Valve Nest"
+        },
+        {
+          "row": 130,
+          "item_number": "35359-04",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 2854
+            },
+            {
+              "col": 8,
+              "value": 375
+            },
+            {
+              "col": 9,
+              "value": 2479
+            }
+          ],
+          "description": "Heater Recirculation Valve Nest"
+        },
+        {
+          "row": 131,
+          "item_number": "35359-05",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 9162
+            }
+          ],
+          "description": "Hot Water Pump Skid"
+        },
+        {
+          "row": 132,
+          "item_number": "35359-06",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 12713
+            },
+            {
+              "col": 8,
+              "value": 810
+            },
+            {
+              "col": 9,
+              "value": 11903
+            }
+          ],
+          "description": "Heater Control Panel"
+        },
+        {
+          "row": 133,
+          "item_number": "1048136",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 9,
+              "value": 3507
+            }
+          ],
+          "description": "24\" Dia x 10' L, FBE, Stack Section"
+        }
+      ],
+      "sample_data": {
+        "proposal_number": "35359",
+        "htr1_type": "TE-100+, NSF",
+        "htr1_size": "x106BTU/hr",
+        "labor_pkg": "",
+        "equipment_qty": "INSTALL"
+      }
+    },
+    {
+      "filename": "35140 KOM AND OC FORM.xlsx",
+      "filepath": "F:/Geneva Rock/Logan, UT/35140/35140 KOM AND OC FORM.xlsx",
+      "max_row": 161,
+      "max_col": 23,
+      "sections": [
+        {
+          "row": 1,
+          "col": 1,
+          "text": "TO BE COMPLETED BY SALES",
+          "keyword": "TO BE COMPLETED BY SALES"
+        },
+        {
+          "row": 10,
+          "col": 4,
+          "text": "BILL TO:",
+          "keyword": "BILL TO"
+        },
+        {
+          "row": 10,
+          "col": 7,
+          "text": "SHIP TO:",
+          "keyword": "SHIP TO"
+        },
+        {
+          "row": 26,
+          "col": 1,
+          "text": "Tax Exempt?",
+          "keyword": "TAX"
+        },
+        {
+          "row": 28,
+          "col": 1,
+          "text": "TO BE COMPLETED BY ACCT",
+          "keyword": "TO BE COMPLETED BY ACCT"
+        },
+        {
+          "row": 30,
+          "col": 5,
+          "text": "Confirm Tax Status Noted Above:",
+          "keyword": "TAX"
+        },
+        {
+          "row": 32,
+          "col": 1,
+          "text": "Payment Milestones",
+          "keyword": "PAYMENT MILESTONES"
+        },
+        {
+          "row": 41,
+          "col": 1,
+          "text": "TO BE COMPLETED BY SALES",
+          "keyword": "TO BE COMPLETED BY SALES"
+        },
+        {
+          "row": 47,
+          "col": 1,
+          "text": "SHIPPING",
+          "keyword": "SHIPPING"
+        },
+        {
+          "row": 52,
+          "col": 1,
+          "text": "SPECIFICATIONS AND TERMS & COND",
+          "keyword": "SPECIFICATIONS"
+        },
+        {
+          "row": 53,
+          "col": 3,
+          "text": "Specifications?",
+          "keyword": "SPECIFICATIONS"
+        },
+        {
+          "row": 57,
+          "col": 1,
+          "text": "APPROVAL PRINTS REQ'D?",
+          "keyword": "APPROVAL PRINTS"
+        },
+        {
+          "row": 60,
+          "col": 1,
+          "text": "EQUIPMENT",
+          "keyword": "EQUIPMENT"
+        },
+        {
+          "row": 61,
+          "col": 1,
+          "text": "HTR - 1",
+          "keyword": "HTR - 1"
+        },
+        {
+          "row": 63,
+          "col": 3,
+          "text": "x106BTU/hr",
+          "keyword": "HR"
+        },
+        {
+          "row": 65,
+          "col": 1,
+          "text": "HTR - 2",
+          "keyword": "HTR - 2"
+        },
+        {
+          "row": 67,
+          "col": 3,
+          "text": "x106BTU/hr",
+          "keyword": "HR"
+        },
+        {
+          "row": 69,
+          "col": 1,
+          "text": "STK ECON",
+          "keyword": "STK ECON"
+        },
+        {
+          "row": 71,
+          "col": 1,
+          "text": "STACK(S)",
+          "keyword": "STACK"
+        },
+        {
+          "row": 73,
+          "col": 1,
+          "text": "HR",
+          "keyword": "HR"
+        },
+        {
+          "row": 75,
+          "col": 1,
+          "text": "TANKS",
+          "keyword": "TANKS"
+        },
+        {
+          "row": 83,
+          "col": 1,
+          "text": "PUMPS",
+          "keyword": "PUMPS"
+        },
+        {
+          "row": 93,
+          "col": 1,
+          "text": "Steam Heaters",
+          "keyword": "STEAM HEATERS"
+        },
+        {
+          "row": 98,
+          "col": 1,
+          "text": "SOFTENER",
+          "keyword": "SOFTENER"
+        },
+        {
+          "row": 101,
+          "col": 1,
+          "text": "PANEL(S)",
+          "keyword": "PANEL"
+        },
+        {
+          "row": 104,
+          "col": 1,
+          "text": "OTHER",
+          "keyword": "OTHER"
+        },
+        {
+          "row": 107,
+          "col": 1,
+          "text": "UTILITIES",
+          "keyword": "UTILITIES"
+        },
+        {
+          "row": 115,
+          "col": 1,
+          "text": "OTHER INFO",
+          "keyword": "OTHER"
+        },
+        {
+          "row": 123,
+          "col": 1,
+          "text": "Project Name:",
+          "keyword": "PROJECT NAME"
+        },
+        {
+          "row": 125,
+          "col": 1,
+          "text": "TO BE COMPLETED BY APPS",
+          "keyword": "TO BE COMPLETED BY APPS"
+        },
+        {
+          "row": 132,
+          "col": 4,
+          "text": "Heater Control Panel",
+          "keyword": "PANEL"
+        },
+        {
+          "row": 133,
+          "col": 4,
+          "text": "18\" Dia x 10' L, FOE, Stack Section",
+          "keyword": "STACK"
+        },
+        {
+          "row": 137,
+          "col": 1,
+          "text": "LABOR HOURS",
+          "keyword": "LABOR HOURS"
+        },
+        {
+          "row": 137,
+          "col": 7,
+          "text": "EQUIPMENT REQD",
+          "keyword": "EQUIPMENT"
+        },
+        {
+          "row": 138,
+          "col": 2,
+          "text": "HR:",
+          "keyword": "HR"
+        },
+        {
+          "row": 143,
+          "col": 1,
+          "text": "CAPITAL",
+          "keyword": "CAPITAL"
+        },
+        {
+          "row": 143,
+          "col": 7,
+          "text": "INSTALL",
+          "keyword": "INSTALL"
+        },
+        {
+          "row": 147,
+          "col": 7,
+          "text": "Install Cost:",
+          "keyword": "INSTALL"
+        },
+        {
+          "row": 155,
+          "col": 1,
+          "text": "TO BE COMPLETED BY ENG",
+          "keyword": "TO BE COMPLETED BY ENG"
+        },
+        {
+          "row": 159,
+          "col": 5,
+          "text": "Large HP or Excessive LL Pumps?",
+          "keyword": "PUMPS"
+        }
+      ],
+      "tanks": [
+        {
+          "row": 77,
+          "marker": "#1:",
+          "cells": {
+            "3": "HW",
+            "5": "90",
+            "7": "6",
+            "9": "STD",
+            "11": "304"
+          }
+        },
+        {
+          "row": 79,
+          "marker": "#2:",
+          "cells": {}
+        },
+        {
+          "row": 81,
+          "marker": "#3:",
+          "cells": {}
+        }
+      ],
+      "line_items": [
+        {
+          "row": 127,
+          "item_number": "35140-01",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 24932
+            }
+          ],
+          "description": "7.0 MMBTU DCWH, RM, Gravity"
+        },
+        {
+          "row": 128,
+          "item_number": "35140-02",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 5518
+            }
+          ],
+          "description": "Modular Valve Nest"
+        },
+        {
+          "row": 129,
+          "item_number": "35140-03",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 10421
+            }
+          ],
+          "description": "90\" x 6' Hot Water Tank"
+        },
+        {
+          "row": 130,
+          "item_number": "35140-04",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 8237
+            }
+          ],
+          "description": "Hot Water Pump Skid"
+        },
+        {
+          "row": 131,
+          "item_number": "35140-05",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 3142
+            }
+          ],
+          "description": "Modular Piping"
+        },
+        {
+          "row": 132,
+          "item_number": "35140-06",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 6538
+            }
+          ],
+          "description": "Heater Control Panel"
+        },
+        {
+          "row": 133,
+          "item_number": "1033367",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 967
+            }
+          ],
+          "description": "18\" Dia x 10' L, FOE, Stack Section"
+        }
+      ],
+      "sample_data": {
+        "proposal_number": "35140",
+        "htr1_type": "RM",
+        "htr1_size": "x106BTU/hr",
+        "labor_pkg": "",
+        "equipment_qty": "INSTALL"
+      }
+    },
+    {
+      "filename": "35397 KOM AND OC FORM.xlsx",
+      "filepath": "F:/Mar-Jac/Hattiesburg, MS/35397/35397 KOM AND OC FORM.xlsx",
+      "max_row": 161,
+      "max_col": 23,
+      "sections": [
+        {
+          "row": 1,
+          "col": 1,
+          "text": "TO BE COMPLETED BY SALES",
+          "keyword": "TO BE COMPLETED BY SALES"
+        },
+        {
+          "row": 10,
+          "col": 4,
+          "text": "BILL TO:",
+          "keyword": "BILL TO"
+        },
+        {
+          "row": 10,
+          "col": 7,
+          "text": "SHIP TO:",
+          "keyword": "SHIP TO"
+        },
+        {
+          "row": 26,
+          "col": 1,
+          "text": "Tax Exempt?",
+          "keyword": "TAX"
+        },
+        {
+          "row": 28,
+          "col": 1,
+          "text": "TO BE COMPLETED BY ACCT",
+          "keyword": "TO BE COMPLETED BY ACCT"
+        },
+        {
+          "row": 30,
+          "col": 5,
+          "text": "Confirm Tax Status Noted Above:",
+          "keyword": "TAX"
+        },
+        {
+          "row": 32,
+          "col": 1,
+          "text": "Payment Milestones",
+          "keyword": "PAYMENT MILESTONES"
+        },
+        {
+          "row": 41,
+          "col": 1,
+          "text": "TO BE COMPLETED BY SALES",
+          "keyword": "TO BE COMPLETED BY SALES"
+        },
+        {
+          "row": 47,
+          "col": 1,
+          "text": "SHIPPING",
+          "keyword": "SHIPPING"
+        },
+        {
+          "row": 52,
+          "col": 1,
+          "text": "SPECIFICATIONS AND TERMS & COND",
+          "keyword": "SPECIFICATIONS"
+        },
+        {
+          "row": 53,
+          "col": 3,
+          "text": "Specifications?",
+          "keyword": "SPECIFICATIONS"
+        },
+        {
+          "row": 57,
+          "col": 1,
+          "text": "APPROVAL PRINTS REQ'D?",
+          "keyword": "APPROVAL PRINTS"
+        },
+        {
+          "row": 60,
+          "col": 1,
+          "text": "EQUIPMENT",
+          "keyword": "EQUIPMENT"
+        },
+        {
+          "row": 61,
+          "col": 1,
+          "text": "HTR - 1",
+          "keyword": "HTR - 1"
+        },
+        {
+          "row": 63,
+          "col": 3,
+          "text": "x106BTU/hr",
+          "keyword": "HR"
+        },
+        {
+          "row": 65,
+          "col": 1,
+          "text": "HTR - 2",
+          "keyword": "HTR - 2"
+        },
+        {
+          "row": 67,
+          "col": 3,
+          "text": "x106BTU/hr",
+          "keyword": "HR"
+        },
+        {
+          "row": 69,
+          "col": 1,
+          "text": "STK ECON",
+          "keyword": "STK ECON"
+        },
+        {
+          "row": 71,
+          "col": 1,
+          "text": "STACK(S)",
+          "keyword": "STACK"
+        },
+        {
+          "row": 73,
+          "col": 1,
+          "text": "HR",
+          "keyword": "HR"
+        },
+        {
+          "row": 75,
+          "col": 1,
+          "text": "TANKS",
+          "keyword": "TANKS"
+        },
+        {
+          "row": 83,
+          "col": 1,
+          "text": "PUMPS",
+          "keyword": "PUMPS"
+        },
+        {
+          "row": 93,
+          "col": 1,
+          "text": "Steam Heaters",
+          "keyword": "STEAM HEATERS"
+        },
+        {
+          "row": 98,
+          "col": 1,
+          "text": "SOFTENER",
+          "keyword": "SOFTENER"
+        },
+        {
+          "row": 101,
+          "col": 1,
+          "text": "PANEL(S)",
+          "keyword": "PANEL"
+        },
+        {
+          "row": 104,
+          "col": 1,
+          "text": "OTHER",
+          "keyword": "OTHER"
+        },
+        {
+          "row": 107,
+          "col": 1,
+          "text": "UTILITIES",
+          "keyword": "UTILITIES"
+        },
+        {
+          "row": 115,
+          "col": 1,
+          "text": "OTHER INFO",
+          "keyword": "OTHER"
+        },
+        {
+          "row": 121,
+          "col": 1,
+          "text": "Project Name:",
+          "keyword": "PROJECT NAME"
+        },
+        {
+          "row": 123,
+          "col": 1,
+          "text": "TO BE COMPLETED BY APPS",
+          "keyword": "TO BE COMPLETED BY APPS"
+        },
+        {
+          "row": 132,
+          "col": 4,
+          "text": "Control Panel",
+          "keyword": "PANEL"
+        },
+        {
+          "row": 133,
+          "col": 4,
+          "text": "30\"x10' FOE Stack",
+          "keyword": "STACK"
+        },
+        {
+          "row": 134,
+          "col": 4,
+          "text": "30\"x10' FBE Stack",
+          "keyword": "STACK"
+        },
+        {
+          "row": 135,
+          "col": 4,
+          "text": "Stack Cap",
+          "keyword": "STACK"
+        },
+        {
+          "row": 137,
+          "col": 1,
+          "text": "LABOR HOURS",
+          "keyword": "LABOR HOURS"
+        },
+        {
+          "row": 137,
+          "col": 7,
+          "text": "EQUIPMENT REQD",
+          "keyword": "EQUIPMENT"
+        },
+        {
+          "row": 138,
+          "col": 2,
+          "text": "HR:",
+          "keyword": "HR"
+        },
+        {
+          "row": 143,
+          "col": 1,
+          "text": "CAPITAL",
+          "keyword": "CAPITAL"
+        },
+        {
+          "row": 143,
+          "col": 7,
+          "text": "INSTALL",
+          "keyword": "INSTALL"
+        },
+        {
+          "row": 147,
+          "col": 7,
+          "text": "Install Cost:",
+          "keyword": "INSTALL"
+        },
+        {
+          "row": 155,
+          "col": 1,
+          "text": "TO BE COMPLETED BY ENG",
+          "keyword": "TO BE COMPLETED BY ENG"
+        },
+        {
+          "row": 159,
+          "col": 5,
+          "text": "Large HP or Excessive LL Pumps?",
+          "keyword": "PUMPS"
+        }
+      ],
+      "tanks": [
+        {
+          "row": 77,
+          "marker": "#1:",
+          "cells": {
+            "3": "HW",
+            "5": "90",
+            "7": "18",
+            "9": "STD",
+            "11": "304"
+          }
+        },
+        {
+          "row": 79,
+          "marker": "#2:",
+          "cells": {}
+        },
+        {
+          "row": 81,
+          "marker": "#3:",
+          "cells": {}
+        }
+      ],
+      "line_items": [
+        {
+          "row": 125,
+          "item_number": "35397-01",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 46861
+            }
+          ],
+          "description": "15MMBTU DCWH TE-100+"
+        },
+        {
+          "row": 126,
+          "item_number": "35397-02",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 2243
+            }
+          ],
+          "description": "Heater Inlet"
+        },
+        {
+          "row": 127,
+          "item_number": "35397-03",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 13012
+            }
+          ],
+          "description": "Htr Discharge Pump Skid"
+        },
+        {
+          "row": 128,
+          "item_number": "35397-04",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 4775
+            },
+            {
+              "col": 8,
+              "value": 402
+            },
+            {
+              "col": 9,
+              "value": 4373
+            }
+          ],
+          "description": "HW Make-up Valve Nest"
+        },
+        {
+          "row": 129,
+          "item_number": "35397-05",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 3249
+            },
+            {
+              "col": 8,
+              "value": 402
+            },
+            {
+              "col": 9,
+              "value": 2847
+            }
+          ],
+          "description": "HW Recirc Valve Nest"
+        },
+        {
+          "row": 130,
+          "item_number": "35397-06",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 14915
+            }
+          ],
+          "description": "90\"x18' Hot Water Tank"
+        },
+        {
+          "row": 131,
+          "item_number": "35397-07",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 11866
+            }
+          ],
+          "description": "HW Pump Skid"
+        },
+        {
+          "row": 132,
+          "item_number": "35397-08",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 20349
+            },
+            {
+              "col": 8,
+              "value": 810
+            },
+            {
+              "col": 9,
+              "value": 3052
+            },
+            {
+              "col": 10,
+              "value": 16487
+            }
+          ],
+          "description": "Control Panel"
+        },
+        {
+          "row": 133,
+          "item_number": "1047287",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 1237.56
+            }
+          ],
+          "description": "30\"x10' FOE Stack"
+        },
+        {
+          "row": 134,
+          "item_number": "1048015",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 1504.51
+            },
+            {
+              "col": 7,
+              "value": 4209
+            }
+          ],
+          "description": "30\"x10' FBE Stack"
+        },
+        {
+          "row": 135,
+          "item_number": "1058623",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 1466.93
+            }
+          ],
+          "description": "Stack Cap"
+        }
+      ],
+      "sample_data": {
+        "proposal_number": "35397",
+        "htr1_type": "TE-100+, NSF",
+        "htr1_size": "x106BTU/hr",
+        "labor_pkg": "",
+        "equipment_qty": "INSTALL"
+      }
+    },
+    {
+      "filename": "34489 KOM AND OC FORM.xlsx",
+      "filepath": "F:/Valoris/Sherbrooke, QC/34489/34489 KOM AND OC FORM.xlsx",
+      "max_row": 161,
+      "max_col": 23,
+      "sections": [
+        {
+          "row": 1,
+          "col": 1,
+          "text": "TO BE COMPLETED BY SALES",
+          "keyword": "TO BE COMPLETED BY SALES"
+        },
+        {
+          "row": 4,
+          "col": 3,
+          "text": "OTHER",
+          "keyword": "OTHER"
+        },
+        {
+          "row": 10,
+          "col": 4,
+          "text": "BILL TO:",
+          "keyword": "BILL TO"
+        },
+        {
+          "row": 10,
+          "col": 7,
+          "text": "SHIP TO:",
+          "keyword": "SHIP TO"
+        },
+        {
+          "row": 26,
+          "col": 1,
+          "text": "Tax Exempt?",
+          "keyword": "TAX"
+        },
+        {
+          "row": 28,
+          "col": 1,
+          "text": "TO BE COMPLETED BY ACCT",
+          "keyword": "TO BE COMPLETED BY ACCT"
+        },
+        {
+          "row": 30,
+          "col": 5,
+          "text": "Confirm Tax Status Noted Above:",
+          "keyword": "TAX"
+        },
+        {
+          "row": 32,
+          "col": 1,
+          "text": "Payment Milestones",
+          "keyword": "PAYMENT MILESTONES"
+        },
+        {
+          "row": 41,
+          "col": 1,
+          "text": "TO BE COMPLETED BY SALES",
+          "keyword": "TO BE COMPLETED BY SALES"
+        },
+        {
+          "row": 47,
+          "col": 1,
+          "text": "SHIPPING",
+          "keyword": "SHIPPING"
+        },
+        {
+          "row": 50,
+          "col": 3,
+          "text": "Services Energetiques will make shipping arraingements",
+          "keyword": "SHIPPING"
+        },
+        {
+          "row": 52,
+          "col": 1,
+          "text": "SPECIFICATIONS AND TERMS & COND",
+          "keyword": "SPECIFICATIONS"
+        },
+        {
+          "row": 53,
+          "col": 3,
+          "text": "Specifications?",
+          "keyword": "SPECIFICATIONS"
+        },
+        {
+          "row": 57,
+          "col": 1,
+          "text": "APPROVAL PRINTS REQ'D?",
+          "keyword": "APPROVAL PRINTS"
+        },
+        {
+          "row": 60,
+          "col": 1,
+          "text": "EQUIPMENT",
+          "keyword": "EQUIPMENT"
+        },
+        {
+          "row": 61,
+          "col": 1,
+          "text": "HTR - 1",
+          "keyword": "HTR - 1"
+        },
+        {
+          "row": 63,
+          "col": 3,
+          "text": "x106BTU/hr",
+          "keyword": "HR"
+        },
+        {
+          "row": 65,
+          "col": 1,
+          "text": "HTR - 2",
+          "keyword": "HTR - 2"
+        },
+        {
+          "row": 67,
+          "col": 3,
+          "text": "x106BTU/hr",
+          "keyword": "HR"
+        },
+        {
+          "row": 69,
+          "col": 1,
+          "text": "STK ECON",
+          "keyword": "STK ECON"
+        },
+        {
+          "row": 71,
+          "col": 1,
+          "text": "STACK(S)",
+          "keyword": "STACK"
+        },
+        {
+          "row": 73,
+          "col": 1,
+          "text": "HR",
+          "keyword": "HR"
+        },
+        {
+          "row": 75,
+          "col": 1,
+          "text": "TANKS",
+          "keyword": "TANKS"
+        },
+        {
+          "row": 83,
+          "col": 1,
+          "text": "PUMPS",
+          "keyword": "PUMPS"
+        },
+        {
+          "row": 93,
+          "col": 1,
+          "text": "Steam Heaters",
+          "keyword": "STEAM HEATERS"
+        },
+        {
+          "row": 98,
+          "col": 1,
+          "text": "SOFTENER",
+          "keyword": "SOFTENER"
+        },
+        {
+          "row": 101,
+          "col": 1,
+          "text": "PANEL(S)",
+          "keyword": "PANEL"
+        },
+        {
+          "row": 104,
+          "col": 1,
+          "text": "OTHER",
+          "keyword": "OTHER"
+        },
+        {
+          "row": 107,
+          "col": 1,
+          "text": "UTILITIES",
+          "keyword": "UTILITIES"
+        },
+        {
+          "row": 115,
+          "col": 1,
+          "text": "OTHER INFO",
+          "keyword": "OTHER"
+        },
+        {
+          "row": 123,
+          "col": 1,
+          "text": "Project Name:",
+          "keyword": "PROJECT NAME"
+        },
+        {
+          "row": 125,
+          "col": 1,
+          "text": "TO BE COMPLETED BY APPS",
+          "keyword": "TO BE COMPLETED BY APPS"
+        },
+        {
+          "row": 127,
+          "col": 4,
+          "text": "2MMBTU/hr DCWH TE+ AL6XN",
+          "keyword": "HR"
+        },
+        {
+          "row": 130,
+          "col": 4,
+          "text": "Control Panel",
+          "keyword": "PANEL"
+        },
+        {
+          "row": 131,
+          "col": 4,
+          "text": "18\"x10' FOE Stack",
+          "keyword": "STACK"
+        },
+        {
+          "row": 132,
+          "col": 4,
+          "text": "18\"x10' FBE Stack",
+          "keyword": "STACK"
+        },
+        {
+          "row": 133,
+          "col": 4,
+          "text": "18\"x10' FBE Stack",
+          "keyword": "STACK"
+        },
+        {
+          "row": 134,
+          "col": 4,
+          "text": "18\" Stack Cap",
+          "keyword": "STACK"
+        },
+        {
+          "row": 137,
+          "col": 1,
+          "text": "LABOR HOURS",
+          "keyword": "LABOR HOURS"
+        },
+        {
+          "row": 137,
+          "col": 7,
+          "text": "EQUIPMENT REQD",
+          "keyword": "EQUIPMENT"
+        },
+        {
+          "row": 138,
+          "col": 2,
+          "text": "HR:",
+          "keyword": "HR"
+        },
+        {
+          "row": 143,
+          "col": 1,
+          "text": "CAPITAL",
+          "keyword": "CAPITAL"
+        },
+        {
+          "row": 143,
+          "col": 7,
+          "text": "INSTALL",
+          "keyword": "INSTALL"
+        },
+        {
+          "row": 147,
+          "col": 7,
+          "text": "Install Cost:",
+          "keyword": "INSTALL"
+        },
+        {
+          "row": 155,
+          "col": 1,
+          "text": "TO BE COMPLETED BY ENG",
+          "keyword": "TO BE COMPLETED BY ENG"
+        },
+        {
+          "row": 159,
+          "col": 5,
+          "text": "Large HP or Excessive LL Pumps?",
+          "keyword": "PUMPS"
+        }
+      ],
+      "tanks": [
+        {
+          "row": 77,
+          "marker": "#1:",
+          "cells": {}
+        },
+        {
+          "row": 79,
+          "marker": "#2:",
+          "cells": {}
+        },
+        {
+          "row": 81,
+          "marker": "#3:",
+          "cells": {}
+        }
+      ],
+      "line_items": [
+        {
+          "row": 127,
+          "item_number": "34489-01",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 45129
+            }
+          ],
+          "description": "2MMBTU/hr DCWH TE+ AL6XN"
+        },
+        {
+          "row": 128,
+          "item_number": "34489-02",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 2048
+            }
+          ],
+          "description": "Htr Inlet"
+        },
+        {
+          "row": 129,
+          "item_number": "34489-03",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 4410
+            }
+          ],
+          "description": "HW Make-up Valve Nest"
+        },
+        {
+          "row": 130,
+          "item_number": "34489-04",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 14853
+            }
+          ],
+          "description": "Control Panel"
+        },
+        {
+          "row": 131,
+          "item_number": "1033367",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 7,
+              "value": 3822
+            }
+          ],
+          "description": "18\"x10' FOE Stack"
+        }
+      ],
+      "sample_data": {
+        "proposal_number": "34489",
+        "htr1_type": "TE-100+, NSF",
+        "htr1_size": "x106BTU/hr",
+        "labor_pkg": "",
+        "equipment_qty": "INSTALL"
+      }
+    },
+    {
+      "filename": "35282 KOM AND OC FORM.xlsx",
+      "filepath": "F:/Smithfield Foods/Wichita, KS/35282/35282 KOM AND OC FORM.xlsx",
+      "max_row": 162,
+      "max_col": 23,
+      "sections": [
+        {
+          "row": 1,
+          "col": 1,
+          "text": "TO BE COMPLETED BY SALES",
+          "keyword": "TO BE COMPLETED BY SALES"
+        },
+        {
+          "row": 10,
+          "col": 4,
+          "text": "BILL TO:",
+          "keyword": "BILL TO"
+        },
+        {
+          "row": 10,
+          "col": 7,
+          "text": "SHIP TO:",
+          "keyword": "SHIP TO"
+        },
+        {
+          "row": 26,
+          "col": 1,
+          "text": "Tax Exempt?",
+          "keyword": "TAX"
+        },
+        {
+          "row": 28,
+          "col": 1,
+          "text": "TO BE COMPLETED BY ACCT",
+          "keyword": "TO BE COMPLETED BY ACCT"
+        },
+        {
+          "row": 30,
+          "col": 5,
+          "text": "Confirm Tax Status Noted Above:",
+          "keyword": "TAX"
+        },
+        {
+          "row": 32,
+          "col": 1,
+          "text": "Payment Milestones",
+          "keyword": "PAYMENT MILESTONES"
+        },
+        {
+          "row": 41,
+          "col": 1,
+          "text": "TO BE COMPLETED BY SALES",
+          "keyword": "TO BE COMPLETED BY SALES"
+        },
+        {
+          "row": 47,
+          "col": 1,
+          "text": "SHIPPING",
+          "keyword": "SHIPPING"
+        },
+        {
+          "row": 52,
+          "col": 1,
+          "text": "SPECIFICATIONS AND TERMS & COND",
+          "keyword": "SPECIFICATIONS"
+        },
+        {
+          "row": 53,
+          "col": 3,
+          "text": "Specifications?",
+          "keyword": "SPECIFICATIONS"
+        },
+        {
+          "row": 57,
+          "col": 1,
+          "text": "APPROVAL PRINTS REQ'D?",
+          "keyword": "APPROVAL PRINTS"
+        },
+        {
+          "row": 60,
+          "col": 1,
+          "text": "EQUIPMENT",
+          "keyword": "EQUIPMENT"
+        },
+        {
+          "row": 61,
+          "col": 1,
+          "text": "HTR - 1",
+          "keyword": "HTR - 1"
+        },
+        {
+          "row": 63,
+          "col": 3,
+          "text": "x106BTU/hr",
+          "keyword": "HR"
+        },
+        {
+          "row": 65,
+          "col": 1,
+          "text": "HTR - 2",
+          "keyword": "HTR - 2"
+        },
+        {
+          "row": 67,
+          "col": 3,
+          "text": "x106BTU/hr",
+          "keyword": "HR"
+        },
+        {
+          "row": 69,
+          "col": 1,
+          "text": "STK ECON",
+          "keyword": "STK ECON"
+        },
+        {
+          "row": 71,
+          "col": 1,
+          "text": "STACK(S)",
+          "keyword": "STACK"
+        },
+        {
+          "row": 73,
+          "col": 1,
+          "text": "HR",
+          "keyword": "HR"
+        },
+        {
+          "row": 75,
+          "col": 1,
+          "text": "TANKS",
+          "keyword": "TANKS"
+        },
+        {
+          "row": 83,
+          "col": 1,
+          "text": "PUMPS",
+          "keyword": "PUMPS"
+        },
+        {
+          "row": 93,
+          "col": 1,
+          "text": "Steam Heaters",
+          "keyword": "STEAM HEATERS"
+        },
+        {
+          "row": 98,
+          "col": 1,
+          "text": "SOFTENER",
+          "keyword": "SOFTENER"
+        },
+        {
+          "row": 101,
+          "col": 1,
+          "text": "PANEL(S)",
+          "keyword": "PANEL"
+        },
+        {
+          "row": 104,
+          "col": 1,
+          "text": "OTHER",
+          "keyword": "OTHER"
+        },
+        {
+          "row": 107,
+          "col": 1,
+          "text": "UTILITIES",
+          "keyword": "UTILITIES"
+        },
+        {
+          "row": 115,
+          "col": 1,
+          "text": "OTHER INFO",
+          "keyword": "OTHER"
+        },
+        {
+          "row": 123,
+          "col": 1,
+          "text": "Project Name:",
+          "keyword": "PROJECT NAME"
+        },
+        {
+          "row": 125,
+          "col": 1,
+          "text": "TO BE COMPLETED BY APPS",
+          "keyword": "TO BE COMPLETED BY APPS"
+        },
+        {
+          "row": 127,
+          "col": 4,
+          "text": "25MMBTU/hr DCWH, TE-100+",
+          "keyword": "HR"
+        },
+        {
+          "row": 134,
+          "col": 4,
+          "text": "Control Panel",
+          "keyword": "PANEL"
+        },
+        {
+          "row": 135,
+          "col": 4,
+          "text": "36\"x20' FOE Stack",
+          "keyword": "STACK"
+        },
+        {
+          "row": 136,
+          "col": 4,
+          "text": "36\" Stack Cap",
+          "keyword": "STACK"
+        },
+        {
+          "row": 138,
+          "col": 1,
+          "text": "LABOR HOURS",
+          "keyword": "LABOR HOURS"
+        },
+        {
+          "row": 138,
+          "col": 7,
+          "text": "EQUIPMENT REQD",
+          "keyword": "EQUIPMENT"
+        },
+        {
+          "row": 139,
+          "col": 2,
+          "text": "HR:",
+          "keyword": "HR"
+        },
+        {
+          "row": 144,
+          "col": 1,
+          "text": "CAPITAL",
+          "keyword": "CAPITAL"
+        },
+        {
+          "row": 144,
+          "col": 7,
+          "text": "INSTALL",
+          "keyword": "INSTALL"
+        },
+        {
+          "row": 148,
+          "col": 7,
+          "text": "Install Cost:",
+          "keyword": "INSTALL"
+        },
+        {
+          "row": 156,
+          "col": 1,
+          "text": "TO BE COMPLETED BY ENG",
+          "keyword": "TO BE COMPLETED BY ENG"
+        },
+        {
+          "row": 160,
+          "col": 5,
+          "text": "Large HP or Excessive LL Pumps?",
+          "keyword": "PUMPS"
+        }
+      ],
+      "tanks": [
+        {
+          "row": 77,
+          "marker": "#1:",
+          "cells": {
+            "3": "HW",
+            "5": "132",
+            "7": "13",
+            "9": "STD",
+            "11": "304"
+          }
+        },
+        {
+          "row": 79,
+          "marker": "#2:",
+          "cells": {}
+        },
+        {
+          "row": 81,
+          "marker": "#3:",
+          "cells": {}
+        }
+      ],
+      "line_items": [
+        {
+          "row": 127,
+          "item_number": "35282-01",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 69662
+            }
+          ],
+          "description": "25MMBTU/hr DCWH, TE-100+"
+        },
+        {
+          "row": 128,
+          "item_number": "35282-02",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 3388
+            }
+          ],
+          "description": "Heater Inlet"
+        },
+        {
+          "row": 129,
+          "item_number": "35282-03",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 14797
+            }
+          ],
+          "description": "Heater Discharge Pump Skid"
+        },
+        {
+          "row": 130,
+          "item_number": "35282-04",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 5668.5
+            },
+            {
+              "col": 9,
+              "value": 494.5
+            },
+            {
+              "col": 10,
+              "value": 5174
+            }
+          ],
+          "description": "HW Make-up Valve Nest"
+        },
+        {
+          "row": 131,
+          "item_number": "35282-05",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 4302.5
+            },
+            {
+              "col": 9,
+              "value": 494.5
+            },
+            {
+              "col": 10,
+              "value": 3808
+            }
+          ],
+          "description": "HW Recirculation Valve Nest"
+        },
+        {
+          "row": 132,
+          "item_number": "35282-06",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 17968
+            }
+          ],
+          "description": "Hot Water Tank"
+        },
+        {
+          "row": 133,
+          "item_number": "35282-07",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 15924
+            }
+          ],
+          "description": "Hot Water Pump Skid"
+        },
+        {
+          "row": 134,
+          "item_number": "35282-08",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 6,
+              "value": 21910
+            },
+            {
+              "col": 8,
+              "value": 810
+            },
+            {
+              "col": 9,
+              "value": 3455
+            },
+            {
+              "col": 10,
+              "value": 17645
+            }
+          ],
+          "description": "Control Panel"
+        },
+        {
+          "row": 135,
+          "item_number": "1051305",
+          "description_col": 4,
+          "value_cols": [
+            {
+              "col": 7,
+              "value": 4729
+            }
+          ],
+          "description": "36\"x20' FOE Stack"
+        }
+      ],
+      "sample_data": {
+        "proposal_number": "35282",
+        "htr1_type": "TE-100+",
+        "htr1_size": "x106BTU/hr",
+        "labor_pkg": "",
+        "equipment_qty": ""
+      }
+    }
+  ],
+  "comparison": {
+    "section_positions": {
+      "TO BE COMPLETED BY SALES": [
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 1,
+          "col": 1
+        },
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 41,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 1,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 41,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35411-R4.xlsx",
+          "row": 1,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35411-R4.xlsx",
+          "row": 41,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 1,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 41,
+          "col": 1
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 1,
+          "col": 1
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 41,
+          "col": 1
+        },
+        {
+          "file": "35140 KOM AND OC FORM.xlsx",
+          "row": 1,
+          "col": 1
+        },
+        {
+          "file": "35140 KOM AND OC FORM.xlsx",
+          "row": 41,
+          "col": 1
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 1,
+          "col": 1
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 41,
+          "col": 1
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 1,
+          "col": 1
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 41,
+          "col": 1
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 1,
+          "col": 1
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 41,
+          "col": 1
+        }
+      ],
+      "BILL TO": [
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 10,
+          "col": 4
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 10,
+          "col": 4
+        },
+        {
+          "file": "KOM AND OC FORM - 35411-R4.xlsx",
+          "row": 10,
+          "col": 4
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 10,
+          "col": 4
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 10,
+          "col": 4
+        },
+        {
+          "file": "35140 KOM AND OC FORM.xlsx",
+          "row": 10,
+          "col": 4
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 10,
+          "col": 4
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 10,
+          "col": 4
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 10,
+          "col": 4
+        }
+      ],
+      "SHIP TO": [
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 10,
+          "col": 7
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 10,
+          "col": 7
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 50,
+          "col": 3
+        },
+        {
+          "file": "KOM AND OC FORM - 35411-R4.xlsx",
+          "row": 10,
+          "col": 7
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 10,
+          "col": 7
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 10,
+          "col": 7
+        },
+        {
+          "file": "35140 KOM AND OC FORM.xlsx",
+          "row": 10,
+          "col": 7
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 10,
+          "col": 7
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 10,
+          "col": 7
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 10,
+          "col": 7
+        }
+      ],
+      "OTHER": [
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 18,
+          "col": 3
+        },
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 18,
+          "col": 7
+        },
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 104,
+          "col": 1
+        },
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 115,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 104,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 115,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35411-R4.xlsx",
+          "row": 104,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35411-R4.xlsx",
+          "row": 115,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 104,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 115,
+          "col": 1
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 104,
+          "col": 1
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 115,
+          "col": 1
+        },
+        {
+          "file": "35140 KOM AND OC FORM.xlsx",
+          "row": 104,
+          "col": 1
+        },
+        {
+          "file": "35140 KOM AND OC FORM.xlsx",
+          "row": 115,
+          "col": 1
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 104,
+          "col": 1
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 115,
+          "col": 1
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 4,
+          "col": 3
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 104,
+          "col": 1
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 115,
+          "col": 1
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 104,
+          "col": 1
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 115,
+          "col": 1
+        }
+      ],
+      "TAX": [
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 26,
+          "col": 1
+        },
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 30,
+          "col": 5
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 26,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 30,
+          "col": 5
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 117,
+          "col": 6
+        },
+        {
+          "file": "KOM AND OC FORM - 35411-R4.xlsx",
+          "row": 26,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35411-R4.xlsx",
+          "row": 30,
+          "col": 5
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 26,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 30,
+          "col": 5
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 26,
+          "col": 1
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 30,
+          "col": 5
+        },
+        {
+          "file": "35140 KOM AND OC FORM.xlsx",
+          "row": 26,
+          "col": 1
+        },
+        {
+          "file": "35140 KOM AND OC FORM.xlsx",
+          "row": 30,
+          "col": 5
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 26,
+          "col": 1
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 30,
+          "col": 5
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 26,
+          "col": 1
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 30,
+          "col": 5
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 26,
+          "col": 1
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 30,
+          "col": 5
+        }
+      ],
+      "TO BE COMPLETED BY ACCT": [
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 28,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 28,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35411-R4.xlsx",
+          "row": 28,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 28,
+          "col": 1
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 28,
+          "col": 1
+        },
+        {
+          "file": "35140 KOM AND OC FORM.xlsx",
+          "row": 28,
+          "col": 1
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 28,
+          "col": 1
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 28,
+          "col": 1
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 28,
+          "col": 1
+        }
+      ],
+      "PAYMENT MILESTONES": [
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 32,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 32,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35411-R4.xlsx",
+          "row": 32,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 32,
+          "col": 1
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 32,
+          "col": 1
+        },
+        {
+          "file": "35140 KOM AND OC FORM.xlsx",
+          "row": 32,
+          "col": 1
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 32,
+          "col": 1
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 32,
+          "col": 1
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 32,
+          "col": 1
+        }
+      ],
+      "SHIPPING": [
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 47,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 47,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35411-R4.xlsx",
+          "row": 47,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35411-R4.xlsx",
+          "row": 50,
+          "col": 3
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 47,
+          "col": 1
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 47,
+          "col": 1
+        },
+        {
+          "file": "35140 KOM AND OC FORM.xlsx",
+          "row": 47,
+          "col": 1
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 47,
+          "col": 1
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 47,
+          "col": 1
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 50,
+          "col": 3
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 47,
+          "col": 1
+        }
+      ],
+      "SPECIFICATIONS": [
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 52,
+          "col": 1
+        },
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 53,
+          "col": 3
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 52,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 53,
+          "col": 3
+        },
+        {
+          "file": "KOM AND OC FORM - 35411-R4.xlsx",
+          "row": 52,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35411-R4.xlsx",
+          "row": 53,
+          "col": 3
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 52,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 53,
+          "col": 3
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 52,
+          "col": 1
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 53,
+          "col": 3
+        },
+        {
+          "file": "35140 KOM AND OC FORM.xlsx",
+          "row": 52,
+          "col": 1
+        },
+        {
+          "file": "35140 KOM AND OC FORM.xlsx",
+          "row": 53,
+          "col": 3
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 52,
+          "col": 1
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 53,
+          "col": 3
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 52,
+          "col": 1
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 53,
+          "col": 3
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 52,
+          "col": 1
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 53,
+          "col": 3
+        }
+      ],
+      "APPROVAL PRINTS": [
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 57,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 57,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35411-R4.xlsx",
+          "row": 57,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 57,
+          "col": 1
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 57,
+          "col": 1
+        },
+        {
+          "file": "35140 KOM AND OC FORM.xlsx",
+          "row": 57,
+          "col": 1
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 57,
+          "col": 1
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 57,
+          "col": 1
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 57,
+          "col": 1
+        }
+      ],
+      "EQUIPMENT": [
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 60,
+          "col": 1
+        },
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 141,
+          "col": 7
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 60,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 141,
+          "col": 7
+        },
+        {
+          "file": "KOM AND OC FORM - 35411-R4.xlsx",
+          "row": 60,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35411-R4.xlsx",
+          "row": 133,
+          "col": 7
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 60,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 134,
+          "col": 7
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 60,
+          "col": 1
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 137,
+          "col": 7
+        },
+        {
+          "file": "35140 KOM AND OC FORM.xlsx",
+          "row": 60,
+          "col": 1
+        },
+        {
+          "file": "35140 KOM AND OC FORM.xlsx",
+          "row": 137,
+          "col": 7
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 60,
+          "col": 1
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 137,
+          "col": 7
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 60,
+          "col": 1
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 137,
+          "col": 7
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 60,
+          "col": 1
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 138,
+          "col": 7
+        }
+      ],
+      "HTR - 1": [
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 61,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 61,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35411-R4.xlsx",
+          "row": 61,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 61,
+          "col": 1
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 61,
+          "col": 1
+        },
+        {
+          "file": "35140 KOM AND OC FORM.xlsx",
+          "row": 61,
+          "col": 1
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 61,
+          "col": 1
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 61,
+          "col": 1
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 61,
+          "col": 1
+        }
+      ],
+      "HR": [
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 63,
+          "col": 3
+        },
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 67,
+          "col": 3
+        },
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 73,
+          "col": 1
+        },
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 142,
+          "col": 2
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 63,
+          "col": 3
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 67,
+          "col": 3
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 73,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 142,
+          "col": 2
+        },
+        {
+          "file": "KOM AND OC FORM - 35411-R4.xlsx",
+          "row": 63,
+          "col": 3
+        },
+        {
+          "file": "KOM AND OC FORM - 35411-R4.xlsx",
+          "row": 67,
+          "col": 3
+        },
+        {
+          "file": "KOM AND OC FORM - 35411-R4.xlsx",
+          "row": 73,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35411-R4.xlsx",
+          "row": 134,
+          "col": 2
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 63,
+          "col": 3
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 67,
+          "col": 3
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 73,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 135,
+          "col": 2
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 63,
+          "col": 3
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 67,
+          "col": 3
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 73,
+          "col": 1
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 138,
+          "col": 2
+        },
+        {
+          "file": "35140 KOM AND OC FORM.xlsx",
+          "row": 63,
+          "col": 3
+        },
+        {
+          "file": "35140 KOM AND OC FORM.xlsx",
+          "row": 67,
+          "col": 3
+        },
+        {
+          "file": "35140 KOM AND OC FORM.xlsx",
+          "row": 73,
+          "col": 1
+        },
+        {
+          "file": "35140 KOM AND OC FORM.xlsx",
+          "row": 138,
+          "col": 2
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 63,
+          "col": 3
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 67,
+          "col": 3
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 73,
+          "col": 1
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 138,
+          "col": 2
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 63,
+          "col": 3
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 67,
+          "col": 3
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 73,
+          "col": 1
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 127,
+          "col": 4
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 138,
+          "col": 2
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 63,
+          "col": 3
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 67,
+          "col": 3
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 73,
+          "col": 1
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 127,
+          "col": 4
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 139,
+          "col": 2
+        }
+      ],
+      "HTR - 2": [
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 65,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 65,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35411-R4.xlsx",
+          "row": 65,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 65,
+          "col": 1
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 65,
+          "col": 1
+        },
+        {
+          "file": "35140 KOM AND OC FORM.xlsx",
+          "row": 65,
+          "col": 1
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 65,
+          "col": 1
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 65,
+          "col": 1
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 65,
+          "col": 1
+        }
+      ],
+      "STK ECON": [
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 69,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 69,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35411-R4.xlsx",
+          "row": 69,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 69,
+          "col": 1
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 69,
+          "col": 1
+        },
+        {
+          "file": "35140 KOM AND OC FORM.xlsx",
+          "row": 69,
+          "col": 1
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 69,
+          "col": 1
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 69,
+          "col": 1
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 69,
+          "col": 1
+        }
+      ],
+      "STACK": [
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 71,
+          "col": 1
+        },
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 138,
+          "col": 4
+        },
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 139,
+          "col": 4
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 71,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 137,
+          "col": 4
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 138,
+          "col": 4
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 139,
+          "col": 4
+        },
+        {
+          "file": "KOM AND OC FORM - 35411-R4.xlsx",
+          "row": 71,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 71,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 129,
+          "col": 4
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 71,
+          "col": 1
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 133,
+          "col": 4
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 134,
+          "col": 4
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 135,
+          "col": 4
+        },
+        {
+          "file": "35140 KOM AND OC FORM.xlsx",
+          "row": 71,
+          "col": 1
+        },
+        {
+          "file": "35140 KOM AND OC FORM.xlsx",
+          "row": 133,
+          "col": 4
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 71,
+          "col": 1
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 133,
+          "col": 4
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 134,
+          "col": 4
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 135,
+          "col": 4
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 71,
+          "col": 1
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 131,
+          "col": 4
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 132,
+          "col": 4
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 133,
+          "col": 4
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 134,
+          "col": 4
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 71,
+          "col": 1
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 135,
+          "col": 4
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 136,
+          "col": 4
+        }
+      ],
+      "TANKS": [
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 75,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 75,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35411-R4.xlsx",
+          "row": 75,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 75,
+          "col": 1
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 75,
+          "col": 1
+        },
+        {
+          "file": "35140 KOM AND OC FORM.xlsx",
+          "row": 75,
+          "col": 1
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 75,
+          "col": 1
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 75,
+          "col": 1
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 75,
+          "col": 1
+        }
+      ],
+      "PUMPS": [
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 83,
+          "col": 1
+        },
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 163,
+          "col": 5
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 83,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 163,
+          "col": 5
+        },
+        {
+          "file": "KOM AND OC FORM - 35411-R4.xlsx",
+          "row": 83,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35411-R4.xlsx",
+          "row": 155,
+          "col": 5
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 83,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 116,
+          "col": 3
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 163,
+          "col": 5
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 83,
+          "col": 1
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 159,
+          "col": 5
+        },
+        {
+          "file": "35140 KOM AND OC FORM.xlsx",
+          "row": 83,
+          "col": 1
+        },
+        {
+          "file": "35140 KOM AND OC FORM.xlsx",
+          "row": 159,
+          "col": 5
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 83,
+          "col": 1
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 159,
+          "col": 5
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 83,
+          "col": 1
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 159,
+          "col": 5
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 83,
+          "col": 1
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 160,
+          "col": 5
+        }
+      ],
+      "STEAM HEATERS": [
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 93,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 93,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35411-R4.xlsx",
+          "row": 93,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 93,
+          "col": 1
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 93,
+          "col": 1
+        },
+        {
+          "file": "35140 KOM AND OC FORM.xlsx",
+          "row": 93,
+          "col": 1
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 93,
+          "col": 1
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 93,
+          "col": 1
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 93,
+          "col": 1
+        }
+      ],
+      "SOFTENER": [
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 98,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 98,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 119,
+          "col": 6
+        },
+        {
+          "file": "KOM AND OC FORM - 35411-R4.xlsx",
+          "row": 98,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 98,
+          "col": 1
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 98,
+          "col": 1
+        },
+        {
+          "file": "35140 KOM AND OC FORM.xlsx",
+          "row": 98,
+          "col": 1
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 98,
+          "col": 1
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 98,
+          "col": 1
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 98,
+          "col": 1
+        }
+      ],
+      "PANEL": [
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 101,
+          "col": 1
+        },
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 118,
+          "col": 2
+        },
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 137,
+          "col": 4
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 101,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 136,
+          "col": 4
+        },
+        {
+          "file": "KOM AND OC FORM - 35411-R4.xlsx",
+          "row": 101,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 101,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 128,
+          "col": 4
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 101,
+          "col": 1
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 132,
+          "col": 4
+        },
+        {
+          "file": "35140 KOM AND OC FORM.xlsx",
+          "row": 101,
+          "col": 1
+        },
+        {
+          "file": "35140 KOM AND OC FORM.xlsx",
+          "row": 132,
+          "col": 4
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 101,
+          "col": 1
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 132,
+          "col": 4
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 101,
+          "col": 1
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 130,
+          "col": 4
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 101,
+          "col": 1
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 134,
+          "col": 4
+        }
+      ],
+      "UTILITIES": [
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 107,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 107,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35411-R4.xlsx",
+          "row": 107,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 107,
+          "col": 1
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 107,
+          "col": 1
+        },
+        {
+          "file": "35140 KOM AND OC FORM.xlsx",
+          "row": 107,
+          "col": 1
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 107,
+          "col": 1
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 107,
+          "col": 1
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 107,
+          "col": 1
+        }
+      ],
+      "PROJECT NAME": [
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 123,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 125,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35411-R4.xlsx",
+          "row": 123,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 119,
+          "col": 1
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 123,
+          "col": 1
+        },
+        {
+          "file": "35140 KOM AND OC FORM.xlsx",
+          "row": 123,
+          "col": 1
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 121,
+          "col": 1
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 123,
+          "col": 1
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 123,
+          "col": 1
+        }
+      ],
+      "TO BE COMPLETED BY APPS": [
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 125,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 127,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35411-R4.xlsx",
+          "row": 125,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 122,
+          "col": 1
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 125,
+          "col": 1
+        },
+        {
+          "file": "35140 KOM AND OC FORM.xlsx",
+          "row": 125,
+          "col": 1
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 123,
+          "col": 1
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 125,
+          "col": 1
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 125,
+          "col": 1
+        }
+      ],
+      "LABOR HOURS": [
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 141,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 141,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35411-R4.xlsx",
+          "row": 133,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 134,
+          "col": 1
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 137,
+          "col": 1
+        },
+        {
+          "file": "35140 KOM AND OC FORM.xlsx",
+          "row": 137,
+          "col": 1
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 137,
+          "col": 1
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 137,
+          "col": 1
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 138,
+          "col": 1
+        }
+      ],
+      "CAPITAL": [
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 147,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 147,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35411-R4.xlsx",
+          "row": 139,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 140,
+          "col": 1
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 143,
+          "col": 1
+        },
+        {
+          "file": "35140 KOM AND OC FORM.xlsx",
+          "row": 143,
+          "col": 1
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 143,
+          "col": 1
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 143,
+          "col": 1
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 144,
+          "col": 1
+        }
+      ],
+      "INSTALL": [
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 147,
+          "col": 7
+        },
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 151,
+          "col": 7
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 147,
+          "col": 7
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 151,
+          "col": 7
+        },
+        {
+          "file": "KOM AND OC FORM - 35411-R4.xlsx",
+          "row": 139,
+          "col": 7
+        },
+        {
+          "file": "KOM AND OC FORM - 35411-R4.xlsx",
+          "row": 143,
+          "col": 7
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 140,
+          "col": 7
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 144,
+          "col": 7
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 143,
+          "col": 7
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 147,
+          "col": 7
+        },
+        {
+          "file": "35140 KOM AND OC FORM.xlsx",
+          "row": 143,
+          "col": 7
+        },
+        {
+          "file": "35140 KOM AND OC FORM.xlsx",
+          "row": 147,
+          "col": 7
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 143,
+          "col": 7
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 147,
+          "col": 7
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 143,
+          "col": 7
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 147,
+          "col": 7
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 144,
+          "col": 7
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 148,
+          "col": 7
+        }
+      ],
+      "TO BE COMPLETED BY ENG": [
+        {
+          "file": "35371 KOM AND OC FORM.xlsx",
+          "row": 159,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35042.xlsx",
+          "row": 159,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35411-R4.xlsx",
+          "row": 151,
+          "col": 1
+        },
+        {
+          "file": "KOM AND OC FORM - 35167.xlsx",
+          "row": 159,
+          "col": 1
+        },
+        {
+          "file": "35359 KOM AND OC FORM.xlsx",
+          "row": 155,
+          "col": 1
+        },
+        {
+          "file": "35140 KOM AND OC FORM.xlsx",
+          "row": 155,
+          "col": 1
+        },
+        {
+          "file": "35397 KOM AND OC FORM.xlsx",
+          "row": 155,
+          "col": 1
+        },
+        {
+          "file": "34489 KOM AND OC FORM.xlsx",
+          "row": 155,
+          "col": 1
+        },
+        {
+          "file": "35282 KOM AND OC FORM.xlsx",
+          "row": 156,
+          "col": 1
+        }
+      ]
+    },
+    "tank_columns": {
+      "#1:": "{3, 5, 7, 9, 11}",
+      "#2:": "{3, 5, 7, 9, 11}"
+    },
+    "value_columns": {
+      "6": "{'KOM AND OC FORM - 35167.xlsx', '35371 KOM AND OC FORM.xlsx', '34489 KOM AND OC FORM.xlsx', 'KOM AND OC FORM - 35042.xlsx', '35397 KOM AND OC FORM.xlsx', 'KOM AND OC FORM - 35411-R4.xlsx', '35140 KOM AND OC FORM.xlsx', '35282 KOM AND OC FORM.xlsx', '35359 KOM AND OC FORM.xlsx'}",
+      "9": "{'KOM AND OC FORM - 35167.xlsx', '35371 KOM AND OC FORM.xlsx', 'KOM AND OC FORM - 35042.xlsx', '35397 KOM AND OC FORM.xlsx', '35282 KOM AND OC FORM.xlsx', '35359 KOM AND OC FORM.xlsx'}",
+      "10": "{'KOM AND OC FORM - 35167.xlsx', '35371 KOM AND OC FORM.xlsx', 'KOM AND OC FORM - 35042.xlsx', '35397 KOM AND OC FORM.xlsx', '35282 KOM AND OC FORM.xlsx'}",
+      "8": "{'KOM AND OC FORM - 35167.xlsx', '35371 KOM AND OC FORM.xlsx', 'KOM AND OC FORM - 35042.xlsx', '35397 KOM AND OC FORM.xlsx', '35282 KOM AND OC FORM.xlsx', '35359 KOM AND OC FORM.xlsx'}",
+      "11": "{'35371 KOM AND OC FORM.xlsx', 'KOM AND OC FORM - 35042.xlsx'}",
+      "7": "{'34489 KOM AND OC FORM.xlsx', '35282 KOM AND OC FORM.xlsx', '35397 KOM AND OC FORM.xlsx'}"
+    },
+    "desc_columns": "{4}"
+  }
+}

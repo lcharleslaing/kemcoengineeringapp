@@ -1,0 +1,403 @@
+{% extends "core/base.html" %}
+
+{% block title %}Inventor Working Folder{% endblock %}
+
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="container mx-auto p-6">
+  <div class="mb-6">
+    <h1 class="text-3xl font-bold mb-2">Inventor Working Folder</h1>
+    <p class="text-base-content/70">Base Path: <code class="text-sm">{{ base_path }}</code></p>
+    {% if not path_exists %}
+    <div class="alert alert-warning mt-2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+      </svg>
+      <span>The base path does not exist. Please ensure the folder exists at: <code>{{ base_path }}</code></span>
+    </div>
+    {% elif path_error %}
+      {% if "Note:" in path_error or "note:" in path_error|lower %}
+      <div class="alert alert-info mt-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span>{{ path_error }}</span>
+      </div>
+      {% else %}
+      <div class="alert alert-error mt-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span>Error accessing path: {{ path_error }}</span>
+      </div>
+      {% endif %}
+    {% endif %}
+  </div>
+
+  <!-- Search Field -->
+  <div class="mb-6">
+    <div class="form-control w-full">
+      <label class="label">
+        <span class="label-text font-semibold">Search Files</span>
+      </label>
+      <form method="get" action="{% url 'inventor:list' %}" id="searchForm">
+        <div class="flex gap-2">
+          <input 
+            type="text" 
+            name="q"
+            id="searchInput" 
+            placeholder="Enter search term to find files (required)..." 
+            class="input input-bordered w-full" 
+            value="{{ search_query }}"
+            autocomplete="off"
+            required
+          />
+          <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+      </form>
+      <label class="label">
+        <span class="label-text-alt">Search by filename or path. Files are only loaded when you search.</span>
+      </label>
+    </div>
+  </div>
+
+  <!-- File Type Filters -->
+  <div class="mb-6">
+    <div class="form-control">
+      <label class="label">
+        <span class="label-text font-semibold">File Type Filters</span>
+      </label>
+      <div class="flex flex-wrap gap-4">
+        <label class="label cursor-pointer gap-2">
+          <input 
+            type="checkbox" 
+            class="checkbox checkbox-primary" 
+            id="filterIDW" 
+            data-extension=".idw"
+            checked
+          />
+          <span class="label-text">IDW (Drawings)</span>
+        </label>
+        <label class="label cursor-pointer gap-2">
+          <input 
+            type="checkbox" 
+            class="checkbox checkbox-primary" 
+            id="filterIPT" 
+            data-extension=".ipt"
+          />
+          <span class="label-text">IPT (Parts)</span>
+        </label>
+        <label class="label cursor-pointer gap-2">
+          <input 
+            type="checkbox" 
+            class="checkbox checkbox-primary" 
+            id="filterIAM" 
+            data-extension=".iam"
+          />
+          <span class="label-text">IAM (Assemblies)</span>
+        </label>
+      </div>
+      <label class="label">
+        <span class="label-text-alt">Toggle file types to show/hide in the list</span>
+      </label>
+    </div>
+  </div>
+
+  <!-- File Count -->
+  <div class="mb-4">
+    <p class="text-sm text-base-content/60">
+      Showing <span id="fileCount">{{ files|length }}</span> file{{ files|length|pluralize }}
+    </p>
+  </div>
+
+  <!-- Files List -->
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      {% if search_query %}
+        {% if files %}
+        <div class="overflow-x-auto">
+          <table class="table table-zebra w-full" id="filesTable">
+            <thead>
+              <tr>
+                <th>File Name</th>
+                <th>Directory</th>
+                <th>Size</th>
+                <th>Modified</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="filesTableBody">
+              {% for file in files %}
+            <tr class="file-row" data-name="{{ file.name|lower }}" data-path="{{ file.relative_path|lower }}" data-extension="{{ file.extension|lower }}">
+              <td>
+                <div class="flex items-center gap-2">
+                  <span class="badge badge-outline">{{ file.extension|upper }}</span>
+                  <span class="font-medium">{{ file.name }}</span>
+                </div>
+              </td>
+              <td>
+                <span class="text-sm text-base-content/70">{{ file.directory }}</span>
+              </td>
+              <td>{{ file.size_str }}</td>
+              <td>{{ file.modified_str }}</td>
+              <td>
+                <div class="flex gap-2">
+                  <a 
+                    href="#" 
+                    onclick="openFile('{{ file.path|escapejs }}'); return false;"
+                    class="btn btn-sm btn-primary"
+                    title="Open file"
+                  >
+                    Open
+                  </a>
+                  <button 
+                    onclick="openLocation('{{ file.path|escapejs }}')" 
+                    class="btn btn-sm btn-outline"
+                    title="Open file location in Explorer"
+                  >
+                    Open Location
+                  </button>
+                </div>
+              </td>
+            </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% else %}
+        <div class="text-center py-12">
+          <svg class="w-16 h-16 mx-auto text-base-content/30 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          <p class="text-lg font-semibold mb-2">No files found</p>
+          <p class="text-base-content/60">No files matching your search "{{ search_query }}" were found.</p>
+          <p class="text-sm text-base-content/50 mt-2">Try a different search term.</p>
+        </div>
+        {% endif %}
+      {% else %}
+      <div class="text-center py-12">
+        <svg class="w-16 h-16 mx-auto text-base-content/30 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <p class="text-lg font-semibold mb-2">Enter a search term to find files</p>
+        <p class="text-base-content/60">Search by filename or path to find Inventor files in the working folder.</p>
+        <p class="text-sm text-base-content/50 mt-2">Base path: <code>{{ base_path }}</code></p>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<script>
+  // Live search functionality
+  const searchInput = document.getElementById('searchInput');
+  const filesTableBody = document.getElementById('filesTableBody');
+  const fileCount = document.getElementById('fileCount');
+  const allRows = Array.from(document.querySelectorAll('.file-row'));
+  
+  // File type filter checkboxes
+  const filterIDW = document.getElementById('filterIDW');
+  const filterIPT = document.getElementById('filterIPT');
+  const filterIAM = document.getElementById('filterIAM');
+
+  function getEnabledExtensions() {
+    const enabled = [];
+    if (filterIDW.checked) enabled.push('.idw');
+    if (filterIPT.checked) enabled.push('.ipt');
+    if (filterIAM.checked) enabled.push('.iam');
+    return enabled;
+  }
+
+  function filterFiles() {
+    const query = searchInput.value.toLowerCase().trim();
+    const enabledExtensions = getEnabledExtensions();
+    let visibleCount = 0;
+    
+    // Use requestAnimationFrame for smoother performance with large lists
+    const startTime = performance.now();
+    
+    // Optimize: cache extension check
+    const hasQuery = query !== '';
+    const hasExtensions = enabledExtensions.length > 0;
+    
+    // Batch DOM updates for better performance
+    const fragment = document.createDocumentFragment();
+    let batchCount = 0;
+    const BATCH_SIZE = 100; // Process in batches
+    
+    for (let i = 0; i < allRows.length; i++) {
+      const row = allRows[i];
+      
+      // Get file extension from data attribute (cached)
+      const fileExtension = row.getAttribute('data-extension') || '';
+      
+      // Quick extension check first (most selective)
+      if (hasExtensions && !enabledExtensions.includes(fileExtension)) {
+        row.style.display = 'none';
+        continue;
+      }
+      
+      // Then check search query if needed
+      if (hasQuery) {
+        const name = row.getAttribute('data-name') || '';
+        const path = row.getAttribute('data-path') || '';
+        if (!name.includes(query) && !path.includes(query)) {
+          row.style.display = 'none';
+          continue;
+        }
+      }
+      
+      // Show row
+      row.style.display = '';
+      visibleCount++;
+    }
+
+    fileCount.textContent = visibleCount;
+    
+    // Performance logging (only in dev)
+    if (allRows.length > 1000) {
+      const endTime = performance.now();
+      console.log(`Filtered ${allRows.length} rows in ${(endTime - startTime).toFixed(2)}ms, showing ${visibleCount}`);
+    }
+  }
+
+  // Debounce search input
+  let searchTimeout;
+  searchInput.addEventListener('input', function() {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(filterFiles, 150);
+  });
+
+  // Add event listeners to filter checkboxes
+  filterIDW.addEventListener('change', filterFiles);
+  filterIPT.addEventListener('change', filterFiles);
+  filterIAM.addEventListener('change', filterFiles);
+
+  // Initial filter on page load
+  filterFiles();
+
+  // Function to open file using Electron IPC
+  function openFile(filePath) {
+    // Check if we're in Electron
+    if (typeof require !== 'undefined') {
+      try {
+        const { ipcRenderer } = require('electron');
+        ipcRenderer.invoke('open-file', filePath).then(result => {
+          if (!result.success) {
+            alert('Error opening file: ' + (result.error || 'Unknown error'));
+          }
+        }).catch(error => {
+          console.error('Error opening file:', error);
+          alert('Error opening file');
+        });
+      } catch (error) {
+        console.error('Electron IPC not available:', error);
+        // Fallback: use server endpoint
+        const encodedPath = encodeURIComponent(filePath);
+        const openUrl = `/inventor/open/${encodedPath}/`;
+        fetch(openUrl, {
+          method: 'GET',
+          headers: {
+            'X-CSRFToken': '{{ csrf_token }}'
+          }
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (!data.success) {
+            alert('Error opening file: ' + (data.error || 'Unknown error'));
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('Error opening file');
+        });
+      }
+    } else {
+      // Not in Electron, use server endpoint
+      const encodedPath = encodeURIComponent(filePath);
+      const openUrl = `/inventor/open/${encodedPath}/`;
+      fetch(openUrl, {
+        method: 'GET',
+        headers: {
+          'X-CSRFToken': '{{ csrf_token }}'
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (!data.success) {
+          alert('Error opening file: ' + (data.error || 'Unknown error'));
+        } else {
+          // Try to open using file:// URL as fallback
+          const fileUrl = 'file:///' + filePath.replace(/\\/g, '/');
+          window.open(fileUrl, '_blank');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Error opening file');
+      });
+    }
+  }
+
+  // Function to open file location using Electron IPC
+  function openLocation(filePath) {
+    // Check if we're in Electron
+    if (typeof require !== 'undefined') {
+      try {
+        const { ipcRenderer } = require('electron');
+        ipcRenderer.invoke('open-location', filePath).then(result => {
+          if (!result.success) {
+            alert('Error opening location: ' + (result.error || 'Unknown error'));
+          }
+        }).catch(error => {
+          console.error('Error opening location:', error);
+          alert('Error opening file location');
+        });
+      } catch (error) {
+        console.error('Electron IPC not available:', error);
+        // Fallback: use server endpoint
+        const encodedPath = encodeURIComponent(filePath);
+        const locationUrl = `/inventor/open-location/${encodedPath}/`;
+        fetch(locationUrl, {
+          method: 'GET',
+          headers: {
+            'X-CSRFToken': '{{ csrf_token }}'
+          }
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (!data.success) {
+            alert('Error opening location: ' + (data.error || 'Unknown error'));
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('Error opening file location');
+        });
+      }
+    } else {
+      // Not in Electron, use server endpoint
+      const encodedPath = encodeURIComponent(filePath);
+      const locationUrl = `/inventor/open-location/${encodedPath}/`;
+      fetch(locationUrl, {
+        method: 'GET',
+        headers: {
+          'X-CSRFToken': '{{ csrf_token }}'
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (!data.success) {
+          alert('Error opening location: ' + (data.error || 'Unknown error'));
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Error opening file location');
+      });
+    }
+  }
+</script>
+{% endblock %}
+

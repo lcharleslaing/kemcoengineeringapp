@@ -1,0 +1,53 @@
+{% extends "core/base.html" %}
+
+{% block title %}{% if edit %}Edit Job{% else %}Create Job{% endif %} #{% if edit %}{{ job.job_number }}{% endif %}{% endblock %}
+
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="container mx-auto p-6">
+  <div class="mb-6">
+    <h1 class="text-3xl font-bold">{% if edit %}Edit Job{% else %}Create Job{% endif %}</h1>
+  </div>
+
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-control mb-4">
+          <label class="label">
+            <span class="label-text">Job Number *</span>
+          </label>
+          <input type="text" name="job_number" class="input input-bordered" placeholder="e.g., 35371 or 35411-R4 (will extract 5 digits)" value="{% if edit %}{{ job.job_number }}{% endif %}" {% if edit %}readonly{% else %}required{% endif %}>
+          {% if edit %}
+          <label class="label">
+            <span class="label-text-alt text-base-content/60">Job number cannot be changed</span>
+          </label>
+          {% else %}
+          <label class="label">
+            <span class="label-text-alt text-base-content/60">Enter job number (5 digits). Extra characters like "-R4" will be removed automatically.</span>
+          </label>
+          {% endif %}
+        </div>
+        <div class="form-control mb-4">
+          <label class="label">
+            <span class="label-text">Customer Name</span>
+          </label>
+          <input type="text" name="customer_name" class="input input-bordered" placeholder="Company name" value="{% if edit %}{{ job.customer_name }}{% endif %}">
+        </div>
+        <div class="form-control mb-4">
+          <label class="label">
+            <span class="label-text">Project Name</span>
+          </label>
+          <input type="text" name="project_name" class="input input-bordered" placeholder="Project name" value="{% if edit %}{{ job.project_name }}{% endif %}">
+        </div>
+        <div class="flex gap-2">
+          <button type="submit" class="btn btn-primary">{% if edit %}Update Job{% else %}Create Job{% endif %}</button>
+          <a href="{% if edit %}{% url 'project_notes:job_detail' job.job_number %}{% else %}{% url 'project_notes:job_list' %}{% endif %}" class="btn btn-outline">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

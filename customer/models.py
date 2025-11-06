@@ -5,6 +5,9 @@ from django.contrib.auth.models import User
 class KOMForm(models.Model):
     """Main KOM (Kick Off Meeting) form - captures everything from the CSV"""
     
+    # Job number - extracted from proposal_number (5 digit number)
+    job_number = models.CharField(max_length=10, blank=True, db_index=True, help_text="5-digit job number extracted from proposal number")
+    
     # TO BE COMPLETED BY SALES
     proposal_number = models.CharField(max_length=50, blank=True)
     proposal_date = models.DateField(null=True, blank=True)
@@ -256,11 +259,126 @@ class KOMForm(models.Model):
     eng_special_testing_reqd = models.BooleanField(default=False)
     eng_extra_forklift_or_scissor_lift_reqd = models.BooleanField(default=False)
     
+    # Raw parsed data stored as JSON for comparison and flexible extraction
+    raw_data = models.JSONField(default=dict, blank=True, null=True, help_text="Raw parsed data from Excel file as JSON")
+    
+    def get_raw_data(self):
+        """Safely get raw_data, returning empty dict if None or field doesn't exist"""
+        try:
+            return self.raw_data if self.raw_data is not None else {}
+        except (AttributeError, KeyError):
+            # Field doesn't exist yet (migration not run) or field is missing
+            return {}
+    
     # Metadata
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     source_file = models.CharField(max_length=255, blank=True)  # Original filename
+    file_path = models.CharField(max_length=1000, blank=True, null=True)  # Full path to the original file
+    
+    def extract_from_raw_data(self):
+        """Extract structured fields from raw_data JSON"""
+        try:
+            if not self.raw_data:
+                return
+        except (AttributeError, KeyError):
+            # Field doesn't exist yet
+            return
+        
+        from decimal import Decimal
+        from datetime import datetime
+        
+        def get_value(key, default=None):
+            """Helper to get value from raw_data with type conversion"""
+            val = self.raw_data.get(key, default)
+            if val is None or val == '':
+                return default
+            return val
+        
+        def parse_date_from_json(val):
+            """Parse date from JSON string"""
+            if not val:
+                return None
+            if isinstance(val, str):
+                for fmt in ('%Y-%m-%d', '%m/%d/%y', '%m/%d/%Y'):
+                    try:
+                        return datetime.strptime(val, fmt).date()
+                    except ValueError:
+                        pass
+            return None
+        
+        def parse_decimal_from_json(val):
+            """Parse decimal from JSON"""
+            if val is None or val == '':
+                return None
+            if isinstance(val, (int, float)):
+                return Decimal(str(val))
+            if isinstance(val, str):
+                val_str = val.replace('$', '').replace(',', '').strip()
+                try:
+                    return Decimal(val_str)
+                except:
+                    return None
+            return None
+        
+        # Extract all fields from raw_data
+        # This allows flexible field mapping and handles variations in file formats
+        self.proposal_number = get_value('proposal_number', '')
+        self.proposal_date = parse_date_from_json(get_value('proposal_date'))
+        self.sales_rep = get_value('sales_rep', '')
+        self.date_of_oc = parse_date_from_json(get_value('date_of_oc'))
+        self.industry = get_value('industry', '')
+        self.industry_subcategory = get_value('industry_subcategory', '')
+        self.discount = parse_decimal_from_json(get_value('discount'))
+        self.po_number = get_value('po_number', '')
+        
+        # Commissions
+        self.comm_1_inside_percent = parse_decimal_from_json(get_value('comm_1_inside_percent'))
+        self.comm_1_inside_name = get_value('comm_1_inside_name', '')
+        self.comm_2_inside_percent = parse_decimal_from_json(get_value('comm_2_inside_percent'))
+        self.comm_2_inside_name = get_value('comm_2_inside_name', '')
+        self.comm_outside_amount = parse_decimal_from_json(get_value('comm_outside_amount'))
+        self.comm_outside_name = get_value('comm_outside_name', '')
+        
+        # BILL TO
+        self.bill_to_name = get_value('bill_to_name', '')
+        self.bill_to_phone = get_value('bill_to_phone', '')
+        self.bill_to_email = get_value('bill_to_email', '')
+        self.bill_to_company = get_value('bill_to_company', '')
+        self.bill_to_address = get_value('bill_to_address', '')
+        self.bill_to_city = get_value('bill_to_city', '')
+        self.bill_to_state = get_value('bill_to_state', '')
+        self.bill_to_zip = get_value('bill_to_zip', '')
+        
+        # SHIP TO
+        self.ship_to_name = get_value('ship_to_name', '')
+        self.ship_to_phone = get_value('ship_to_phone', '')
+        self.ship_to_email = get_value('ship_to_email', '')
+        self.ship_to_company = get_value('ship_to_company', '')
+        self.ship_to_address = get_value('ship_to_address', '')
+        self.ship_to_city = get_value('ship_to_city', '')
+        self.ship_to_state = get_value('ship_to_state', '')
+        self.ship_to_zip = get_value('ship_to_zip', '')
+        
+        # Tax Information
+        self.tax_exempt = bool(get_value('tax_exempt', False))
+        self.exempt_cert_in_hand = bool(get_value('exempt_cert_in_hand', False))
+        self.tax_action_who = get_value('tax_action_who', '')
+        self.tax_action_when = parse_date_from_json(get_value('tax_action_when'))
+        self.confirm_tax_status_noted = bool(get_value('confirm_tax_status_noted', False))
+        self.customer_in_sage = bool(get_value('customer_in_sage', False))
+        
+        # Payment Milestones
+        for i in range(1, 6):
+            setattr(self, f'payment_milestone_{i}_event', get_value(f'payment_milestone_{i}_event', ''))
+            setattr(self, f'payment_milestone_{i}_percent', parse_decimal_from_json(get_value(f'payment_milestone_{i}_percent')))
+            setattr(self, f'payment_milestone_{i}_terms', get_value(f'payment_milestone_{i}_terms', ''))
+            setattr(self, f'payment_milestone_{i}_notes', get_value(f'payment_milestone_{i}_notes', ''))
+        
+        # Continue with all other fields...
+        # (This is a simplified version - you'd want to extract all fields)
+        # For now, we'll extract the most common ones and let the import view handle the rest
     
     class Meta:
         verbose_name = "KOM Form"

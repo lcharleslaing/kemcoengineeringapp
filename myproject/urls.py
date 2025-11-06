@@ -27,6 +27,8 @@ urlpatterns = [
     path("calendar/", include("my_calendar.urls")),
     path("resources/", include("resources.urls")),
     path("customer/", include("customer.urls")),
+    path("inventor/", include("inventor.urls")),
+    path("notes/", include("project_notes.urls")),
     path("", include("core.urls")),
 ]
 

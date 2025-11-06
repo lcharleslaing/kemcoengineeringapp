@@ -1,0 +1,83 @@
+{% extends "core/base.html" %}
+
+{% block title %}Equipment Note - Job #{{ job.job_number }}{% endblock %}
+
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="container mx-auto p-6">
+  <div class="mb-6">
+    <h1 class="text-3xl font-bold">Equipment Note</h1>
+    <p class="text-base-content/70 mt-1">Job #{{ job.job_number }} - {{ job.customer_name|default:"No Customer" }}</p>
+  </div>
+
+  <div class="card bg-base-100 shadow-xl mb-6">
+    <div class="card-body">
+      <div class="alert alert-info mb-4">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <span>Equipment notes are automatically generated from KOM imports. To update this note, re-import the KOM file or delete this note and create a new one.</span>
+      </div>
+      
+      <div class="mb-4">
+        <span class="text-sm text-base-content/60">Created by {{ equipment_note.created_by.get_full_name|default:equipment_note.created_by.username }} on {{ equipment_note.created_at|date:"M d, Y H:i" }}</span>
+        {% if equipment_note.updated_at != equipment_note.created_at %}
+        <span class="text-sm text-base-content/50"> | Updated: {{ equipment_note.updated_at|date:"M d, Y H:i" }}</span>
+        {% endif %}
+      </div>
+
+      {% if equipment_note.equipment_data %}
+      <div class="mb-4">
+        <h3 class="font-semibold mb-2">Equipment:</h3>
+        <div class="ml-4 space-y-2">
+          {% for eq_type, eq_info in equipment_note.equipment_data.items %}
+          <div class="border-l-2 border-base-300 pl-3">
+            <strong>{{ eq_type }}:</strong>
+            <div class="ml-2 space-y-1 mt-1">
+              {% if eq_info.qty is not None %}<div>Qty: {{ eq_info.qty }}</div>{% endif %}
+              {% if eq_info.kn_number %}<div>KN: {{ eq_info.kn_number }}</div>{% endif %}
+              {% if eq_info.description %}<div>Description: {{ eq_info.description }}</div>{% endif %}
+              {% if eq_info.type %}<div>Type: {{ eq_info.type }}</div>{% endif %}
+              {% if eq_info.emissions %}<div>Emissions: {{ eq_info.emissions }}</div>{% endif %}
+              {% if eq_info.size %}<div>Size: {{ eq_info.size }}</div>{% endif %}
+              {% if eq_info.pump_grav %}<div>Pump/Grav: {{ eq_info.pump_grav }}</div>{% endif %}
+              {% if eq_info.material %}<div>Material: {{ eq_info.material }}</div>{% endif %}
+              {% if eq_info.dia_in is not None %}<div>Dia (in): {{ eq_info.dia_in }}</div>{% endif %}
+              {% if eq_info.ht_ft is not None %}<div>Ht (ft): {{ eq_info.ht_ft }}</div>{% endif %}
+              {% if eq_info.ga %}<div>GA: {{ eq_info.ga }}</div>{% endif %}
+              {% if eq_info.flow_gpm is not None %}<div>Flow (gpm): {{ eq_info.flow_gpm }}</div>{% endif %}
+              {% if eq_info.tdh_ft is not None %}<div>TDH (ft): {{ eq_info.tdh_ft }}</div>{% endif %}
+              {% if eq_info.packaging %}<div>Packaging: {{ eq_info.packaging }}</div>{% endif %}
+              {% if eq_info.piping_material %}<div>Piping Material: {{ eq_info.piping_material }}</div>{% endif %}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      {% if equipment_note.line_items_data %}
+      <div class="mb-4">
+        <h3 class="font-semibold mb-2">Line Items (Engineering/Drafting Work):</h3>
+        <div class="ml-4 space-y-1">
+          {% for item in equipment_note.line_items_data %}
+          <div>
+            {% if item.item_number %}<strong>{{ item.item_number }}:</strong>{% endif %}
+            {{ item.description }}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      <form method="post" class="mt-4">
+        {% csrf_token %}
+        <div class="flex gap-2">
+          <button type="submit" class="btn btn-primary">Update Timestamp</button>
+          <a href="{% url 'project_notes:job_detail' job.job_number %}" class="btn btn-outline">Back</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

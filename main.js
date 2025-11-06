@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, shell, globalShortcut, ipcMain } = require('electron');
 const { spawn } = require('child_process');
 const path = require('path');
 const net = require('net');
@@ -189,8 +189,8 @@ function createWindow() {
     width: 1200,
     height: 800,
     webPreferences: {
-      nodeIntegration: false,
-      contextIsolation: true,
+      nodeIntegration: true,  // Enable for file path access in desktop app
+      contextIsolation: false, // Disable to allow direct Node.js access
       enableRemoteModule: false,
       webSecurity: false, // Disabled for local development
       allowRunningInsecureContent: true
@@ -231,6 +231,47 @@ function createWindow() {
   });
 }
 
+// Register IPC handlers for file operations (register once at app startup)
+ipcMain.handle('open-file', async (event, filePath) => {
+  try {
+    await shell.openPath(filePath);
+    return { success: true };
+  } catch (error) {
+    console.error('Error opening file:', error);
+    return { success: false, error: error.message };
+  }
+});
+
+ipcMain.handle('open-location', async (event, filePath) => {
+  try {
+    if (process.platform === 'win32') {
+      // Windows: Open Explorer with file selected
+      const { exec } = require('child_process');
+      return new Promise((resolve) => {
+        exec(`explorer /select,"${filePath.replace(/\//g, '\\')}"`, (error) => {
+          if (error) {
+            console.error('Error opening location:', error);
+            resolve({ success: false, error: error.message });
+          } else {
+            resolve({ success: true });
+          }
+        });
+      });
+    } else if (process.platform === 'darwin') {
+      // macOS: Reveal in Finder
+      await shell.openPath(path.dirname(filePath));
+      return { success: true };
+    } else {
+      // Linux: Open file manager
+      await shell.openPath(path.dirname(filePath));
+      return { success: true };
+    }
+  } catch (error) {
+    console.error('Error opening location:', error);
+    return { success: false, error: error.message };
+  }
+});
+
 // Handle app ready
 app.whenReady().then(async () => {
   console.log('Electron app is ready');
@@ -258,6 +299,19 @@ app.whenReady().then(async () => {
     
     createWindow();
     
+    // Register global keyboard shortcuts for history navigation
+    globalShortcut.register('Alt+Left', () => {
+      if (mainWindow && mainWindow.webContents.canGoBack()) {
+        mainWindow.webContents.goBack();
+      }
+    });
+
+    globalShortcut.register('Alt+Right', () => {
+      if (mainWindow && mainWindow.webContents.canGoForward()) {
+        mainWindow.webContents.goForward();
+      }
+    });
+    
   } catch (error) {
     console.error('Error during startup:', error);
     console.log('Trying to create window anyway...');
@@ -273,6 +327,10 @@ app.whenReady().then(async () => {
 
 app.on('window-all-closed', () => {
   console.log('All windows closed');
+  
+  // Unregister all global shortcuts
+  globalShortcut.unregisterAll();
+  
   // Kill Django process when app closes
   if (djangoProcess) {
     console.log('Stopping Django server...');

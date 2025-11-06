@@ -18,17 +18,23 @@
         {% endfor %}
       {% endif %}
 
-      <form method="post" enctype="multipart/form-data">
+      <form method="post" enctype="multipart/form-data" id="komImportForm">
         {% csrf_token %}
+        
+        <input type="hidden" name="file_path" id="file_path" value="" />
         
         <div class="form-control w-full mb-6">
           <label class="label">
             <span class="label-text font-semibold">Select KOM Excel File</span>
           </label>
-          <input type="file" name="kom_file" accept=".xlsx,.xls" class="file-input file-input-bordered w-full" required />
+          <div class="flex gap-2">
+            <input type="file" name="kom_file" id="kom_file" accept=".xlsx,.xls" class="file-input file-input-bordered flex-1" required />
+            <button type="button" onclick="selectFileWithPath()" class="btn btn-outline">Browse...</button>
+          </div>
           <label class="label">
             <span class="label-text-alt">Upload the KOM Excel file (.xlsx or .xls format)</span>
           </label>
+          <div id="selected_file_path" class="text-sm text-base-content/60 mt-2"></div>
         </div>
 
         <div class="card-actions justify-end">
@@ -36,6 +42,64 @@
           <button type="submit" class="btn btn-primary">Import KOM</button>
         </div>
       </form>
+
+      <script>
+        // Try to get file path from file input (works in Electron with nodeIntegration)
+        document.getElementById('kom_file').addEventListener('change', function(e) {
+          const fileInput = e.target;
+          const filePathInput = document.getElementById('file_path');
+          const pathDisplay = document.getElementById('selected_file_path');
+          
+          if (fileInput.files && fileInput.files.length > 0) {
+            const file = fileInput.files[0];
+            
+            // In Electron with nodeIntegration, the file object has a path property
+            if (file.path) {
+              filePathInput.value = file.path;
+              pathDisplay.textContent = 'File: ' + file.path;
+            } else {
+              pathDisplay.textContent = 'File selected (path not available - will use temp file)';
+            }
+          }
+        });
+
+        // Function to use Electron dialog if available
+        function selectFileWithPath() {
+          // Check if we're in Electron
+          if (typeof require !== 'undefined') {
+            try {
+              const { dialog } = require('electron').remote || require('@electron/remote');
+              dialog.showOpenDialog({
+                filters: [
+                  { name: 'Excel Files', extensions: ['xlsx', 'xls'] }
+                ],
+                properties: ['openFile']
+              }).then(result => {
+                if (!result.canceled && result.filePaths && result.filePaths.length > 0) {
+                  const selectedPath = result.filePaths[0];
+                  document.getElementById('file_path').value = selectedPath;
+                  document.getElementById('selected_file_path').textContent = 'File: ' + selectedPath;
+                  
+                  // Also trigger the file input to select the same file
+                  // Note: We can't programmatically set file input value for security,
+                  // but the path is stored and will be used when opening the file
+                  alert('File path captured: ' + selectedPath + '\n\nPlease also select the file using the file input above to upload it for parsing.');
+                }
+              }).catch(err => {
+                console.error('Error opening file dialog:', err);
+                // Fallback to regular file input
+                document.getElementById('kom_file').click();
+              });
+            } catch (err) {
+              console.log('Electron dialog not available, using file input:', err);
+              document.getElementById('kom_file').click();
+            }
+          } else {
+            // Not in Electron, use regular file input
+            document.getElementById('kom_file').click();
+          }
+        }
+      </script>
     </div>
   </div>
 </div>

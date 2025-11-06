@@ -1,0 +1,58 @@
+{% extends "core/base.html" %}
+
+{% block title %}Project Notes - Jobs{% endblock %}
+
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="container mx-auto p-6">
+  <div class="mb-6 flex items-center justify-between">
+    <div>
+      <h1 class="text-3xl font-bold">Project Notes - Jobs</h1>
+      <p class="text-base-content/70">Sorted by Job #, then Customer Name</p>
+    </div>
+    <a href="{% url 'project_notes:job_create' %}" class="btn btn-primary">Create New Job</a>
+  </div>
+
+  <div class="overflow-x-auto bg-base-100 shadow-xl rounded-box">
+    <table class="table w-full">
+      <thead>
+        <tr>
+          <th>Job #</th>
+          <th>Customer Name</th>
+          <th>Project Name</th>
+          <th>Notes Count</th>
+          <th>Equipment Notes</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for job in jobs %}
+        <tr class="hover">
+          <td class="font-bold">{{ job.job_number }}</td>
+          <td>{{ job.customer_name|default:"-" }}</td>
+          <td>{{ job.project_name|default:"-" }}</td>
+          <td>{{ job.notes.count }}</td>
+          <td>{{ job.equipment_notes.count }}</td>
+          <td>
+            <div class="flex gap-2" onclick="event.stopPropagation();">
+              <a href="{% url 'project_notes:job_detail' job.job_number %}" class="btn btn-sm btn-primary" onclick="event.stopPropagation();">View</a>
+              <a href="{% url 'project_notes:job_edit' job.job_number %}" class="btn btn-sm btn-secondary" onclick="event.stopPropagation();">Edit</a>
+              <form method="post" action="{% url 'project_notes:job_delete' job.job_number %}" style="display: inline;" onsubmit="event.stopPropagation(); return confirm('Are you sure you want to delete Job #{{ job.job_number }}? This will also delete all associated notes.');">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-sm btn-error" onclick="event.stopPropagation();">Delete</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="6" class="text-center text-base-content/60 py-8">No jobs found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
+

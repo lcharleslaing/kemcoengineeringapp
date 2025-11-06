@@ -11,5 +11,22 @@
   <body class="min-h-screen bg-base-200 text-base-content">
     {% block content %}{% endblock %}
     {% block extra_body %}{% endblock %}
+    
+    <script>
+      // Auto-dismiss Django messages after 5 seconds
+      document.addEventListener('DOMContentLoaded', function() {
+        const alerts = document.querySelectorAll('.alert');
+        alerts.forEach(function(alert) {
+          // Set a timeout to fade out and remove the alert
+          setTimeout(function() {
+            alert.style.transition = 'opacity 0.5s ease-out';
+            alert.style.opacity = '0';
+            setTimeout(function() {
+              alert.remove();
+            }, 500); // Wait for fade out animation
+          }, 5000); // 5 seconds
+        });
+      });
+    </script>
   </body>
 </html>
