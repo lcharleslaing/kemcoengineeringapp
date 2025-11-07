@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flange Assembly Part Numbers Reference</title>
+    <style>
+        @media print {
+            @page {
+                size: letter;
+                margin: 0.5in;
+            }
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            .no-print {
+                display: none;
+            }
+            table {
+                page-break-inside: avoid;
+            }
+            h2 {
+                page-break-after: avoid;
+            }
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            border-bottom: 2px solid #95a5a6;
+            padding-bottom: 5px;
+        }
+        
+        h3 {
+            color: #7f8c8d;
+            margin-top: 20px;
+        }
+        
+        h4 {
+            color: #95a5a6;
+            margin-top: 15px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 11px;
+        }
+        
+        th {
+            background-color: #3498db;
+            color: white;
+            padding: 10px;
+            text-align: left;
+            font-weight: bold;
+        }
+        
+        td {
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .warning {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        
+        .warning::before {
+            content: "⚠️ ";
+            font-weight: bold;
+        }
+        
+        .info-box {
+            background-color: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .error-box {
+            background-color: #ffebee;
+            border-left: 4px solid #f44336;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .component-section {
+            background-color: #f0f8ff;
+            border-left: 4px solid #5dade2;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .material-section {
+            background-color: #f5f5f5;
+            border-left: 4px solid #9e9e9e;
+            padding: 10px;
+            margin: 15px 0;
+        }
+        
+        .print-button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 20px 0;
+        }
+        
+        .print-button:hover {
+            background-color: #2980b9;
+        }
+        
+        .issue-marker {
+            color: #f44336;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="no-print">
+        <button class="print-button" onclick="window.print()">🖨️ Print This Document</button>
+        <p><strong>Tip:</strong> Use Ctrl+P (or Cmd+P on Mac) to print. The document is optimized for Letter size paper.</p>
+    </div>
+
+    <h1>Flange Assembly Part Numbers Reference</h1>
+    
+    <div class="info-box">
+        <strong>Overview:</strong> This document lists all part number assignments for multiple components in a flange assembly based on:
+        <ul>
+            <li>Flange Size (1.5", 2", 2.5", 3", 4", 6", 8", 10", 12")</li>
+            <li>Material: SS304 or SS316</li>
+            <li>SS316_FLANGES flag (True/False) - for SS316 only</li>
+        </ul>
+        <p><strong>Components:</strong></p>
+        <ol>
+            <li>Flange 150lb-02:1</li>
+            <li>PIPE SS304 S-5 22.5 DEG.:1</li>
+            <li>PIPE SS304 S-5 22.5 AND 45 DEG.:1</li>
+            <li>RFSO FLANGE 150LB:1</li>
+        </ol>
+    </div>
+
+    <div class="error-box">
+        <strong>⚠️ Critical Issues Found in Code:</strong>
+        <ol>
+            <li><strong>SS316 Descriptions Still Say "SS304"</strong>: When MATERIAL = "SS316", many descriptions incorrectly say "SS304" instead of "SS316"</li>
+            <li><strong>Missing Part Numbers</strong>: SS316, 12" size has "XXX" placeholders for Flange 150lb-02:1 and PIPE components</li>
+            <li><strong>PIPE Components</strong>: Use same part numbers regardless of SS316_FLANGES flag (only MATERIAL matters)</li>
+        </ol>
+    </div>
+
+    <h2>Part Number Tables by Component</h2>
+
+    <div class="component-section">
+        <h3>Component 1: Flange 150lb-02:1</h3>
+        
+        <div class="material-section">
+            <h4>SS304 Material</h4>
+            <table>
+                <tr><th>Size</th><th>Part Number</th><th>Description</th></tr>
+                <tr><td>1.5"</td><td>800-08-009</td><td>FLANGE, SS304, 1/2" PLT., 1-1/2"</td></tr>
+                <tr><td>2"</td><td>800-08-007</td><td>FLANGE, SS304, 1/2" PLT., 2"</td></tr>
+                <tr><td>2.5"</td><td>800-08-008</td><td>FLANGE, SS304, 1/2" PLT., 2-1/2"</td></tr>
+                <tr><td>3"</td><td>800-08-001</td><td>FLANGE, SS304, 1/2" PLT., 3"</td></tr>
+                <tr><td>4"</td><td>800-08-002</td><td>FLANGE, SS304, 1/2" PLT., 4"</td></tr>
+                <tr><td>6"</td><td>800-08-004</td><td>FLANGE, SS304, 1/2" PLT., 6"</td></tr>
+                <tr><td>8"</td><td>800-08-005</td><td>FLANGE, SS304, 1/2" PLT., 8"</td></tr>
+                <tr><td>10"</td><td>800-08-006</td><td>FLANGE, SS304, 1/2" PLT., 10"</td></tr>
+                <tr><td>12"</td><td>800-08-014</td><td>FLANGE, SS304, 1/2" PLT., 12"</td></tr>
+            </table>
+        </div>
+
+        <div class="material-section">
+            <h4>SS316 Material (SS316_FLANGES = False)</h4>
+            <div class="warning">⚠️ Part numbers are IDENTICAL to SS304, but descriptions are wrong (say "SS304" instead of "SS316")</div>
+            <table>
+                <tr><th>Size</th><th>Part Number</th><th>Description</th><th>Issue</th></tr>
+                <tr><td>1.5"</td><td>800-08-009</td><td>FLANGE, SS304, 1/2" PLT., 1-1/2"</td><td class="issue-marker">Should say SS316</td></tr>
+                <tr><td>2"</td><td>800-08-007</td><td>FLANGE, SS304, 1/2" PLT., 2"</td><td class="issue-marker">Should say SS316</td></tr>
+                <tr><td>2.5"</td><td>800-08-008</td><td>FLANGE, SS304, 1/2" PLT., 2-1/2"</td><td class="issue-marker">Should say SS316</td></tr>
+                <tr><td>3"</td><td>800-08-001</td><td>FLANGE, SS304, 1/2" PLT., 3"</td><td class="issue-marker">Should say SS316</td></tr>
+                <tr><td>4"</td><td>800-08-002</td><td>FLANGE, SS304, 1/2" PLT., 4"</td><td class="issue-marker">Should say SS316</td></tr>
+                <tr><td>6"</td><td>800-08-004</td><td>FLANGE, SS304, 1/2" PLT., 6"</td><td class="issue-marker">Should say SS316</td></tr>
+                <tr><td>8"</td><td>800-08-005</td><td>FLANGE, SS304, 1/2" PLT., 8"</td><td class="issue-marker">Should say SS316</td></tr>
+                <tr><td>10"</td><td>800-08-006</td><td>FLANGE, SS304, 1/2" PLT., 10"</td><td class="issue-marker">Should say SS316</td></tr>
+                <tr><td>12"</td><td>800-08-014</td><td>FLANGE, SS304, 1/2" PLT., 12"</td><td class="issue-marker">Should say SS316</td></tr>
+            </table>
+        </div>
+
+        <div class="material-section">
+            <h4>SS316 Material (SS316_FLANGES = True)</h4>
+            <table>
+                <tr><th>Size</th><th>Part Number</th><th>Description</th></tr>
+                <tr><td>1.5"</td><td>800-08-029</td><td>FLANGE, SS316, 1/2" PLT., 1-1/2"</td></tr>
+                <tr><td>2"</td><td>800-08-020</td><td>FLANGE, SS316, 1/2" PLT., 2"</td></tr>
+                <tr><td>2.5"</td><td>800-01-036</td><td>FLANGE, SS316, 1/2" PLT., 2-1/2"</td></tr>
+                <tr><td>3"</td><td>800-08-034</td><td>FLANGE, SS316, 1/2" PLT., 3"</td></tr>
+                <tr><td>4"</td><td>800-01-035</td><td>FLANGE, SS316, 1/2" PLT., 4"</td></tr>
+                <tr><td>6"</td><td>800-08-022</td><td>FLANGE, SS316, 1/2" PLT., 6"</td></tr>
+                <tr><td>8"</td><td>800-08-024</td><td>FLANGE, SS316, 1/2" PLT., 8"</td></tr>
+                <tr><td>10"</td><td>800-08-034</td><td>FLANGE, SS316, 1/2" PLT., 10"</td></tr>
+                <tr><td>12"</td><td class="issue-marker">800-08-XXX</td><td>FLANGE, SS316, 1/2" PLT., 12"</td><td class="issue-marker">Missing part number</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="component-section">
+        <h3>Components 2 & 3: PIPE SS304 S-5 22.5 DEG.:1 & PIPE SS304 S-5 22.5 AND 45 DEG.:1</h3>
+        <div class="info-box">
+            <strong>Note:</strong> Both pipe components use the SAME part numbers. PIPE components use same part numbers regardless of SS316_FLANGES flag (only MATERIAL matters).
+        </div>
+        
+        <div class="material-section">
+            <h4>SS304 Material</h4>
+            <table>
+                <tr><th>Size</th><th>Part Number</th><th>Used By Both Components</th></tr>
+                <tr><td>1.5"</td><td>910-01-083</td><td>PIPE SS304 S-5 22.5 DEG.:1 & PIPE SS304 S-5 22.5 AND 45 DEG.:1</td></tr>
+                <tr><td>2"</td><td>910-01-082</td><td>PIPE SS304 S-5 22.5 DEG.:1 & PIPE SS304 S-5 22.5 AND 45 DEG.:1</td></tr>
+                <tr><td>2.5"</td><td>910-01-101</td><td>PIPE SS304 S-5 22.5 DEG.:1 & PIPE SS304 S-5 22.5 AND 45 DEG.:1</td></tr>
+                <tr><td>3"</td><td>910-01-111</td><td>PIPE SS304 S-5 22.5 DEG.:1 & PIPE SS304 S-5 22.5 AND 45 DEG.:1</td></tr>
+                <tr><td>4"</td><td>910-01-081</td><td>PIPE SS304 S-5 22.5 DEG.:1 & PIPE SS304 S-5 22.5 AND 45 DEG.:1</td></tr>
+                <tr><td>6"</td><td>910-01-079</td><td>PIPE SS304 S-5 22.5 DEG.:1 & PIPE SS304 S-5 22.5 AND 45 DEG.:1</td></tr>
+                <tr><td>8"</td><td>910-01-080</td><td>PIPE SS304 S-5 22.5 DEG.:1 & PIPE SS304 S-5 22.5 AND 45 DEG.:1</td></tr>
+                <tr><td>10"</td><td>910-01-076</td><td>PIPE SS304 S-5 22.5 DEG.:1 & PIPE SS304 S-5 22.5 AND 45 DEG.:1</td></tr>
+                <tr><td>12"</td><td>910-01-120</td><td>PIPE SS304 S-5 22.5 DEG.:1 & PIPE SS304 S-5 22.5 AND 45 DEG.:1</td></tr>
+            </table>
+        </div>
+
+        <div class="material-section">
+            <h4>SS316 Material (Both SS316_FLANGES = False and True)</h4>
+            <table>
+                <tr><th>Size</th><th>Part Number</th><th>Used By Both Components</th></tr>
+                <tr><td>1.5"</td><td>910-03-042</td><td>PIPE SS304 S-5 22.5 DEG.:1 & PIPE SS304 S-5 22.5 AND 45 DEG.:1</td></tr>
+                <tr><td>2"</td><td>910-03-043</td><td>PIPE SS304 S-5 22.5 DEG.:1 & PIPE SS304 S-5 22.5 AND 45 DEG.:1</td></tr>
+                <tr><td>2.5"</td><td>910-03-031</td><td>PIPE SS304 S-5 22.5 DEG.:1 & PIPE SS304 S-5 22.5 AND 45 DEG.:1</td></tr>
+                <tr><td>3"</td><td>910-03-046</td><td>PIPE SS304 S-5 22.5 DEG.:1 & PIPE SS304 S-5 22.5 AND 45 DEG.:1</td></tr>
+                <tr><td>4"</td><td>910-03-051</td><td>PIPE SS304 S-5 22.5 DEG.:1 & PIPE SS304 S-5 22.5 AND 45 DEG.:1</td></tr>
+                <tr><td>6"</td><td>910-03-038</td><td>PIPE SS304 S-5 22.5 DEG.:1 & PIPE SS304 S-5 22.5 AND 45 DEG.:1</td></tr>
+                <tr><td>8"</td><td>910-03-050</td><td>PIPE SS304 S-5 22.5 DEG.:1 & PIPE SS304 S-5 22.5 AND 45 DEG.:1</td></tr>
+                <tr><td>10"</td><td>910-03-036</td><td>PIPE SS304 S-5 22.5 DEG.:1 & PIPE SS304 S-5 22.5 AND 45 DEG.:1</td></tr>
+                <tr><td>12"</td><td class="issue-marker">910-03-XXX</td><td>PIPE SS304 S-5 22.5 DEG.:1 & PIPE SS304 S-5 22.5 AND 45 DEG.:1</td><td class="issue-marker">Missing part number</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="component-section">
+        <h3>Component 4: RFSO FLANGE 150LB:1</h3>
+        
+        <div class="material-section">
+            <h4>SS304 Material</h4>
+            <table>
+                <tr><th>Size</th><th>Part Number</th><th>Description</th></tr>
+                <tr><td>1.5"</td><td>800-02-010</td><td>FLANGE, SS304, RFSO, 1-1/2"</td></tr>
+                <tr><td>2"</td><td>800-02-007</td><td>FLANGE, SS304, RFSO, 2"</td></tr>
+                <tr><td>2.5"</td><td>800-02-016</td><td>FLANGE, SS304, RFSO, 2-1/2"</td></tr>
+                <tr><td>3"</td><td>800-02-001</td><td>FLANGE, SS304, RFSO, 3"</td></tr>
+                <tr><td>4"</td><td>800-02-002</td><td>FLANGE, SS304, RFSO, 4"</td></tr>
+                <tr><td>6"</td><td>800-02-004</td><td>FLANGE, SS304, RFSO, 6"</td></tr>
+                <tr><td>8"</td><td>800-02-011</td><td>FLANGE, SS304, RFSO, 8"</td></tr>
+                <tr><td>10"</td><td>800-02-017</td><td>FLANGE, SS304, RFSO, 10"</td></tr>
+                <tr><td>12"</td><td>800-02-013</td><td>FLANGE, SS304, RFSO, 12"</td></tr>
+            </table>
+        </div>
+
+        <div class="material-section">
+            <h4>SS316 Material (SS316_FLANGES = False)</h4>
+            <div class="warning">⚠️ Part numbers are IDENTICAL to SS304, but descriptions are wrong (say "SS304" instead of "SS316")</div>
+            <table>
+                <tr><th>Size</th><th>Part Number</th><th>Description</th><th>Issue</th></tr>
+                <tr><td>1.5"</td><td>800-02-010</td><td>FLANGE, SS304, RFSO, 1-1/2"</td><td class="issue-marker">Should say SS316</td></tr>
+                <tr><td>2"</td><td>800-02-007</td><td>FLANGE, SS304, RFSO, 2"</td><td class="issue-marker">Should say SS316</td></tr>
+                <tr><td>2.5"</td><td>800-02-016</td><td>FLANGE, SS304, RFSO, 2-1/2"</td><td class="issue-marker">Should say SS316</td></tr>
+                <tr><td>3"</td><td>800-02-001</td><td>FLANGE, SS304, RFSO, 3"</td><td class="issue-marker">Should say SS316</td></tr>
+                <tr><td>4"</td><td>800-02-002</td><td>FLANGE, SS304, RFSO, 4"</td><td class="issue-marker">Should say SS316</td></tr>
+                <tr><td>6"</td><td>800-02-004</td><td>FLANGE, SS304, RFSO, 6"</td><td class="issue-marker">Should say SS316</td></tr>
+                <tr><td>8"</td><td>800-02-011</td><td>FLANGE, SS304, RFSO, 8"</td><td class="issue-marker">Should say SS316</td></tr>
+                <tr><td>10"</td><td>800-02-017</td><td>FLANGE, SS304, RFSO, 10"</td><td class="issue-marker">Should say SS316</td></tr>
+                <tr><td>12"</td><td>800-02-013</td><td>FLANGE, SS304, RFSO, 12"</td><td class="issue-marker">Should say SS316</td></tr>
+            </table>
+        </div>
+
+        <div class="material-section">
+            <h4>SS316 Material (SS316_FLANGES = True)</h4>
+            <div class="warning">⚠️ Part numbers are IDENTICAL to SS304, but descriptions are wrong (say "SS304" instead of "SS316")</div>
+            <table>
+                <tr><th>Size</th><th>Part Number</th><th>Description</th><th>Issue</th></tr>
+                <tr><td>1.5"</td><td>800-02-010</td><td>FLANGE, SS304, RFSO, 1-1/2"</td><td class="issue-marker">Should say SS316</td></tr>
+                <tr><td>2"</td><td>800-02-007</td><td>FLANGE, SS304, RFSO, 2"</td><td class="issue-marker">Should say SS316</td></tr>
+                <tr><td>2.5"</td><td>800-02-016</td><td>FLANGE, SS304, RFSO, 2-1/2"</td><td class="issue-marker">Should say SS316</td></tr>
+                <tr><td>3"</td><td>800-02-001</td><td>FLANGE, SS304, RFSO, 3"</td><td class="issue-marker">Should say SS316</td></tr>
+                <tr><td>4"</td><td>800-02-002</td><td>FLANGE, SS304, RFSO, 4"</td><td class="issue-marker">Should say SS316</td></tr>
+                <tr><td>6"</td><td>800-02-004</td><td>FLANGE, SS304, RFSO, 6"</td><td class="issue-marker">Should say SS316</td></tr>
+                <tr><td>8"</td><td>800-02-011</td><td>FLANGE, SS304, RFSO, 8"</td><td class="issue-marker">Should say SS316</td></tr>
+                <tr><td>10"</td><td>800-02-017</td><td>FLANGE, SS304, RFSO, 10"</td><td class="issue-marker">Should say SS316</td></tr>
+                <tr><td>12"</td><td>800-02-013</td><td>FLANGE, SS304, RFSO, 12"</td><td class="issue-marker">Should say SS316</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <h2>Complete Assembly Reference by Size</h2>
+
+    <h3>1.5" Flange Size</h3>
+    <table>
+        <tr><th>Material/Flag</th><th>Flange 150lb-02:1</th><th>PIPE 22.5 DEG.</th><th>PIPE 22.5 & 45 DEG.</th><th>RFSO FLANGE</th></tr>
+        <tr><td>SS304</td><td>800-08-009</td><td>910-01-083</td><td>910-01-083</td><td>800-02-010</td></tr>
+        <tr><td>SS316 (False)</td><td>800-08-009 ⚠️</td><td>910-03-042</td><td>910-03-042</td><td>800-02-010 ⚠️</td></tr>
+        <tr><td>SS316 (True)</td><td>800-08-029</td><td>910-03-042</td><td>910-03-042</td><td>800-02-010 ⚠️</td></tr>
+    </table>
+
+    <h3>2" Flange Size</h3>
+    <table>
+        <tr><th>Material/Flag</th><th>Flange 150lb-02:1</th><th>PIPE 22.5 DEG.</th><th>PIPE 22.5 & 45 DEG.</th><th>RFSO FLANGE</th></tr>
+        <tr><td>SS304</td><td>800-08-007</td><td>910-01-082</td><td>910-01-082</td><td>800-02-007</td></tr>
+        <tr><td>SS316 (False)</td><td>800-08-007 ⚠️</td><td>910-03-043</td><td>910-03-043</td><td>800-02-007 ⚠️</td></tr>
+        <tr><td>SS316 (True)</td><td>800-08-020</td><td>910-03-043</td><td>910-03-043</td><td>800-02-007 ⚠️</td></tr>
+    </table>
+
+    <h3>2.5" Flange Size</h3>
+    <table>
+        <tr><th>Material/Flag</th><th>Flange 150lb-02:1</th><th>PIPE 22.5 DEG.</th><th>PIPE 22.5 & 45 DEG.</th><th>RFSO FLANGE</th></tr>
+        <tr><td>SS304</td><td>800-08-008</td><td>910-01-101</td><td>910-01-101</td><td>800-02-016</td></tr>
+        <tr><td>SS316 (False)</td><td>800-08-008 ⚠️</td><td>910-03-031</td><td>910-03-031</td><td>800-02-016 ⚠️</td></tr>
+        <tr><td>SS316 (True)</td><td>800-01-036</td><td>910-03-031</td><td>910-03-031</td><td>800-02-016 ⚠️</td></tr>
+    </table>
+
+    <h3>3" Flange Size</h3>
+    <table>
+        <tr><th>Material/Flag</th><th>Flange 150lb-02:1</th><th>PIPE 22.5 DEG.</th><th>PIPE 22.5 & 45 DEG.</th><th>RFSO FLANGE</th></tr>
+        <tr><td>SS304</td><td>800-08-001</td><td>910-01-111</td><td>910-01-111</td><td>800-02-001</td></tr>
+        <tr><td>SS316 (False)</td><td>800-08-001 ⚠️</td><td>910-03-046</td><td>910-03-046</td><td>800-02-001 ⚠️</td></tr>
+        <tr><td>SS316 (True)</td><td>800-08-034</td><td>910-03-046</td><td>910-03-046</td><td>800-02-001 ⚠️</td></tr>
+    </table>
+
+    <h3>4" Flange Size</h3>
+    <table>
+        <tr><th>Material/Flag</th><th>Flange 150lb-02:1</th><th>PIPE 22.5 DEG.</th><th>PIPE 22.5 & 45 DEG.</th><th>RFSO FLANGE</th></tr>
+        <tr><td>SS304</td><td>800-08-002</td><td>910-01-081</td><td>910-01-081</td><td>800-02-002</td></tr>
+        <tr><td>SS316 (False)</td><td>800-08-002 ⚠️</td><td>910-03-051</td><td>910-03-051</td><td>800-02-002 ⚠️</td></tr>
+        <tr><td>SS316 (True)</td><td>800-01-035</td><td>910-03-051</td><td>910-03-051</td><td>800-02-002 ⚠️</td></tr>
+    </table>
+
+    <h3>6" Flange Size</h3>
+    <table>
+        <tr><th>Material/Flag</th><th>Flange 150lb-02:1</th><th>PIPE 22.5 DEG.</th><th>PIPE 22.5 & 45 DEG.</th><th>RFSO FLANGE</th></tr>
+        <tr><td>SS304</td><td>800-08-004</td><td>910-01-079</td><td>910-01-079</td><td>800-02-004</td></tr>
+        <tr><td>SS316 (False)</td><td>800-08-004 ⚠️</td><td>910-03-038</td><td>910-03-038</td><td>800-02-004 ⚠️</td></tr>
+        <tr><td>SS316 (True)</td><td>800-08-022</td><td>910-03-038</td><td>910-03-038</td><td>800-02-004 ⚠️</td></tr>
+    </table>
+
+    <h3>8" Flange Size</h3>
+    <table>
+        <tr><th>Material/Flag</th><th>Flange 150lb-02:1</th><th>PIPE 22.5 DEG.</th><th>PIPE 22.5 & 45 DEG.</th><th>RFSO FLANGE</th></tr>
+        <tr><td>SS304</td><td>800-08-005</td><td>910-01-080</td><td>910-01-080</td><td>800-02-011</td></tr>
+        <tr><td>SS316 (False)</td><td>800-08-005 ⚠️</td><td>910-03-050</td><td>910-03-050</td><td>800-02-011 ⚠️</td></tr>
+        <tr><td>SS316 (True)</td><td>800-08-024</td><td>910-03-050</td><td>910-03-050</td><td>800-02-011 ⚠️</td></tr>
+    </table>
+
+    <h3>10" Flange Size</h3>
+    <table>
+        <tr><th>Material/Flag</th><th>Flange 150lb-02:1</th><th>PIPE 22.5 DEG.</th><th>PIPE 22.5 & 45 DEG.</th><th>RFSO FLANGE</th></tr>
+        <tr><td>SS304</td><td>800-08-006</td><td>910-01-076</td><td>910-01-076</td><td>800-02-017</td></tr>
+        <tr><td>SS316 (False)</td><td>800-08-006 ⚠️</td><td>910-03-036</td><td>910-03-036</td><td>800-02-017 ⚠️</td></tr>
+        <tr><td>SS316 (True)</td><td>800-08-034</td><td>910-03-036</td><td>910-03-036</td><td>800-02-017 ⚠️</td></tr>
+    </table>
+
+    <h3>12" Flange Size</h3>
+    <table>
+        <tr><th>Material/Flag</th><th>Flange 150lb-02:1</th><th>PIPE 22.5 DEG.</th><th>PIPE 22.5 & 45 DEG.</th><th>RFSO FLANGE</th></tr>
+        <tr><td>SS304</td><td>800-08-014</td><td>910-01-120</td><td>910-01-120</td><td>800-02-013</td></tr>
+        <tr><td>SS316 (False)</td><td>800-08-014 ⚠️</td><td class="issue-marker">910-03-XXX</td><td class="issue-marker">910-03-XXX</td><td>800-02-013 ⚠️</td></tr>
+        <tr><td>SS316 (True)</td><td class="issue-marker">800-08-XXX</td><td class="issue-marker">910-03-XXX</td><td class="issue-marker">910-03-XXX</td><td>800-02-013 ⚠️</td></tr>
+    </table>
+    <div class="warning">⚠️ 12" SS316 has missing part numbers (XXX placeholders)</div>
+
+    <h2>Decision Tree</h2>
+    <div class="info-box" style="font-family: 'Courier New', monospace; font-size: 13px; line-height: 1.8;">
+        <pre>
+Is MATERIAL = "SS304"?
+├─ YES → Use SS304 part numbers for all components
+│
+└─ NO (SS316)
+   ├─ Is SS316_FLANGES = True?
+   │  ├─ YES → Use SS316_FLANGES = True part numbers
+   │  │        (Different Flange 150lb-02:1 part numbers)
+   │  │        (Same PIPE and RFSO part numbers as SS316_FLANGES = False)
+   │  └─ NO → Use SS316_FLANGES = False part numbers
+   │           (Same Flange 150lb-02:1 part numbers as SS304)
+   │           (Different PIPE part numbers from SS304)
+   │           (Same RFSO part numbers as SS304)
+        </pre>
+    </div>
+
+    <h2>Summary of Issues</h2>
+    <div class="error-box">
+        <ol>
+            <li><strong>Description Errors</strong>: When MATERIAL = "SS316", descriptions incorrectly say "SS304" in:
+                <ul>
+                    <li>Flange 150lb-02:1 (for SS316_FLANGES = False only)</li>
+                    <li>RFSO FLANGE 150LB:1 (for both SS316_FLANGES = False and True)</li>
+                </ul>
+            </li>
+            <li><strong>Missing Part Numbers</strong>: 
+                <ul>
+                    <li>SS316, 12" size, SS316_FLANGES = True: Flange 150lb-02:1 = "800-08-XXX"</li>
+                    <li>SS316, 12" size: PIPE components = "910-03-XXX" (both SS316_FLANGES flags)</li>
+                </ul>
+            </li>
+            <li><strong>Duplicate Part Numbers</strong>: 
+                <ul>
+                    <li>Flange 150lb-02:1 uses same part numbers for SS304 and SS316 (SS316_FLANGES = False)</li>
+                    <li>RFSO FLANGE 150LB:1 uses same part numbers for SS304 and SS316 (both flags)</li>
+                </ul>
+            </li>
+            <li><strong>PIPE Components</strong>: Use same part numbers regardless of SS316_FLANGES flag (only MATERIAL matters)</li>
+        </ol>
+    </div>
+
+    <div style="margin-top: 40px; padding-top: 20px; border-top: 2px solid #ddd; text-align: center; color: #7f8c8d; font-size: 12px;">
+        <p>Document generated from iLogic VBA code analysis</p>
+        <p>Print Date: <span id="printDate"></span></p>
+    </div>
+
+    <script>
+        document.getElementById('printDate').textContent = new Date().toLocaleDateString('en-US', { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+    </script>
+</body>
+</html>
+

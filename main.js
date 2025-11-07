@@ -67,8 +67,22 @@ function cleanupDjangoPort() {
       }
     } else {
       // Linux/Mac: Use standard Unix commands
-      execSync('pkill -9 -f "manage.py runserver" 2>/dev/null || true', { stdio: 'ignore' });
-      execSync(`fuser -k ${DJANGO_PORT}/tcp 2>/dev/null || true`, { stdio: 'ignore' });
+      try {
+        execSync('pkill -9 -f "manage.py runserver" 2>/dev/null || true', { stdio: 'ignore' });
+      } catch (e) {
+        // Ignore if pkill fails
+      }
+      try {
+        execSync(`fuser -k ${DJANGO_PORT}/tcp 2>/dev/null || true`, { stdio: 'ignore' });
+      } catch (e) {
+        // fuser might not be available, try lsof instead
+        try {
+          const { exec } = require('child_process');
+          exec(`lsof -ti:${DJANGO_PORT} | xargs kill -9 2>/dev/null || true`, { stdio: 'ignore' });
+        } catch (e2) {
+          // Ignore all errors
+        }
+      }
     }
   } catch (e) {
     // Ignore all cleanup errors - they're not critical
@@ -205,9 +219,30 @@ function createWindow() {
     show: true // Show immediately
   });
 
-  // Load the Django app
-  console.log(`Loading Django app at http://127.0.0.1:${DJANGO_PORT}`);
-  mainWindow.loadURL(`http://127.0.0.1:${DJANGO_PORT}`);
+  // Load the Django app - wait for server to be ready first
+  async function loadDjangoApp() {
+    const maxRetries = 15;
+    let retries = 0;
+    
+    while (retries < maxRetries) {
+      const isRunning = await checkDjangoServer(DJANGO_PORT);
+      if (isRunning) {
+        console.log(`Loading Django app at http://127.0.0.1:${DJANGO_PORT}`);
+        mainWindow.loadURL(`http://127.0.0.1:${DJANGO_PORT}`);
+        return;
+      }
+      
+      retries++;
+      console.log(`Waiting for Django server on port ${DJANGO_PORT}... (attempt ${retries}/${maxRetries})`);
+      await new Promise(resolve => setTimeout(resolve, 1000));
+    }
+    
+    // If server never became ready, show loading page
+    console.log('Django server not ready after retries, showing loading page...');
+    mainWindow.loadFile(path.join(__dirname, 'loading.html'));
+  }
+  
+  loadDjangoApp();
 
   // Show window when ready (backup in case it was hidden)
   mainWindow.once('ready-to-show', () => {
@@ -234,17 +269,47 @@ function createWindow() {
     mainWindow = null;
   });
 
-  // Handle page load failures
-  mainWindow.webContents.on('did-fail-load', (event, errorCode, errorDescription) => {
-    console.log(`Page load failed: ${errorCode} - ${errorDescription}`);
-    console.log('Loading fallback page...');
-    mainWindow.loadFile(path.join(__dirname, 'loading.html'));
+  // Handle page load failures with retry logic to prevent infinite loop
+  let failLoadCount = 0;
+  const maxFailLoadRetries = 3;
+  let isRetrying = false;
+  
+  mainWindow.webContents.on('did-fail-load', (event, errorCode, errorDescription, validatedURL, isMainFrame) => {
+    if (!isMainFrame) return; // Only handle main frame failures
+    
+    failLoadCount++;
+    console.log(`Page load failed: ${errorCode} - ${errorDescription} (attempt ${failLoadCount})`);
+    
+    if (failLoadCount < maxFailLoadRetries && !isRetrying) {
+      isRetrying = true;
+      // Retry loading after a short delay
+      setTimeout(async () => {
+        console.log(`Retrying load... (${failLoadCount}/${maxFailLoadRetries})`);
+        const isRunning = await checkDjangoServer(DJANGO_PORT);
+        if (isRunning) {
+          mainWindow.loadURL(`http://127.0.0.1:${DJANGO_PORT}`);
+        } else {
+          console.log('Django server not running, showing loading page...');
+          mainWindow.loadFile(path.join(__dirname, 'loading.html'));
+        }
+        isRetrying = false;
+      }, 2000);
+    } else if (failLoadCount >= maxFailLoadRetries) {
+      // Too many failures, show loading page and reset
+      console.log('Too many load failures, showing loading page...');
+      mainWindow.loadFile(path.join(__dirname, 'loading.html'));
+      failLoadCount = 0; // Reset counter
+      isRetrying = false;
+    }
   });
-
-  // Log navigation events
+  
+  // Reset fail count on successful load
   mainWindow.webContents.on('did-finish-load', () => {
+    failLoadCount = 0;
+    isRetrying = false;
     console.log('Page loaded successfully');
   });
+
 }
 
 // Register IPC handlers for file operations (register once at app startup)
@@ -285,13 +350,29 @@ ipcMain.handle('open-location', async (event, filePath) => {
       await shell.openPath(path.dirname(filePath));
       return { success: true };
     } else {
-      // Linux: Open file manager
-      await shell.openPath(path.dirname(filePath));
-      return { success: true };
+      // Linux: Open file manager (xdg-open works on most Linux distributions including ZorinOS)
+      const { exec } = require('child_process');
+      const directory = path.dirname(filePath);
+      
+      return new Promise((resolve) => {
+        // Try xdg-open first (standard on most Linux distros)
+        exec(`xdg-open "${directory}"`, (error, stdout, stderr) => {
+          if (error) {
+            // Fallback to shell.openPath if xdg-open fails
+            shell.openPath(directory).then(() => {
+              resolve({ success: true });
+            }).catch(() => {
+              resolve({ success: true }); // Return success anyway
+            });
+          } else {
+            resolve({ success: true });
+          }
+        });
+      });
     }
   } catch (error) {
     console.error('Error opening location:', error);
-    // Even on error, explorer usually opens, so return success
+    // Even on error, file manager usually opens, so return success
     return { success: true };
   }
 });

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overflow Fitting Assembly Part Numbers Reference</title>
+    <style>
+        @media print {
+            @page {
+                size: letter;
+                margin: 0.5in;
+            }
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            .no-print {
+                display: none;
+            }
+            table {
+                page-break-inside: avoid;
+            }
+            h2 {
+                page-break-after: avoid;
+            }
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            border-bottom: 2px solid #95a5a6;
+            padding-bottom: 5px;
+        }
+        
+        h3 {
+            color: #7f8c8d;
+            margin-top: 20px;
+        }
+        
+        h4 {
+            color: #95a5a6;
+            margin-top: 15px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 12px;
+        }
+        
+        th {
+            background-color: #3498db;
+            color: white;
+            padding: 10px;
+            text-align: left;
+            font-weight: bold;
+        }
+        
+        td {
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .info-box {
+            background-color: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .decision-tree {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+        
+        .print-button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 20px 0;
+        }
+        
+        .print-button:hover {
+            background-color: #2980b9;
+        }
+        
+        .material-section {
+            background-color: #f0f8ff;
+            border-left: 4px solid #5dade2;
+            padding: 10px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="no-print">
+        <button class="print-button" onclick="window.print()">🖨️ Print This Document</button>
+        <p><strong>Tip:</strong> Use Ctrl+P (or Cmd+P on Mac) to print. The document is optimized for Letter size paper.</p>
+    </div>
+
+    <h1>Overflow Fitting Assembly Part Numbers Reference</h1>
+    
+    <div class="info-box">
+        <strong>Overview:</strong> This document lists all part number assignments for Overflow Fitting Assembly:1 based on:
+        <ul>
+            <li>Flange Size (2", 2.5", 3", 4", 6", 8", 10", 12")</li>
+            <li>Material: SS304 or SS316</li>
+            <li>Overflow Type: "Short tank overflow" or "Standard tank overflow"</li>
+            <li>SS316_FLANGES flag (True/False) - for SS316 only</li>
+            <li>Food Grade (currently commented out in code)</li>
+        </ul>
+    </div>
+
+    <h2>Part Number Logic Summary</h2>
+    
+    <h3>SS304 - Short Tank Overflow (Non-Food Grade)</h3>
+    <table>
+        <tr><th>Size</th><th>Part Number</th><th>Description</th></tr>
+        <tr><td>2"</td><td><strong>1023429-2</strong></td><td>2" SS304</td></tr>
+        <tr><td>2.5"</td><td><strong>1023429-5</strong></td><td>2-1/2" SS304</td></tr>
+        <tr><td>3"</td><td><strong>1023429-3</strong></td><td>3" SS304</td></tr>
+        <tr><td>4"</td><td><strong>1023429-4</strong></td><td>4" SS304</td></tr>
+        <tr><td>6"</td><td><strong>1023429-6</strong></td><td>6" SS304</td></tr>
+        <tr><td>8"</td><td><strong>1023429-8</strong></td><td>8" SS304</td></tr>
+        <tr><td>10"</td><td><strong>1023429-10</strong></td><td>10" SS304</td></tr>
+        <tr><td>12"</td><td><strong>1023429-12</strong></td><td>12" SS304</td></tr>
+    </table>
+
+    <h3>SS304 - Standard Tank Overflow (Non-Food Grade)</h3>
+    <table>
+        <tr><th>Size</th><th>Part Number</th><th>Description</th></tr>
+        <tr><td>2"</td><td><strong>1025543-01</strong></td><td>2" SS304</td></tr>
+        <tr><td>2.5"</td><td><strong>1025543-02</strong></td><td>2-1/2" SS304</td></tr>
+        <tr><td>3"</td><td><strong>1025543-03</strong></td><td>3" SS304</td></tr>
+        <tr><td>4"</td><td><strong>1025543-04</strong></td><td>4" SS304</td></tr>
+        <tr><td>6"</td><td><strong>1025543-06</strong></td><td>6" SS304</td></tr>
+        <tr><td>8"</td><td><strong>1025543-08</strong></td><td>8" SS304</td></tr>
+        <tr><td>10"</td><td><strong>1025543-10</strong></td><td>10" SS304</td></tr>
+        <tr><td>12"</td><td><strong>1025543-12</strong></td><td>12" SS304</td></tr>
+    </table>
+
+    <h3>SS316 - Short Tank Overflow (SS316_FLANGES = False)</h3>
+    <table>
+        <tr><th>Size</th><th>Part Number</th><th>Description</th></tr>
+        <tr><td>2"</td><td><strong>1036402-2</strong></td><td>2" SS316</td></tr>
+        <tr><td>2.5"</td><td><strong>1036402-5</strong></td><td>2-1/2" SS316</td></tr>
+        <tr><td>3"</td><td><strong>1036402-3</strong></td><td>3" SS316</td></tr>
+        <tr><td>4"</td><td><strong>1036402-4</strong></td><td>4" SS316</td></tr>
+        <tr><td>6"</td><td><strong>1036402-6</strong></td><td>6" SS316</td></tr>
+        <tr><td>8"</td><td><strong>1036402-8</strong></td><td>8" SS316</td></tr>
+        <tr><td>10"</td><td><strong>1036402-10</strong></td><td>10" SS316</td></tr>
+        <tr><td>12"</td><td><strong>1036402-12</strong></td><td>12" SS316</td></tr>
+    </table>
+
+    <h3>SS316 - Short Tank Overflow (SS316_FLANGES = True)</h3>
+    <p>Same base numbers with "SS" suffix. Example: <strong>1036402-2SS</strong> = 2" SS316 (with SS316_FLANGES flag)</p>
+
+    <h3>SS316 - Standard Tank Overflow (SS316_FLANGES = False)</h3>
+    <table>
+        <tr><th>Size</th><th>Part Number</th><th>Description</th></tr>
+        <tr><td>2"</td><td><strong>1033918-01</strong></td><td>2" SS316</td></tr>
+        <tr><td>2.5"</td><td><strong>1033918-02</strong></td><td>2-1/2" SS316</td></tr>
+        <tr><td>3"</td><td><strong>1033918-03</strong></td><td>3" SS316</td></tr>
+        <tr><td>4"</td><td><strong>1033918-04</strong></td><td>4" SS316</td></tr>
+        <tr><td>6"</td><td><strong>1033918-06</strong></td><td>6" SS316</td></tr>
+        <tr><td>8"</td><td><strong>1033918-08</strong></td><td>8" SS316</td></tr>
+        <tr><td>10"</td><td><strong>1033918-10</strong></td><td>10" SS316</td></tr>
+        <tr><td>12"</td><td><strong>1033918-12</strong></td><td>12" SS316</td></tr>
+    </table>
+
+    <h3>SS316 - Standard Tank Overflow (SS316_FLANGES = True)</h3>
+    <p>Same base numbers with "SS" suffix. Example: <strong>1033918-01SS</strong> = 2" SS316 (with SS316_FLANGES flag)</p>
+
+    <h2>Detailed Part Number Tables</h2>
+
+    <div class="material-section">
+        <h3>SS304 MATERIAL</h3>
+        
+        <h4>Short Tank Overflow (Non-Food Grade)</h4>
+        <table>
+            <tr><th>Size</th><th>Part Number</th><th>Description</th><th>UM</th></tr>
+            <tr><td>2"</td><td>1023429-2</td><td>VENT/OVERFLOW FITTING, 2" SS304</td><td>BOM</td></tr>
+            <tr><td>2.5"</td><td>1023429-5</td><td>VENT/OVERFLOW FITTING, 2-1/2" SS304</td><td>BOM</td></tr>
+            <tr><td>3"</td><td>1023429-3</td><td>VENT/OVERFLOW FITTING, 3" SS304</td><td>BOM</td></tr>
+            <tr><td>4"</td><td>1023429-4</td><td>VENT/OVERFLOW FITTING, 4" SS304</td><td>BOM</td></tr>
+            <tr><td>6"</td><td>1023429-6</td><td>VENT/OVERFLOW FITTING, 6" SS304</td><td>BOM</td></tr>
+            <tr><td>8"</td><td>1023429-8</td><td>VENT/OVERFLOW FITTING, 8" SS304</td><td>BOM</td></tr>
+            <tr><td>10"</td><td>1023429-10</td><td>VENT/OVERFLOW FITTING, 10" SS304</td><td>BOM</td></tr>
+            <tr><td>12"</td><td>1023429-12</td><td>VENT/OVERFLOW FITTING, 12" SS304</td><td>BOM</td></tr>
+        </table>
+
+        <h4>Standard Tank Overflow (Non-Food Grade)</h4>
+        <table>
+            <tr><th>Size</th><th>Part Number</th><th>Description</th><th>UM</th></tr>
+            <tr><td>2"</td><td>1025543-01</td><td>FLANGE FITTING, 2" SS304</td><td>BOM</td></tr>
+            <tr><td>2.5"</td><td>1025543-02</td><td>FLANGE FITTING, 2-1/2" SS304</td><td>BOM</td></tr>
+            <tr><td>3"</td><td>1025543-03</td><td>FLANGE FITTING, 3" SS304</td><td>BOM</td></tr>
+            <tr><td>4"</td><td>1025543-04</td><td>FLANGE FITTING, 4" SS304</td><td>BOM</td></tr>
+            <tr><td>6"</td><td>1025543-06</td><td>FLANGE FITTING, 6" SS304</td><td>BOM</td></tr>
+            <tr><td>8"</td><td>1025543-08</td><td>FLANGE FITTING, 8" SS304</td><td>BOM</td></tr>
+            <tr><td>10"</td><td>1025543-10</td><td>FLANGE FITTING, 10" SS304</td><td>BOM</td></tr>
+            <tr><td>12"</td><td>1025543-12</td><td>FLANGE FITTING, 12" SS304</td><td>BOM</td></tr>
+        </table>
+    </div>
+
+    <div class="material-section">
+        <h3>SS316 MATERIAL</h3>
+        
+        <h4>Short Tank Overflow (SS316_FLANGES = False)</h4>
+        <table>
+            <tr><th>Size</th><th>Part Number</th><th>Description</th><th>UM</th></tr>
+            <tr><td>2"</td><td>1036402-2</td><td>VENT/OVERFLOW FITTING, 2" SS316</td><td>BOM</td></tr>
+            <tr><td>2.5"</td><td>1036402-5</td><td>VENT/OVERFLOW FITTING, 2-1/2" SS316</td><td>BOM</td></tr>
+            <tr><td>3"</td><td>1036402-3</td><td>VENT/OVERFLOW FITTING, 3" SS316</td><td>BOM</td></tr>
+            <tr><td>4"</td><td>1036402-4</td><td>VENT/OVERFLOW FITTING, 4" SS316</td><td>BOM</td></tr>
+            <tr><td>6"</td><td>1036402-6</td><td>VENT/OVERFLOW FITTING, 6" SS316</td><td>BOM</td></tr>
+            <tr><td>8"</td><td>1036402-8</td><td>VENT/OVERFLOW FITTING, 8" SS316</td><td>BOM</td></tr>
+            <tr><td>10"</td><td>1036402-10</td><td>VENT/OVERFLOW FITTING, 10" SS316</td><td>BOM</td></tr>
+            <tr><td>12"</td><td>1036402-12</td><td>VENT/OVERFLOW FITTING, 12" SS316</td><td>BOM</td></tr>
+        </table>
+
+        <h4>Short Tank Overflow (SS316_FLANGES = True)</h4>
+        <table>
+            <tr><th>Size</th><th>Part Number</th><th>Description</th><th>UM</th></tr>
+            <tr><td>2"</td><td>1036402-2SS</td><td>VENT/OVERFLOW FITTING, 2" SS316</td><td>BOM</td></tr>
+            <tr><td>2.5"</td><td>1036402-5SS</td><td>VENT/OVERFLOW FITTING, 2-1/2" SS316</td><td>BOM</td></tr>
+            <tr><td>3"</td><td>1036402-3SS</td><td>VENT/OVERFLOW FITTING, 3" SS316</td><td>BOM</td></tr>
+            <tr><td>4"</td><td>1036402-4SS</td><td>VENT/OVERFLOW FITTING, 4" SS316</td><td>BOM</td></tr>
+            <tr><td>6"</td><td>1036402-6SS</td><td>VENT/OVERFLOW FITTING, 6" SS316</td><td>BOM</td></tr>
+            <tr><td>8"</td><td>1036402-8SS</td><td>VENT/OVERFLOW FITTING, 8" SS316</td><td>BOM</td></tr>
+            <tr><td>10"</td><td>1036402-10SS</td><td>VENT/OVERFLOW FITTING, 10" SS316</td><td>BOM</td></tr>
+            <tr><td>12"</td><td>1036402-12SS</td><td>VENT/OVERFLOW FITTING, 12" SS316</td><td>BOM</td></tr>
+        </table>
+
+        <h4>Standard Tank Overflow (SS316_FLANGES = False)</h4>
+        <table>
+            <tr><th>Size</th><th>Part Number</th><th>Description</th><th>UM</th></tr>
+            <tr><td>2"</td><td>1033918-01</td><td>FLANGE FITTING, 2" SS316</td><td>BOM</td></tr>
+            <tr><td>2.5"</td><td>1033918-02</td><td>FLANGE FITTING, 2-1/2" SS316</td><td>BOM</td></tr>
+            <tr><td>3"</td><td>1033918-03</td><td>FLANGE FITTING, 3" SS316</td><td>BOM</td></tr>
+            <tr><td>4"</td><td>1033918-04</td><td>FLANGE FITTING, 4" SS316</td><td>BOM</td></tr>
+            <tr><td>6"</td><td>1033918-06</td><td>FLANGE FITTING, 6" SS316</td><td>BOM</td></tr>
+            <tr><td>8"</td><td>1033918-08</td><td>FLANGE FITTING, 8" SS316</td><td>BOM</td></tr>
+            <tr><td>10"</td><td>1033918-10</td><td>FLANGE FITTING, 10" SS316</td><td>BOM</td></tr>
+            <tr><td>12"</td><td>1033918-12</td><td>FLANGE FITTING, 12" SS316</td><td>BOM</td></tr>
+        </table>
+
+        <h4>Standard Tank Overflow (SS316_FLANGES = True)</h4>
+        <table>
+            <tr><th>Size</th><th>Part Number</th><th>Description</th><th>UM</th></tr>
+            <tr><td>2"</td><td>1033918-01SS</td><td>FLANGE FITTING, 2" SS316</td><td>BOM</td></tr>
+            <tr><td>2.5"</td><td>1033918-02SS</td><td>FLANGE FITTING, 2-1/2" SS316</td><td>BOM</td></tr>
+            <tr><td>3"</td><td>1033918-03SS</td><td>FLANGE FITTING, 3" SS316</td><td>BOM</td></tr>
+            <tr><td>4"</td><td>1033918-04SS</td><td>FLANGE FITTING, 4" SS316</td><td>BOM</td></tr>
+            <tr><td>6"</td><td>1033918-06SS</td><td>FLANGE FITTING, 6" SS316</td><td>BOM</td></tr>
+            <tr><td>8"</td><td>1033918-08SS</td><td>FLANGE FITTING, 8" SS316</td><td>BOM</td></tr>
+            <tr><td>10"</td><td>1033918-10SS</td><td>FLANGE FITTING, 10" SS316</td><td>BOM</td></tr>
+            <tr><td>12"</td><td>1033918-12SS</td><td>FLANGE FITTING, 12" SS316</td><td>BOM</td></tr>
+        </table>
+    </div>
+
+    <h2>Food Grade Part Numbers (Currently Commented Out)</h2>
+    
+    <h3>SS304 - Short Tank Overflow (Food Grade)</h3>
+    <table>
+        <tr><th>Size</th><th>Part Number</th><th>Description</th></tr>
+        <tr><td>2"</td><td>1051520-2</td><td>VENT/OVERFLOW FITTING, 2" SS304 (FOOD GRADE)</td></tr>
+        <tr><td>2.5"</td><td>1051520-5</td><td>VENT/OVERFLOW FITTING, 2-1/2" SS304 (FOOD GRADE)</td></tr>
+        <tr><td>3"</td><td>1051520-3</td><td>VENT/OVERFLOW FITTING, 3" SS304 (FOOD GRADE)</td></tr>
+        <tr><td>4"</td><td>1051520-4</td><td>VENT/OVERFLOW FITTING, 4" SS304 (FOOD GRADE)</td></tr>
+        <tr><td>6"</td><td>1051520-6</td><td>VENT/OVERFLOW FITTING, 6" SS304 (FOOD GRADE)</td></tr>
+        <tr><td>8"</td><td>1051520-8</td><td>VENT/OVERFLOW FITTING, 8" SS304 (FOOD GRADE)</td></tr>
+        <tr><td>10"</td><td>1051520-10</td><td>VENT/OVERFLOW FITTING, 10" SS304 (FOOD GRADE)</td></tr>
+        <tr><td>12"</td><td>1051520-12</td><td>VENT/OVERFLOW FITTING, 12" SS304 (FOOD GRADE)</td></tr>
+    </table>
+
+    <h3>SS304 - Standard Tank Overflow (Food Grade)</h3>
+    <table>
+        <tr><th>Size</th><th>Part Number</th><th>Description</th></tr>
+        <tr><td>2"</td><td>1051521-2</td><td>FLANGE FITTING, 2" SS304 (FOOD GRADE)</td></tr>
+        <tr><td>2.5"</td><td>1051521-5</td><td>FLANGE FITTING, 2-1/2" SS304 (FOOD GRADE)</td></tr>
+        <tr><td>3"</td><td>1051521-3</td><td>FLANGE FITTING, 3" SS304 (FOOD GRADE)</td></tr>
+        <tr><td>4"</td><td>1051521-4</td><td>FLANGE FITTING, 4" SS304 (FOOD GRADE)</td></tr>
+        <tr><td>6"</td><td>1051521-6</td><td>FLANGE FITTING, 6" SS304 (FOOD GRADE)</td></tr>
+        <tr><td>8"</td><td>1051521-8</td><td>FLANGE FITTING, 8" SS304 (FOOD GRADE)</td></tr>
+        <tr><td>10"</td><td>1051521-10</td><td>FLANGE FITTING, 10" SS304 (FOOD GRADE)</td></tr>
+        <tr><td>12"</td><td>1051521-12</td><td>FLANGE FITTING, 12" SS304 (FOOD GRADE)</td></tr>
+    </table>
+
+    <h3>SS316 - Short Tank Overflow (Food Grade)</h3>
+    <table>
+        <tr><th>Size</th><th>Part Number</th><th>Description</th></tr>
+        <tr><td>2"</td><td>1051838-2</td><td>VENT/OVERFLOW FITTING, 2" SS316 (FOOD GRADE)</td></tr>
+        <tr><td>2.5"</td><td>1051838-5</td><td>VENT/OVERFLOW FITTING, 2-1/2" SS316 (FOOD GRADE)</td></tr>
+        <tr><td>3"</td><td>1051838-3</td><td>VENT/OVERFLOW FITTING, 3" SS316 (FOOD GRADE)</td></tr>
+        <tr><td>4"</td><td>1051838-4</td><td>VENT/OVERFLOW FITTING, 4" SS316 (FOOD GRADE)</td></tr>
+        <tr><td>6"</td><td>1051838-6</td><td>VENT/OVERFLOW FITTING, 6" SS316 (FOOD GRADE)</td></tr>
+        <tr><td>8"</td><td>1051838-8</td><td>VENT/OVERFLOW FITTING, 8" SS316 (FOOD GRADE)</td></tr>
+        <tr><td>10"</td><td>1051838-10</td><td>VENT/OVERFLOW FITTING, 10" SS316 (FOOD GRADE)</td></tr>
+        <tr><td>12"</td><td>1051838-12</td><td>VENT/OVERFLOW FITTING, 12" SS316 (FOOD GRADE)</td></tr>
+    </table>
+
+    <h3>SS316 - Standard Tank Overflow (Food Grade)</h3>
+    <table>
+        <tr><th>Size</th><th>Part Number</th><th>Description</th></tr>
+        <tr><td>2"</td><td>1051839-1</td><td>FLANGE FITTING, 2" SS316 (FOOD GRADE)</td></tr>
+        <tr><td>2.5"</td><td>1051839-2</td><td>FLANGE FITTING, 2-1/2" SS316 (FOOD GRADE)</td></tr>
+        <tr><td>3"</td><td>1051839-3</td><td>FLANGE FITTING, 3" SS316 (FOOD GRADE)</td></tr>
+        <tr><td>4"</td><td>1051839-4</td><td>FLANGE FITTING, 4" SS316 (FOOD GRADE)</td></tr>
+        <tr><td>6"</td><td>1051839-6</td><td>FLANGE FITTING, 6" SS316 (FOOD GRADE)</td></tr>
+        <tr><td>8"</td><td>1051839-8</td><td>FLANGE FITTING, 8" SS316 (FOOD GRADE)</td></tr>
+        <tr><td>10"</td><td>1051839-10</td><td>FLANGE FITTING, 10" SS316 (FOOD GRADE)</td></tr>
+        <tr><td>12"</td><td>1051839-12</td><td>FLANGE FITTING, 12" SS316 (FOOD GRADE)</td></tr>
+    </table>
+
+    <h2>Decision Tree</h2>
+    <div class="decision-tree">
+Is MATERIAL = "SS304"?
+├─ YES
+│  ├─ Is OverflowType = "Short tank overflow"?
+│  │  ├─ YES → Use 1023429-XX series
+│  │  └─ NO (Standard) → Use 1025543-XX series
+│  └─ Is FoodApplication = True? (Currently disabled)
+│     └─ YES → Use 1051520-XX (Short) or 1051521-XX (Standard)
+│
+└─ NO (SS316)
+   ├─ Is OverflowType = "Short tank overflow"?
+   │  ├─ YES
+   │  │  ├─ Is SS316_FLANGES = True?
+   │  │  │  ├─ YES → Use 1036402-XXSS series
+   │  │  │  └─ NO → Use 1036402-XX series
+   │  │  └─ Is FoodApplication = True? (Currently disabled)
+   │  │     └─ YES → Use 1051838-XX series
+   │  └─ NO (Standard)
+   │     ├─ Is SS316_FLANGES = True?
+   │     │  ├─ YES → Use 1033918-XXSS series
+   │     │  └─ NO → Use 1033918-XX series
+   │     └─ Is FoodApplication = True? (Currently disabled)
+   │        └─ YES → Use 1051839-XX series
+    </div>
+
+    <h2>Notes</h2>
+    <div class="info-box">
+        <ul>
+            <li><strong>Note:</strong> Code has <code>iLogicVb.UpdateWhenDone = True</code> at the end (applies to all conditions)</li>
+            <li><strong>Note:</strong> SS304 does NOT use SS316_FLANGES flag (only SS316 uses it)</li>
+            <li><strong>Note:</strong> All food grade options are currently commented out in the code</li>
+            <li><strong>Note:</strong> Description differs between "Short" (VENT/OVERFLOW FITTING) and "Standard" (FLANGE FITTING)</li>
+        </ul>
+    </div>
+
+    <div style="margin-top: 40px; padding-top: 20px; border-top: 2px solid #ddd; text-align: center; color: #7f8c8d; font-size: 12px;">
+        <p>Document generated from iLogic VBA code analysis</p>
+        <p>Print Date: <span id="printDate"></span></p>
+    </div>
+
+    <script>
+        document.getElementById('printDate').textContent = new Date().toLocaleDateString('en-US', { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+    </script>
+</body>
+</html>
+

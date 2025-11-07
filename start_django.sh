@@ -18,25 +18,33 @@ echo "Cleaning up port $DJANGO_PORT..."
 # Method 1: Kill by process name
 pkill -9 -f "manage.py runserver" 2>/dev/null
 
-# Method 2: Kill by port using lsof
-PID=$(lsof -ti:$DJANGO_PORT 2>/dev/null)
-if [ ! -z "$PID" ]; then
-    echo "Killing process $PID on port $DJANGO_PORT..."
-    kill -9 $PID 2>/dev/null
+# Method 2: Kill by port using lsof (if available)
+if command -v lsof &> /dev/null; then
+    PID=$(lsof -ti:$DJANGO_PORT 2>/dev/null)
+    if [ ! -z "$PID" ]; then
+        echo "Killing process $PID on port $DJANGO_PORT..."
+        kill -9 $PID 2>/dev/null
+    fi
 fi
 
-# Method 3: Alternative using fuser
-fuser -k $DJANGO_PORT/tcp 2>/dev/null
+# Method 3: Alternative using fuser (if available)
+if command -v fuser &> /dev/null; then
+    fuser -k $DJANGO_PORT/tcp 2>/dev/null
+fi
 
 # Wait a moment for cleanup
 sleep 1
 
-# Verify port is free
-if lsof -Pi :$DJANGO_PORT -sTCP:LISTEN -t >/dev/null 2>&1 ; then
-    echo "ERROR: Port $DJANGO_PORT is still in use!"
-    echo "Please manually stop the process:"
-    lsof -i :$DJANGO_PORT
-    exit 1
+# Verify port is free (using lsof if available, otherwise skip check)
+if command -v lsof &> /dev/null; then
+    if lsof -Pi :$DJANGO_PORT -sTCP:LISTEN -t >/dev/null 2>&1 ; then
+        echo "ERROR: Port $DJANGO_PORT is still in use!"
+        echo "Please manually stop the process:"
+        lsof -i :$DJANGO_PORT
+        exit 1
+    fi
+else
+    echo "⚠️  lsof not available, skipping port verification"
 fi
 
 echo "✓ Port $DJANGO_PORT is free"
