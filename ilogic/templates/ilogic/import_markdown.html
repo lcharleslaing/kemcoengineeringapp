@@ -102,25 +102,46 @@
 <script>
   console.log('[iLogic] Markdown import page loaded');
   
-  const form = document.getElementById('markdownImportForm');
-  const fileInput = document.getElementById('markdownFileInput');
-  const fileInfo = document.getElementById('fileInfo');
-  const loadingIndicator = document.getElementById('loadingIndicator');
-  const debugInfo = document.getElementById('debugInfo');
-  const debugContent = document.getElementById('debugContent');
-  const submitBtn = document.getElementById('submitBtn');
-  
-  // Show file info when selected
-  fileInput.addEventListener('change', function(e) {
-    const file = e.target.files[0];
-    if (file) {
-      console.log('[iLogic] File selected:', file.name, 'Size:', file.size, 'bytes');
-      fileInfo.textContent = `Selected: ${file.name} (${(file.size / 1024).toFixed(2)} KB)`;
-      fileInfo.classList.remove('hidden');
-    } else {
-      fileInfo.classList.add('hidden');
+  // Wait for DOM to be fully loaded
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('markdownImportForm');
+    const fileInput = document.getElementById('markdownFileInput');
+    const fileInfo = document.getElementById('fileInfo');
+    const loadingIndicator = document.getElementById('loadingIndicator');
+    const debugInfo = document.getElementById('debugInfo');
+    const debugContent = document.getElementById('debugContent');
+    const submitBtn = document.getElementById('submitBtn');
+    
+    if (!form || !fileInput) {
+      console.error('[iLogic] Required form elements not found');
+      return;
     }
-  });
+    
+    console.log('[iLogic] Form elements found:', {
+      form: !!form,
+      fileInput: !!fileInput,
+      fileInfo: !!fileInfo,
+      loadingIndicator: !!loadingIndicator,
+      debugInfo: !!debugInfo,
+      debugContent: !!debugContent,
+      submitBtn: !!submitBtn
+    });
+    
+    // Show file info when selected
+    fileInput.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        console.log('[iLogic] File selected:', file.name, 'Size:', file.size, 'bytes');
+        if (fileInfo) {
+          fileInfo.textContent = `Selected: ${file.name} (${(file.size / 1024).toFixed(2)} KB)`;
+          fileInfo.classList.remove('hidden');
+        }
+      } else {
+        if (fileInfo) {
+          fileInfo.classList.add('hidden');
+        }
+      }
+    });
   
   // Form submission
   form.addEventListener('submit', function(e) {
@@ -133,13 +154,19 @@
     console.log('[iLogic] Starting markdown import...');
     console.log('[iLogic] File:', file.name, 'Size:', file.size, 'bytes', 'Type:', file.type);
     
-    // Show loading
-    loadingIndicator.classList.remove('hidden');
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Importing...';
+    // Show loading (check if elements exist first)
+    if (loadingIndicator) {
+      loadingIndicator.classList.remove('hidden');
+    }
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Importing...';
+    }
     
     const progressText = document.getElementById('progressText');
-    progressText.textContent = 'Reading file...';
+    if (progressText) {
+      progressText.textContent = 'Reading file...';
+    }
     
     // Read file preview for debugging
     const reader = new FileReader();
@@ -147,7 +174,9 @@
       const content = e.target.result;
       console.log('[iLogic] File content preview (first 500 chars):', content.substring(0, 500));
       
-      progressText.textContent = 'Parsing markdown...';
+      if (progressText) {
+        progressText.textContent = 'Parsing markdown...';
+      }
       
       // Check for assembly name
       const assemblyMatch = content.match(/^#\s+(.+)$/m);
@@ -162,29 +191,41 @@
       const ruleCount = ruleMatches ? ruleMatches.length : 0;
       console.log('[iLogic] Found', ruleCount, 'rule(s)');
       
-      progressText.textContent = `Found ${ruleCount} rule(s). Uploading to server...`;
+      if (progressText) {
+        progressText.textContent = `Found ${ruleCount} rule(s). Uploading to server...`;
+      }
       
-      // Show debug info
-      debugContent.innerHTML = `
-        <div><strong>File:</strong> ${file.name}</div>
-        <div><strong>Size:</strong> ${(file.size / 1024).toFixed(2)} KB</div>
-        <div><strong>Assembly:</strong> ${assemblyMatch ? assemblyMatch[1] : 'NOT FOUND'}</div>
-        <div><strong>Rules Found:</strong> ${ruleCount}</div>
-        <div><strong>First 200 chars:</strong> ${content.substring(0, 200).replace(/\n/g, '\\n')}</div>
-      `;
-      debugInfo.classList.remove('hidden');
+      // Show debug info (check if elements exist)
+      if (debugContent && debugInfo) {
+        debugContent.innerHTML = `
+          <div><strong>File:</strong> ${file.name}</div>
+          <div><strong>Size:</strong> ${(file.size / 1024).toFixed(2)} KB</div>
+          <div><strong>Assembly:</strong> ${assemblyMatch ? assemblyMatch[1] : 'NOT FOUND'}</div>
+          <div><strong>Rules Found:</strong> ${ruleCount}</div>
+          <div><strong>First 200 chars:</strong> ${content.substring(0, 200).replace(/\n/g, '\\n')}</div>
+        `;
+        debugInfo.classList.remove('hidden');
+      }
       
       // Allow form to submit now
       console.log('[iLogic] File analyzed, submitting form...');
+      console.log('[iLogic] Form will now submit to server. This may take a while for large files.');
     };
     reader.onerror = function(e) {
       console.error('[iLogic] Error reading file:', e);
-      progressText.textContent = 'Error reading file';
-      loadingIndicator.classList.add('hidden');
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Import File';
+      if (progressText) {
+        progressText.textContent = 'Error reading file';
+      }
+      if (loadingIndicator) {
+        loadingIndicator.classList.add('hidden');
+      }
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Import File';
+      }
     };
     reader.readAsText(file);
+    });
   });
   
   // Check for Django messages on page load

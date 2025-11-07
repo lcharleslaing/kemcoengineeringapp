@@ -92,11 +92,14 @@ function cleanupDjangoPort() {
 // Function to check if Django server is running
 function checkDjangoServer(port = DJANGO_PORT) {
   return new Promise((resolve) => {
+    console.log(`[DEBUG] checkDjangoServer() called for port ${port}`);
     const client = net.createConnection({ port }, () => {
+      console.log(`[DEBUG] ✓ Connection successful to port ${port}`);
       client.end();
       resolve(true);
     });
-    client.on('error', () => {
+    client.on('error', (err) => {
+      console.log(`[DEBUG] ✗ Connection failed to port ${port}:`, err.code);
       resolve(false);
     });
   });
@@ -104,83 +107,130 @@ function checkDjangoServer(port = DJANGO_PORT) {
 
 // Function to wait for Django server to start
 async function waitForDjangoServer(port = DJANGO_PORT, maxAttempts = 30) {
-  console.log('Waiting for Django server to start...');
+  console.log(`[DEBUG] waitForDjangoServer() called for port ${port}, maxAttempts: ${maxAttempts}`);
   for (let i = 0; i < maxAttempts; i++) {
+    console.log(`[DEBUG] Attempt ${i + 1}/${maxAttempts}...`);
     const isRunning = await checkDjangoServer(port);
     if (isRunning) {
-      console.log('Django server is ready!');
+      console.log('[DEBUG] ✓ Django server is ready!');
       return true;
     }
+    console.log(`[DEBUG] Server not ready yet, waiting 1 second...`);
     await new Promise(resolve => setTimeout(resolve, 1000));
-    console.log(`Attempt ${i + 1}/${maxAttempts}...`);
   }
+  console.log(`[DEBUG] ✗ waitForDjangoServer() timed out after ${maxAttempts} attempts`);
   return false;
 }
 
 // Function to start Django server
 function startDjangoServer() {
   return new Promise((resolve, reject) => {
-    console.log('Starting Django server...');
-    console.log('Project directory:', __dirname);
+    console.log('========================================');
+    console.log('[DEBUG] startDjangoServer() called');
+    console.log('[DEBUG] Project directory:', __dirname);
+    console.log('[DEBUG] Platform:', process.platform);
     
-    // Verify we're in the leecharleslaingdotnet project
+    // Verify we're in the correct project directory
     const fs = require('fs');
     const manageFile = path.join(__dirname, 'manage.py');
+    console.log('[DEBUG] Checking for manage.py at:', manageFile);
+    
     if (!fs.existsSync(manageFile)) {
-      console.error('ERROR: manage.py not found. Wrong project directory?');
-      console.error('Expected directory:', __dirname);
+      console.error('[DEBUG] ERROR: manage.py not found!');
+      console.error('[DEBUG] Directory listing:', fs.readdirSync(__dirname).join(', '));
       reject(new Error('Wrong project directory'));
       return;
     }
     
-    console.log('✓ Verified correct project directory');
+    console.log('[DEBUG] ✓ manage.py found');
     
     // Use the simple startup script
-    // On Windows, we need to use 'bash' to execute .sh files
-    // On Linux, we can execute directly or use bash
     const isWindows = process.platform === 'win32';
     const scriptPath = path.join(__dirname, 'start_django.sh');
+    console.log('[DEBUG] Script path:', scriptPath);
+    console.log('[DEBUG] Script exists?', fs.existsSync(scriptPath));
+    console.log('[DEBUG] Is Windows?', isWindows);
     
-    if (isWindows) {
-      // On Windows, use bash to execute the script
-      djangoProcess = spawn('bash', [scriptPath], {
-        cwd: __dirname,
-        stdio: ['pipe', 'pipe', 'pipe'],
-        env: { ...process.env, PYTHONUNBUFFERED: '1' },
-        shell: false
-      });
-    } else {
-      // On Linux/Mac, can execute directly or use bash
-      djangoProcess = spawn('bash', [scriptPath], {
-        cwd: __dirname,
-        stdio: ['pipe', 'pipe', 'pipe'],
-        env: { ...process.env, PYTHONUNBUFFERED: '1' },
-        shell: false
-      });
+    // Check if bash is available
+    const { execSync } = require('child_process');
+    try {
+      const bashCheck = execSync('bash --version', { encoding: 'utf8', timeout: 2000 });
+      console.log('[DEBUG] ✓ Bash found:', bashCheck.split('\n')[0]);
+    } catch (e) {
+      console.error('[DEBUG] ❌ Bash NOT found in PATH!');
+      console.error('[DEBUG] Error:', e.message);
+    }
+    
+    console.log('[DEBUG] Spawning Django process...');
+    console.log('[DEBUG] Command: bash');
+    console.log('[DEBUG] Args:', [scriptPath]);
+    console.log('[DEBUG] CWD:', __dirname);
+    
+    try {
+      if (isWindows) {
+        djangoProcess = spawn('bash', [scriptPath], {
+          cwd: __dirname,
+          stdio: ['pipe', 'pipe', 'pipe'],
+          env: { ...process.env, PYTHONUNBUFFERED: '1' },
+          shell: false
+        });
+      } else {
+        djangoProcess = spawn('bash', [scriptPath], {
+          cwd: __dirname,
+          stdio: ['pipe', 'pipe', 'pipe'],
+          env: { ...process.env, PYTHONUNBUFFERED: '1' },
+          shell: false
+        });
+      }
+      console.log('[DEBUG] ✓ Process spawned, PID:', djangoProcess.pid);
+    } catch (spawnError) {
+      console.error('[DEBUG] ❌ SPAWN FAILED:', spawnError);
+      reject(spawnError);
+      return;
     }
 
     let resolved = false;
+    let stdoutBuffer = '';
+    let stderrBuffer = '';
 
     djangoProcess.stdout.on('data', (data) => {
       const output = data.toString();
-      console.log(`Django: ${output.trim()}`);
+      stdoutBuffer += output;
+      console.log('[DEBUG] [Django stdout]:', output.trim());
       if (output.includes('Starting development server') && !resolved) {
+        console.log('[DEBUG] ✓ Detected "Starting development server" message');
         resolved = true;
-        setTimeout(resolve, 2000); // Give Django 2 more seconds to fully start
+        setTimeout(() => {
+          console.log('[DEBUG] Resolving promise after 2 second delay');
+          resolve();
+        }, 2000);
       }
     });
 
     djangoProcess.stderr.on('data', (data) => {
       const message = data.toString();
-      console.error(`Django Error: ${message.trim()}`);
+      stderrBuffer += message;
+      console.error('[DEBUG] [Django stderr]:', message.trim());
     });
 
     djangoProcess.on('close', (code) => {
-      console.log(`Django process exited with code ${code}`);
+      console.log('[DEBUG] ========================================');
+      console.log('[DEBUG] Django process CLOSED');
+      console.log('[DEBUG] Exit code:', code);
+      console.log('[DEBUG] Resolved?', resolved);
+      console.log('[DEBUG] Last stdout:', stdoutBuffer.slice(-500));
+      console.log('[DEBUG] Last stderr:', stderrBuffer.slice(-500));
+      console.log('[DEBUG] ========================================');
     });
 
     djangoProcess.on('error', (error) => {
-      console.error('Failed to start Django process:', error);
+      console.error('[DEBUG] ========================================');
+      console.error('[DEBUG] ❌ CRITICAL: Process error event fired!');
+      console.error('[DEBUG] Error code:', error.code);
+      console.error('[DEBUG] Error message:', error.message);
+      console.error('[DEBUG] Error syscall:', error.syscall);
+      console.error('[DEBUG] This usually means bash is not found in PATH');
+      console.error('[DEBUG] ========================================');
       if (!resolved) {
         resolved = true;
         reject(error);
@@ -190,8 +240,16 @@ function startDjangoServer() {
     // Fallback: resolve after 10 seconds
     setTimeout(() => {
       if (!resolved) {
+        console.log('[DEBUG] ========================================');
+        console.log('[DEBUG] ⚠️  TIMEOUT: 10 seconds elapsed');
+        console.log('[DEBUG] Resolved?', resolved);
+        console.log('[DEBUG] Process still running?', !djangoProcess.killed);
+        console.log('[DEBUG] Checking if server is actually running...');
+        checkDjangoServer(DJANGO_PORT).then((isRunning) => {
+          console.log('[DEBUG] Server check result:', isRunning);
+        });
+        console.log('[DEBUG] ========================================');
         resolved = true;
-        console.log('Django startup timeout reached, checking if server is responsive...');
         resolve();
       }
     }, 10000);
@@ -215,34 +273,12 @@ function createWindow() {
       // This ensures each Electron/Django project maintains its own separate session
       partition: 'persist:kemcoengineeringapp'
     },
-    title: 'LeeCharlesLaing.net',
+    title: 'Kemco Engineering App',
     show: true // Show immediately
   });
 
-  // Load the Django app - wait for server to be ready first
-  async function loadDjangoApp() {
-    const maxRetries = 15;
-    let retries = 0;
-    
-    while (retries < maxRetries) {
-      const isRunning = await checkDjangoServer(DJANGO_PORT);
-      if (isRunning) {
-        console.log(`Loading Django app at http://127.0.0.1:${DJANGO_PORT}`);
-        mainWindow.loadURL(`http://127.0.0.1:${DJANGO_PORT}`);
-        return;
-      }
-      
-      retries++;
-      console.log(`Waiting for Django server on port ${DJANGO_PORT}... (attempt ${retries}/${maxRetries})`);
-      await new Promise(resolve => setTimeout(resolve, 1000));
-    }
-    
-    // If server never became ready, show loading page
-    console.log('Django server not ready after retries, showing loading page...');
-    mainWindow.loadFile(path.join(__dirname, 'loading.html'));
-  }
-  
-  loadDjangoApp();
+  // Load loading page first
+  mainWindow.loadFile(path.join(__dirname, 'loading.html'));
 
   // Show window when ready (backup in case it was hidden)
   mainWindow.once('ready-to-show', () => {
@@ -377,39 +413,80 @@ ipcMain.handle('open-location', async (event, filePath) => {
   }
 });
 
+// Prevent multiple instances
+const gotTheLock = app.requestSingleInstanceLock();
+
+if (!gotTheLock) {
+  console.log('Another instance is already running. Exiting...');
+  app.quit();
+} else {
+  app.on('second-instance', () => {
+    // Someone tried to run a second instance, focus our window instead
+    if (mainWindow) {
+      if (mainWindow.isMinimized()) mainWindow.restore();
+      mainWindow.focus();
+    }
+  });
+}
+
 // Handle app ready
 app.whenReady().then(async () => {
   console.log('Electron app is ready');
   
   // Create window immediately - don't wait for Django
+  // Window will show loading.html first, then switch to Django when ready
   createWindow();
   
   try {
-    // Check if Django is already running
+    console.log('[DEBUG] ========================================');
+    console.log('[DEBUG] Checking if Django is already running...');
     const isAlreadyRunning = await checkDjangoServer(DJANGO_PORT);
+    console.log('[DEBUG] Django already running?', isAlreadyRunning);
     
     if (!isAlreadyRunning) {
-      console.log('Django server not running, starting it...');
-      await startDjangoServer();
+      console.log('[DEBUG] Django server not running, starting it...');
+      try {
+        await startDjangoServer();
+        console.log('[DEBUG] startDjangoServer() promise resolved');
+      } catch (startError) {
+        console.error('[DEBUG] ❌ startDjangoServer() REJECTED:', startError);
+        console.error('[DEBUG] Error details:', startError.message);
+      }
       
       // Wait for server to be ready (non-blocking)
+      console.log('[DEBUG] Starting waitForDjangoServer()...');
       waitForDjangoServer(DJANGO_PORT, 20).then((serverReady) => {
+        console.log('[DEBUG] waitForDjangoServer() completed, serverReady:', serverReady);
         if (serverReady) {
-          console.log('Django server is now ready!');
+          console.log('[DEBUG] ✓ Django server is now ready! Loading URL...');
           // Reload the window to show Django content
           if (mainWindow && !mainWindow.isDestroyed()) {
-            mainWindow.loadURL(`http://127.0.0.1:${DJANGO_PORT}`);
+            const url = `http://127.0.0.1:${DJANGO_PORT}`;
+            console.log('[DEBUG] Loading URL:', url);
+            mainWindow.loadURL(url).then(() => {
+              console.log('[DEBUG] ✓ URL loaded successfully');
+            }).catch((loadError) => {
+              console.error('[DEBUG] ❌ Failed to load URL:', loadError);
+            });
+          } else {
+            console.error('[DEBUG] ❌ Main window is null or destroyed!');
           }
         } else {
-          console.warn('Django server not ready yet, but window is open');
-          console.log('You can try starting Django manually with: ./run_django.sh');
+          console.warn('[DEBUG] ⚠️  Django server not ready after waiting');
+          console.log('[DEBUG] You can try starting Django manually with: ./run_django.sh');
         }
       }).catch((err) => {
-        console.error('Error waiting for Django:', err);
+        console.error('[DEBUG] ❌ Error in waitForDjangoServer():', err);
       });
     } else {
-      console.log('Django server is already running');
+      console.log('[DEBUG] ✓ Django server is already running');
+      if (mainWindow && !mainWindow.isDestroyed()) {
+        const url = `http://127.0.0.1:${DJANGO_PORT}`;
+        console.log('[DEBUG] Loading URL immediately:', url);
+        mainWindow.loadURL(url);
+      }
     }
+    console.log('[DEBUG] ========================================');
     
     // Register global keyboard shortcuts for history navigation
     globalShortcut.register('Alt+Left', () => {

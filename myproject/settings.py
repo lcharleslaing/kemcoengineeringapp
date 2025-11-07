@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "inventor",
     "project_notes",
     "ilogic",
+    "sales_design",
 ]
 
 MIDDLEWARE = [

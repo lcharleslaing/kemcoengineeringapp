@@ -30,6 +30,7 @@ urlpatterns = [
     path("inventor/", include("inventor.urls")),
     path("notes/", include("project_notes.urls")),
     path("ilogic/", include("ilogic.urls")),
+    path("sales-design/", include("sales_design.urls")),
     path("", include("core.urls")),
 ]
 
