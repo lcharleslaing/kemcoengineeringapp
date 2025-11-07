@@ -1,0 +1,123 @@
+{% extends "core/base.html" %}
+
+{% block title %}Analysis Dashboard - iLogic{% endblock %}
+
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="container mx-auto p-6">
+  <div class="mb-6 flex items-center justify-between">
+    <div>
+      <h1 class="text-3xl font-bold">Analysis Dashboard</h1>
+      <p class="text-base-content/70 mt-1">Review all inconsistencies and errors found in iLogic rules</p>
+    </div>
+    <div class="flex gap-2">
+      <a href="{% url 'ilogic:assembly_list' %}" class="btn btn-outline">Back to Assemblies</a>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats shadow mb-6">
+    <div class="stat">
+      <div class="stat-title">Critical Issues</div>
+      <div class="stat-value text-error">{{ total_critical }}</div>
+    </div>
+    <div class="stat">
+      <div class="stat-title">Warnings</div>
+      <div class="stat-value text-warning">{{ total_warning }}</div>
+    </div>
+    <div class="stat">
+      <div class="stat-title">Info</div>
+      <div class="stat-value text-info">{{ total_info }}</div>
+    </div>
+  </div>
+
+  <!-- Inconsistencies by Type -->
+  {% if by_type %}
+  <div class="card bg-base-100 shadow-xl mb-6">
+    <div class="card-body">
+      <h2 class="card-title">Issues by Type</h2>
+      <div class="space-y-4">
+        {% for type_name, type_issues in by_type.items %}
+        <div class="border border-base-300 rounded-lg p-4">
+          <h3 class="font-semibold text-lg mb-2">{{ type_name }} ({{ type_issues|length }})</h3>
+          <div class="space-y-2">
+            {% for inc in type_issues|slice:":5" %}
+            <div class="flex items-start gap-2">
+              <span class="badge badge-{{ inc.severity }} badge-sm">{{ inc.get_severity_display }}</span>
+              <div class="flex-1">
+                <div class="text-sm">{{ inc.description|truncatewords:30 }}</div>
+                {% if inc.rule %}
+                <div class="text-xs text-base-content/60 mt-1">
+                  Rule: <a href="{% url 'ilogic:rule_detail' inc.rule.pk %}" class="link">{{ inc.rule.rule_name }}</a>
+                </div>
+                {% endif %}
+              </div>
+              <a href="{% url 'ilogic:inconsistency_detail' inc.pk %}" class="btn btn-xs btn-outline">View</a>
+            </div>
+            {% endfor %}
+            {% if type_issues|length > 5 %}
+            <div class="text-sm text-base-content/60">... and {{ type_issues|length|add:"-5" }} more</div>
+            {% endif %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- All Inconsistencies -->
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h2 class="card-title mb-4">All Open Issues</h2>
+      
+      {% if inconsistencies %}
+      <div class="overflow-x-auto">
+        <table class="table table-zebra w-full">
+          <thead>
+            <tr>
+              <th>Severity</th>
+              <th>Type</th>
+              <th>Description</th>
+              <th>Rule</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for inc in inconsistencies %}
+            <tr>
+              <td>
+                <span class="badge badge-{{ inc.severity }}">{{ inc.get_severity_display }}</span>
+              </td>
+              <td>{{ inc.get_inconsistency_type_display }}</td>
+              <td>{{ inc.description|truncatewords:15 }}</td>
+              <td>
+                {% if inc.rule %}
+                <a href="{% url 'ilogic:rule_detail' inc.rule.pk %}" class="link">{{ inc.rule.rule_name }}</a>
+                {% else %}
+                -
+                {% endif %}
+              </td>
+              <td>
+                <a href="{% url 'ilogic:inconsistency_detail' inc.pk %}" class="btn btn-sm btn-primary">View</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <div class="text-center py-8">
+        <svg class="w-16 h-16 mx-auto text-base-content/30 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <p class="text-lg font-semibold mb-2">No issues found!</p>
+        <p class="text-base-content/60">All rules are clean. Great job!</p>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
+

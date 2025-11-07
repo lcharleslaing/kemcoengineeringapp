@@ -1,0 +1,31 @@
+{% extends "core/base.html" %}
+
+{% block title %}{{ configurator.name }} - Configurator{% endblock %}
+
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="container mx-auto p-6">
+  <div class="mb-6 flex items-center justify-between">
+    <div>
+      <h1 class="text-3xl font-bold">{{ configurator.name }}</h1>
+      <p class="text-base-content/70 mt-1">{{ configurator.assembly.name }}</p>
+    </div>
+    <div class="flex gap-2">
+      <a href="{% url 'ilogic:configurator_list' %}" class="btn btn-outline">Back</a>
+    </div>
+  </div>
+
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <div class="alert alert-info">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        <span>The configurator/simulator is coming soon. This will allow you to simulate rule execution and generate BOMs.</span>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,149 @@
+{% extends "core/base.html" %}
+
+{% block title %}Import Structured Folder{% endblock %}
+
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="container mx-auto p-6">
+  <div class="mb-6">
+    <h1 class="text-3xl font-bold">Import from Structured Folder</h1>
+    <p class="text-base-content/70 mt-1">Import rules from a folder structure exported from Inventor</p>
+  </div>
+
+  <div class="card bg-base-100 shadow-xl mb-6">
+    <div class="card-body">
+      <h2 class="card-title mb-4">How to Export from Inventor</h2>
+      <div class="prose max-w-none">
+        <ol class="list-decimal list-inside space-y-2">
+          <li>Run the <strong>structured export rule</strong> in Inventor</li>
+          <li>Select the root folder where you want to export</li>
+          <li>Inventor will create a folder structure matching your assembly</li>
+          <li>Select that root folder below</li>
+        </ol>
+        <p class="mt-4 text-sm text-base-content/70">
+          <strong>Example structure:</strong><br>
+          <code class="text-xs">
+            Heater Assembly/ (select this folder)<br>
+            &nbsp;&nbsp;├── RFSO FLANGE 150LB:1/<br>
+            &nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├── RFSO FLANGE 150LB__Rule1.txt<br>
+            &nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;└── RFSO FLANGE 150LB__Rule2.txt<br>
+            &nbsp;&nbsp;└── PIPE SS304__Rule1.txt
+          </code>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <form method="post" enctype="multipart/form-data" id="folderImportForm">
+        {% csrf_token %}
+        
+        <div class="form-control mb-4">
+          <label class="label">
+            <span class="label-text font-semibold">Select Root Folder *</span>
+          </label>
+          <input 
+            type="file" 
+            name="files" 
+            class="file-input file-input-bordered w-full" 
+            webkitdirectory 
+            directory 
+            multiple
+            required
+            id="folderInput"
+          >
+          <label class="label">
+            <span class="label-text-alt">Select the root folder from your structured export (e.g., "Heater Assembly")</span>
+          </label>
+          <div id="fileCount" class="text-sm text-base-content/60 mt-2 hidden"></div>
+        </div>
+
+        <div class="alert alert-info mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <span>The app will walk through the folder structure, find all .txt rule files, and create the Assembly → Component → Rule hierarchy automatically.</span>
+        </div>
+
+        <!-- Loading indicator -->
+        <div id="loadingIndicator" class="hidden mb-4">
+          <div class="alert alert-info">
+            <span class="loading loading-spinner loading-md"></span>
+            <div>
+              <div>Importing folder... Please wait. This may take a minute for large folders.</div>
+              <div id="progressText" class="text-sm mt-2"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Error details if any -->
+        {% if error_details %}
+        <div class="alert alert-error mb-4">
+          <div>
+            <strong>Error Details:</strong>
+            <pre class="text-xs mt-2">{{ error_details }}</pre>
+            {% if error_traceback %}
+            <details class="mt-2">
+              <summary class="cursor-pointer text-xs">Show full traceback</summary>
+              <pre class="text-xs mt-2 overflow-auto max-h-48">{{ error_traceback }}</pre>
+            </details>
+            {% endif %}
+          </div>
+        </div>
+        {% endif %}
+
+        <div class="flex gap-2">
+          <button type="submit" class="btn btn-primary" id="submitBtn">Import Folder Structure</button>
+          <a href="{% url 'ilogic:import_markdown' %}" class="btn btn-secondary">Use Markdown Instead</a>
+          <a href="{% url 'ilogic:assembly_list' %}" class="btn btn-outline">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    console.log('[iLogic] Structured import page loaded');
+    
+    const form = document.getElementById('folderImportForm');
+    const folderInput = document.getElementById('folderInput');
+    const fileCount = document.getElementById('fileCount');
+    const loadingIndicator = document.getElementById('loadingIndicator');
+    const progressText = document.getElementById('progressText');
+    const submitBtn = document.getElementById('submitBtn');
+    
+    // Show file count when folder is selected
+    folderInput.addEventListener('change', function(e) {
+      const files = e.target.files;
+      const count = files.length;
+      console.log('[iLogic] Folder selected:', count, 'file(s)');
+      
+      if (count > 0) {
+        const txtFiles = Array.from(files).filter(f => f.name.endsWith('.txt'));
+        const txtCount = txtFiles.length;
+        console.log('[iLogic] Found', txtCount, '.txt file(s)');
+        console.log('[iLogic] Sample file names:', Array.from(files).slice(0, 5).map(f => f.name));
+        
+        fileCount.textContent = `Selected: ${count} file(s) total, ${txtCount} .txt rule file(s)`;
+        fileCount.classList.remove('hidden');
+      } else {
+        fileCount.classList.add('hidden');
+      }
+    });
+    
+    // Form submission
+    form.addEventListener('submit', function(e) {
+      const files = folderInput.files;
+      console.log('[iLogic] Starting structured import...');
+      console.log('[iLogic] Files to import:', files.length);
+      
+      // Show loading
+      loadingIndicator.classList.remove('hidden');
+      progressText.textContent = `Uploading ${files.length} file(s) to server...`;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Importing...';
+    });
+  </script>
+{% endblock %}
+

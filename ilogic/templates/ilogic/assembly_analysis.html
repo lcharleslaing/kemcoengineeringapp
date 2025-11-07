@@ -1,0 +1,79 @@
+{% extends "core/base.html" %}
+
+{% block title %}{{ assembly.name }} - Analysis{% endblock %}
+
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="container mx-auto p-6">
+  <div class="mb-6 flex items-center justify-between">
+    <div>
+      <h1 class="text-3xl font-bold">{{ assembly.name }} - Analysis</h1>
+      <p class="text-base-content/70 mt-1">Review inconsistencies and errors in this assembly</p>
+    </div>
+    <div class="flex gap-2">
+      <a href="{% url 'ilogic:assembly_detail' assembly.pk %}" class="btn btn-outline">Back to Assembly</a>
+    </div>
+  </div>
+
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h2 class="card-title mb-4">Open Issues ({{ inconsistencies|length }})</h2>
+      
+      {% if inconsistencies %}
+      <div class="overflow-x-auto">
+        <table class="table table-zebra w-full">
+          <thead>
+            <tr>
+              <th>Severity</th>
+              <th>Type</th>
+              <th>Description</th>
+              <th>Component</th>
+              <th>Rule</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for inc in inconsistencies %}
+            <tr>
+              <td>
+                <span class="badge badge-{{ inc.severity }}">{{ inc.get_severity_display }}</span>
+              </td>
+              <td>{{ inc.get_inconsistency_type_display }}</td>
+              <td>{{ inc.description|truncatewords:20 }}</td>
+              <td>
+                {% if inc.component %}
+                <a href="{% url 'ilogic:component_detail' inc.component.pk %}" class="link">{{ inc.component.name }}</a>
+                {% else %}
+                -
+                {% endif %}
+              </td>
+              <td>
+                {% if inc.rule %}
+                <a href="{% url 'ilogic:rule_detail' inc.rule.pk %}" class="link">{{ inc.rule.rule_name }}</a>
+                {% else %}
+                -
+                {% endif %}
+              </td>
+              <td>
+                <a href="{% url 'ilogic:inconsistency_detail' inc.pk %}" class="btn btn-sm btn-primary">View</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <div class="text-center py-8">
+        <svg class="w-16 h-16 mx-auto text-base-content/30 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <p class="text-lg font-semibold mb-2">No issues found!</p>
+        <p class="text-base-content/60">This assembly has no open inconsistencies.</p>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
+

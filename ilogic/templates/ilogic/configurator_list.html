@@ -1,0 +1,45 @@
+{% extends "core/base.html" %}
+
+{% block title %}Configurators - iLogic{% endblock %}
+
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="container mx-auto p-6">
+  <div class="mb-6 flex items-center justify-between">
+    <div>
+      <h1 class="text-3xl font-bold">Configurators</h1>
+      <p class="text-base-content/70 mt-1">Simulate rule execution and generate BOMs</p>
+    </div>
+    <div class="flex gap-2">
+      <a href="{% url 'ilogic:configurator_create' %}" class="btn btn-primary">New Configurator</a>
+      <a href="{% url 'ilogic:assembly_list' %}" class="btn btn-outline">Back</a>
+    </div>
+  </div>
+
+  {% if configurators %}
+  <div class="grid gap-4 md:grid-cols-2">
+    {% for configurator in configurators %}
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title">{{ configurator.name }}</h2>
+        <p class="text-sm text-base-content/60">{{ configurator.assembly.name }}</p>
+        <div class="card-actions justify-end mt-4">
+          <a href="{% url 'ilogic:configurator_detail' configurator.pk %}" class="btn btn-primary btn-sm">Open</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body text-center py-12">
+      <p class="text-lg font-semibold mb-2">No configurators yet</p>
+      <p class="text-base-content/60 mb-4">Create a configurator to simulate rule execution.</p>
+      <a href="{% url 'ilogic:configurator_create' %}" class="btn btn-primary">Create Configurator</a>
+    </div>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}
+

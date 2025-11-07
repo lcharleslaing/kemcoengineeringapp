@@ -1,0 +1,114 @@
+{% extends "core/base.html" %}
+
+{% block title %}{{ rule.rule_name }} - iLogic{% endblock %}
+
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="container mx-auto p-6">
+  <div class="mb-6 flex items-center justify-between">
+    <div>
+      <h1 class="text-3xl font-bold">{{ rule.rule_name }}</h1>
+      <p class="text-base-content/70 mt-1">
+        <a href="{% url 'ilogic:component_detail' rule.component.pk %}" class="link">{{ rule.component.name }}</a>
+        in
+        <a href="{% url 'ilogic:assembly_detail' rule.component.assembly.pk %}" class="link">{{ rule.component.assembly.name }}</a>
+      </p>
+    </div>
+    <div class="flex gap-2">
+      <a href="{% url 'ilogic:rule_analyze' rule.pk %}" class="btn btn-warning">Re-analyze</a>
+      <a href="{% url 'ilogic:rule_edit' rule.pk %}" class="btn btn-primary">Edit</a>
+      <a href="{% url 'ilogic:component_detail' rule.component.pk %}" class="btn btn-outline">Back</a>
+    </div>
+  </div>
+
+  <!-- Inconsistencies -->
+  {% if inconsistencies %}
+  <div class="alert alert-warning mb-6">
+    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+    </svg>
+    <div>
+      <h3 class="font-bold">Found {{ inconsistencies|length }} issue{{ inconsistencies|length|pluralize }}</h3>
+      <div class="text-xs">
+        {% for inc in inconsistencies %}
+        <div class="mt-1">
+          <span class="badge badge-{{ inc.severity }} badge-sm">{{ inc.get_severity_display }}</span>
+          {{ inc.get_inconsistency_type_display }}: {{ inc.description|truncatewords:20 }}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Rule Info -->
+  <div class="card bg-base-100 shadow-xl mb-6">
+    <div class="card-body">
+      <h2 class="card-title">Rule Information</h2>
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <div class="text-sm text-base-content/60">Type</div>
+          <div class="font-semibold">{{ rule.get_rule_type_display }}</div>
+        </div>
+        {% if rule.triggers %}
+        <div>
+          <div class="text-sm text-base-content/60">Triggers</div>
+          <div>
+            {% for trigger in rule.triggers %}
+            <span class="badge badge-outline badge-sm">{{ trigger }}</span>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+      </div>
+      {% if rule.notes %}
+      <div class="mt-4">
+        <div class="text-sm text-base-content/60">Notes</div>
+        <div class="mt-1">{{ rule.notes|linebreaks }}</div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Part Numbers -->
+  {% if part_numbers %}
+  <div class="card bg-base-100 shadow-xl mb-6">
+    <div class="card-body">
+      <h2 class="card-title">Extracted Part Numbers</h2>
+      <div class="overflow-x-auto">
+        <table class="table table-zebra w-full">
+          <thead>
+            <tr>
+              <th>Component</th>
+              <th>Part Number</th>
+              <th>Description</th>
+              <th>Size</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for pn in part_numbers %}
+            <tr>
+              <td>{{ pn.component }}</td>
+              <td><code>{{ pn.part_number }}</code></td>
+              <td>{{ pn.description|default:"-" }}</td>
+              <td>{{ pn.size|default:"-" }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Code -->
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h2 class="card-title">Rule Code</h2>
+      <pre class="bg-base-200 p-4 rounded-lg overflow-x-auto"><code class="language-vbnet">{{ rule.rule_code }}</code></pre>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

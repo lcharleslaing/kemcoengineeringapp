@@ -1,0 +1,56 @@
+{% extends "core/base.html" %}
+
+{% block title %}Edit Rule{% endblock %}
+
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="container mx-auto p-6">
+  <div class="mb-6">
+    <h1 class="text-3xl font-bold">Edit Rule: {{ rule.rule_name }}</h1>
+    <p class="text-base-content/70 mt-1">{{ rule.component.name }} in {{ rule.component.assembly.name }}</p>
+  </div>
+
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <form method="post">
+        {% csrf_token %}
+        
+        <div class="form-control mb-4">
+          <label class="label">
+            <span class="label-text font-semibold">Rule Name *</span>
+          </label>
+          <input type="text" name="rule_name" class="input input-bordered" value="{{ rule.rule_name }}" required>
+        </div>
+
+        <div class="form-control mb-4">
+          <label class="label">
+            <span class="label-text font-semibold">Rule Code *</span>
+          </label>
+          <textarea name="rule_code" class="textarea textarea-bordered font-mono text-sm h-96" required>{{ rule.rule_code }}</textarea>
+        </div>
+
+        <div class="form-control mb-4">
+          <label class="label">
+            <span class="label-text font-semibold">Change Notes</span>
+          </label>
+          <textarea name="change_notes" class="textarea textarea-bordered" rows="2" placeholder="Describe what changed in this version..."></textarea>
+        </div>
+
+        <div class="form-control mb-4">
+          <label class="label">
+            <span class="label-text font-semibold">Notes</span>
+          </label>
+          <textarea name="notes" class="textarea textarea-bordered" rows="3">{{ rule.notes }}</textarea>
+        </div>
+
+        <div class="flex gap-2">
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+          <a href="{% url 'ilogic:rule_detail' rule.pk %}" class="btn btn-outline">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

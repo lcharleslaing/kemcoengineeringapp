@@ -1,0 +1,66 @@
+{% extends "core/base.html" %}
+
+{% block title %}Import iLogic Code{% endblock %}
+
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="container mx-auto p-6">
+  <div class="mb-6">
+    <h1 class="text-3xl font-bold">Import Single Rule (Quick Test)</h1>
+    <p class="text-base-content/70 mt-1">Paste a single iLogic rule for quick import and testing</p>
+    <div class="alert alert-warning mt-2">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+      <div>
+        <strong>For importing multiple rules:</strong> Use <a href="{% url 'ilogic:import_markdown' %}" class="link">Markdown Import</a> or <a href="{% url 'ilogic:import_structured' %}" class="link">Structured Folder Import</a> instead.
+      </div>
+    </div>
+  </div>
+
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <form method="post">
+        {% csrf_token %}
+        
+        <div class="form-control mb-4">
+          <label class="label">
+            <span class="label-text font-semibold">Assembly Name *</span>
+          </label>
+          <input type="text" name="assembly_name" class="input input-bordered" placeholder="e.g., Heater Assembly" required>
+          <label class="label">
+            <span class="label-text-alt">Name of the assembly this rule belongs to</span>
+          </label>
+        </div>
+
+        <div class="form-control mb-4">
+          <label class="label">
+            <span class="label-text font-semibold">Rule Name *</span>
+          </label>
+          <input type="text" name="rule_name" class="input input-bordered" placeholder="e.g., Flange Size Parameters" required>
+          <label class="label">
+            <span class="label-text-alt">Name of this rule</span>
+          </label>
+        </div>
+
+        <div class="form-control mb-4">
+          <label class="label">
+            <span class="label-text font-semibold">iLogic Code *</span>
+          </label>
+          <textarea name="code" class="textarea textarea-bordered h-96 font-mono text-sm" placeholder="Paste your iLogic VBA code here..." required></textarea>
+          <label class="label">
+            <span class="label-text-alt">Paste the complete iLogic rule code</span>
+          </label>
+        </div>
+
+        <div class="flex gap-2">
+          <button type="submit" class="btn btn-primary">Import & Analyze</button>
+          <a href="{% url 'ilogic:assembly_list' %}" class="btn btn-outline">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

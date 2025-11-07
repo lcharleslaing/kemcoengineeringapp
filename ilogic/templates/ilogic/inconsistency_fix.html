@@ -1,0 +1,35 @@
+{% extends "core/base.html" %}
+
+{% block title %}Mark Inconsistency as Fixed{% endblock %}
+
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="container mx-auto p-6">
+  <div class="mb-6">
+    <h1 class="text-3xl font-bold">Mark as Fixed</h1>
+    <p class="text-base-content/70 mt-1">Confirm that this inconsistency has been resolved</p>
+  </div>
+
+  <div class="card bg-base-100 shadow-xl mb-6">
+    <div class="card-body">
+      <h2 class="card-title">{{ inconsistency.get_inconsistency_type_display }}</h2>
+      <p>{{ inconsistency.description }}</p>
+    </div>
+  </div>
+
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <form method="post">
+        {% csrf_token %}
+        <p class="mb-4">Are you sure you want to mark this inconsistency as fixed?</p>
+        <div class="flex gap-2">
+          <button type="submit" class="btn btn-success">Yes, Mark as Fixed</button>
+          <a href="{% url 'ilogic:inconsistency_detail' inconsistency.pk %}" class="btn btn-outline">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

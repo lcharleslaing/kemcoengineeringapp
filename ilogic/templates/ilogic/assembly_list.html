@@ -1,0 +1,70 @@
+{% extends "core/base.html" %}
+
+{% block title %}iLogic Assemblies{% endblock %}
+
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="container mx-auto p-6">
+  <div class="mb-6 flex items-center justify-between">
+    <div>
+      <h1 class="text-3xl font-bold">iLogic Rules Management</h1>
+      <p class="text-base-content/70 mt-1">Organize and analyze Inventor iLogic rules by assembly structure</p>
+    </div>
+    <div class="flex gap-2 flex-wrap">
+      <a href="{% url 'ilogic:import_structured' %}" class="btn btn-primary">Import Structured Folder</a>
+      <a href="{% url 'ilogic:import_markdown' %}" class="btn btn-secondary">Import Markdown File</a>
+      <a href="{% url 'ilogic:import_paste' %}" class="btn btn-outline btn-sm">Quick: Paste Single Rule</a>
+      <a href="{% url 'ilogic:assembly_create' %}" class="btn btn-outline">New Assembly</a>
+      <a href="{% url 'ilogic:analysis_dashboard' %}" class="btn btn-warning">Analysis Dashboard</a>
+    </div>
+  </div>
+
+  {% if assemblies %}
+  <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+    {% for assembly in assemblies %}
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title">{{ assembly.name }}</h2>
+        <div class="stats stats-vertical shadow">
+          <div class="stat">
+            <div class="stat-title">Components</div>
+            <div class="stat-value text-primary">{{ assembly.component_count }}</div>
+          </div>
+          <div class="stat">
+            <div class="stat-title">Rules</div>
+            <div class="stat-value text-secondary">{{ assembly.rule_count }}</div>
+          </div>
+          <div class="stat">
+            <div class="stat-title">Open Issues</div>
+            <div class="stat-value {% if assembly.inconsistency_count > 0 %}text-error{% else %}text-success{% endif %}">
+              {{ assembly.inconsistency_count }}
+            </div>
+          </div>
+        </div>
+        <div class="card-actions justify-end mt-4">
+          <a href="{% url 'ilogic:assembly_detail' assembly.pk %}" class="btn btn-primary btn-sm">View</a>
+          <a href="{% url 'ilogic:assembly_analysis' assembly.pk %}" class="btn btn-warning btn-sm">Analyze</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body text-center py-12">
+      <svg class="w-16 h-16 mx-auto text-base-content/30 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+      </svg>
+      <p class="text-lg font-semibold mb-2">No assemblies yet</p>
+      <p class="text-base-content/60 mb-4">Get started by importing iLogic rules or creating a new assembly.</p>
+      <div class="flex gap-2 justify-center">
+        <a href="{% url 'ilogic:import_paste' %}" class="btn btn-primary">Import Code</a>
+        <a href="{% url 'ilogic:assembly_create' %}" class="btn btn-outline">Create Assembly</a>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}
+

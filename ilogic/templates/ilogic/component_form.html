@@ -1,0 +1,55 @@
+{% extends "core/base.html" %}
+
+{% block title %}{% if edit %}Edit{% else %}Create{% endif %} Component{% endblock %}
+
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="container mx-auto p-6">
+  <div class="mb-6">
+    <h1 class="text-3xl font-bold">{% if edit %}Edit{% else %}Create{% endif %} Component</h1>
+  </div>
+
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <form method="post">
+        {% csrf_token %}
+        
+        <div class="form-control mb-4">
+          <label class="label">
+            <span class="label-text font-semibold">Component Name *</span>
+          </label>
+          <input type="text" name="name" class="input input-bordered" value="{% if edit %}{{ component.name }}{% endif %}" required>
+        </div>
+
+        <div class="form-control mb-4">
+          <label class="label">
+            <span class="label-text font-semibold">Inventor Instance Name</span>
+          </label>
+          <input type="text" name="inventor_instance_name" class="input input-bordered" value="{% if edit %}{{ component.inventor_instance_name }}{% endif %}" placeholder="e.g., :1">
+        </div>
+
+        <div class="form-control mb-4">
+          <label class="label">
+            <span class="label-text font-semibold">Component Type</span>
+          </label>
+          <input type="text" name="component_type" class="input input-bordered" value="{% if edit %}{{ component.component_type }}{% endif %}" placeholder="e.g., Flange, Pipe, Tank">
+        </div>
+
+        <div class="form-control mb-4">
+          <label class="label">
+            <span class="label-text font-semibold">Description</span>
+          </label>
+          <textarea name="description" class="textarea textarea-bordered" rows="3">{% if edit %}{{ component.description }}{% endif %}</textarea>
+        </div>
+
+        <div class="flex gap-2">
+          <button type="submit" class="btn btn-primary">{% if edit %}Update{% else %}Create{% endif %}</button>
+          <a href="{% if edit %}{% url 'ilogic:component_detail' component.pk %}{% else %}{% url 'ilogic:assembly_list' %}{% endif %}" class="btn btn-outline">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

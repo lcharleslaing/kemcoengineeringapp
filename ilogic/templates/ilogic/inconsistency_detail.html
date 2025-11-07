@@ -1,0 +1,88 @@
+{% extends "core/base.html" %}
+
+{% block title %}Inconsistency Details{% endblock %}
+
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="container mx-auto p-6">
+  <div class="mb-6 flex items-center justify-between">
+    <div>
+      <h1 class="text-3xl font-bold">Inconsistency Details</h1>
+      <p class="text-base-content/70 mt-1">
+        <span class="badge badge-{{ inconsistency.severity }}">{{ inconsistency.get_severity_display }}</span>
+        <span class="badge badge-{{ inconsistency.status }} ml-2">{{ inconsistency.get_status_display }}</span>
+      </p>
+    </div>
+    <div class="flex gap-2">
+      {% if inconsistency.status == 'open' %}
+      <a href="{% url 'ilogic:inconsistency_fix' inconsistency.pk %}" class="btn btn-success">Mark as Fixed</a>
+      {% endif %}
+      <a href="{% url 'ilogic:inconsistency_list' %}" class="btn btn-outline">Back</a>
+    </div>
+  </div>
+
+  <div class="card bg-base-100 shadow-xl mb-6">
+    <div class="card-body">
+      <h2 class="card-title">Issue Information</h2>
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <div class="text-sm text-base-content/60">Type</div>
+          <div class="font-semibold">{{ inconsistency.get_inconsistency_type_display }}</div>
+        </div>
+        <div>
+          <div class="text-sm text-base-content/60">Severity</div>
+          <div><span class="badge badge-{{ inconsistency.severity }}">{{ inconsistency.get_severity_display }}</span></div>
+        </div>
+        <div>
+          <div class="text-sm text-base-content/60">Status</div>
+          <div><span class="badge badge-{{ inconsistency.status }}">{{ inconsistency.get_status_display }}</span></div>
+        </div>
+        <div>
+          <div class="text-sm text-base-content/60">Found</div>
+          <div>{{ inconsistency.found_at|date:"M d, Y H:i" }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card bg-base-100 shadow-xl mb-6">
+    <div class="card-body">
+      <h2 class="card-title">Description</h2>
+      <p>{{ inconsistency.description|linebreaks }}</p>
+    </div>
+  </div>
+
+  {% if inconsistency.suggested_fix %}
+  <div class="card bg-base-100 shadow-xl mb-6">
+    <div class="card-body">
+      <h2 class="card-title">Suggested Fix</h2>
+      <p>{{ inconsistency.suggested_fix|linebreaks }}</p>
+    </div>
+  </div>
+  {% endif %}
+
+  {% if inconsistency.code_location %}
+  <div class="card bg-base-100 shadow-xl mb-6">
+    <div class="card-body">
+      <h2 class="card-title">Code Location</h2>
+      <p><code>{{ inconsistency.code_location }}</code></p>
+    </div>
+  </div>
+  {% endif %}
+
+  {% if inconsistency.rule %}
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h2 class="card-title">Related Rule</h2>
+      <p>
+        <a href="{% url 'ilogic:rule_detail' inconsistency.rule.pk %}" class="link font-semibold">{{ inconsistency.rule.rule_name }}</a>
+        in
+        <a href="{% url 'ilogic:component_detail' inconsistency.rule.component.pk %}" class="link">{{ inconsistency.rule.component.name }}</a>
+      </p>
+    </div>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}
+

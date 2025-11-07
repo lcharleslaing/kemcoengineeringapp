@@ -1,0 +1,63 @@
+{% extends "core/base.html" %}
+
+{% block title %}{{ component.name }} - iLogic{% endblock %}
+
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="container mx-auto p-6">
+  <div class="mb-6 flex items-center justify-between">
+    <div>
+      <h1 class="text-3xl font-bold">{{ component.name }}</h1>
+      <p class="text-base-content/70 mt-1">
+        <a href="{% url 'ilogic:assembly_detail' component.assembly.pk %}" class="link">{{ component.assembly.name }}</a>
+      </p>
+    </div>
+    <div class="flex gap-2">
+      <a href="{% url 'ilogic:component_edit' component.pk %}" class="btn btn-secondary">Edit</a>
+      <a href="{% url 'ilogic:assembly_detail' component.assembly.pk %}" class="btn btn-outline">Back</a>
+    </div>
+  </div>
+
+  <!-- Rules -->
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h2 class="card-title mb-4">Rules ({{ rules|length }})</h2>
+      
+      {% if rules %}
+      <div class="space-y-4">
+        {% for rule in rules %}
+        <div class="border border-base-300 rounded-lg p-4">
+          <div class="flex items-center justify-between mb-2">
+            <div>
+              <h3 class="font-semibold text-lg">{{ rule.rule_name }}</h3>
+              <div class="flex gap-2 mt-1">
+                <span class="badge badge-outline">{{ rule.get_rule_type_display }}</span>
+                {% if rule.triggers %}
+                {% for trigger in rule.triggers|slice:":3" %}
+                <span class="badge badge-sm">{{ trigger }}</span>
+                {% endfor %}
+                {% endif %}
+              </div>
+            </div>
+            <div class="flex gap-2">
+              <a href="{% url 'ilogic:rule_detail' rule.pk %}" class="btn btn-sm btn-primary">View</a>
+              <a href="{% url 'ilogic:rule_edit' rule.pk %}" class="btn btn-sm btn-secondary">Edit</a>
+            </div>
+          </div>
+          <div class="text-sm text-base-content/60 mt-2">
+            <code class="text-xs">{{ rule.rule_code|truncatewords:30 }}</code>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="text-center py-8">
+        <p class="text-base-content/60">No rules for this component yet.</p>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
+

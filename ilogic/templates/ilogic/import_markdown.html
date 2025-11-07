@@ -1,0 +1,202 @@
+{% extends "core/base.html" %}
+
+{% block title %}Import Markdown File{% endblock %}
+
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="container mx-auto p-6">
+  <div class="mb-6">
+    <h1 class="text-3xl font-bold">Import from Markdown File</h1>
+    <p class="text-base-content/70 mt-1">Upload a markdown file exported from Inventor (single file export)</p>
+  </div>
+
+  <div class="card bg-base-100 shadow-xl mb-6">
+    <div class="card-body">
+      <h2 class="card-title mb-4">How to Export from Inventor</h2>
+      <div class="prose max-w-none">
+        <ol class="list-decimal list-inside space-y-2">
+          <li>Run the <strong>single file export rule</strong> in Inventor</li>
+          <li>Choose where to save the .md file</li>
+          <li>Inventor will create one markdown file with all rules</li>
+          <li>Upload that file below</li>
+        </ol>
+        <p class="mt-4 text-sm text-base-content/70">
+          The markdown file contains all rules organized by component, with full code in code blocks.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <form method="post" enctype="multipart/form-data" id="markdownImportForm">
+        {% csrf_token %}
+        
+        <div class="form-control mb-4">
+          <label class="label">
+            <span class="label-text font-semibold">Markdown File *</span>
+          </label>
+          <input type="file" name="file" class="file-input file-input-bordered w-full" accept=".md,.txt" required id="markdownFileInput">
+          <label class="label">
+            <span class="label-text-alt">Select the .md file exported from Inventor</span>
+          </label>
+          <div id="fileInfo" class="text-sm text-base-content/60 mt-2 hidden"></div>
+        </div>
+
+        <div class="alert alert-info mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <div>
+            <p class="font-semibold">The markdown file should be exported using the single file export rule from Inventor.</p>
+            <p class="text-sm mt-1">Expected format: File starts with "# Assembly Name", then rules in format "## Rule: RuleName" with code blocks.</p>
+          </div>
+        </div>
+
+        <!-- Loading indicator -->
+        <div id="loadingIndicator" class="hidden mb-4">
+          <div class="alert alert-info">
+            <span class="loading loading-spinner loading-md"></span>
+            <div>
+              <div>Importing file... Please wait. This may take a minute for large files.</div>
+              <div id="progressText" class="text-sm mt-2"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Debug info -->
+        <div id="debugInfo" class="hidden mb-4">
+          <div class="alert alert-warning">
+            <div class="text-xs font-mono">
+              <div id="debugContent"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Error details if any -->
+        {% if error_details %}
+        <div class="alert alert-error mb-4">
+          <div>
+            <strong>Error Details:</strong>
+            <pre class="text-xs mt-2">{{ error_details }}</pre>
+            {% if error_traceback %}
+            <details class="mt-2">
+              <summary class="cursor-pointer text-xs">Show full traceback</summary>
+              <pre class="text-xs mt-2 overflow-auto max-h-48">{{ error_traceback }}</pre>
+            </details>
+            {% endif %}
+          </div>
+        </div>
+        {% endif %}
+
+        <div class="flex gap-2">
+          <button type="submit" class="btn btn-primary" id="submitBtn">Import File</button>
+          <a href="{% url 'ilogic:assembly_list' %}" class="btn btn-outline">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  console.log('[iLogic] Markdown import page loaded');
+  
+  const form = document.getElementById('markdownImportForm');
+  const fileInput = document.getElementById('markdownFileInput');
+  const fileInfo = document.getElementById('fileInfo');
+  const loadingIndicator = document.getElementById('loadingIndicator');
+  const debugInfo = document.getElementById('debugInfo');
+  const debugContent = document.getElementById('debugContent');
+  const submitBtn = document.getElementById('submitBtn');
+  
+  // Show file info when selected
+  fileInput.addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file) {
+      console.log('[iLogic] File selected:', file.name, 'Size:', file.size, 'bytes');
+      fileInfo.textContent = `Selected: ${file.name} (${(file.size / 1024).toFixed(2)} KB)`;
+      fileInfo.classList.remove('hidden');
+    } else {
+      fileInfo.classList.add('hidden');
+    }
+  });
+  
+  // Form submission
+  form.addEventListener('submit', function(e) {
+    const file = fileInput.files[0];
+    if (!file) {
+      console.error('[iLogic] No file selected');
+      return;
+    }
+    
+    console.log('[iLogic] Starting markdown import...');
+    console.log('[iLogic] File:', file.name, 'Size:', file.size, 'bytes', 'Type:', file.type);
+    
+    // Show loading
+    loadingIndicator.classList.remove('hidden');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Importing...';
+    
+    const progressText = document.getElementById('progressText');
+    progressText.textContent = 'Reading file...';
+    
+    // Read file preview for debugging
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const content = e.target.result;
+      console.log('[iLogic] File content preview (first 500 chars):', content.substring(0, 500));
+      
+      progressText.textContent = 'Parsing markdown...';
+      
+      // Check for assembly name
+      const assemblyMatch = content.match(/^#\s+(.+)$/m);
+      if (assemblyMatch) {
+        console.log('[iLogic] Found assembly name:', assemblyMatch[1]);
+      } else {
+        console.warn('[iLogic] No assembly name found (looking for "# Assembly Name" at start)');
+      }
+      
+      // Count rules
+      const ruleMatches = content.match(/## Rule:/g);
+      const ruleCount = ruleMatches ? ruleMatches.length : 0;
+      console.log('[iLogic] Found', ruleCount, 'rule(s)');
+      
+      progressText.textContent = `Found ${ruleCount} rule(s). Uploading to server...`;
+      
+      // Show debug info
+      debugContent.innerHTML = `
+        <div><strong>File:</strong> ${file.name}</div>
+        <div><strong>Size:</strong> ${(file.size / 1024).toFixed(2)} KB</div>
+        <div><strong>Assembly:</strong> ${assemblyMatch ? assemblyMatch[1] : 'NOT FOUND'}</div>
+        <div><strong>Rules Found:</strong> ${ruleCount}</div>
+        <div><strong>First 200 chars:</strong> ${content.substring(0, 200).replace(/\n/g, '\\n')}</div>
+      `;
+      debugInfo.classList.remove('hidden');
+      
+      // Allow form to submit now
+      console.log('[iLogic] File analyzed, submitting form...');
+    };
+    reader.onerror = function(e) {
+      console.error('[iLogic] Error reading file:', e);
+      progressText.textContent = 'Error reading file';
+      loadingIndicator.classList.add('hidden');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Import File';
+    };
+    reader.readAsText(file);
+  });
+  
+  // Check for Django messages on page load
+  document.addEventListener('DOMContentLoaded', function() {
+    const alerts = document.querySelectorAll('.alert');
+    alerts.forEach(function(alert) {
+      const text = alert.textContent.trim();
+      if (text) {
+        console.log('[iLogic] Django message:', text);
+      }
+    });
+  });
+</script>
+{% endblock %}
+

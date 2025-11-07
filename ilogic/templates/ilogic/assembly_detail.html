@@ -1,0 +1,92 @@
+{% extends "core/base.html" %}
+
+{% block title %}{{ assembly.name }} - iLogic{% endblock %}
+
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="container mx-auto p-6">
+  <div class="mb-6 flex items-center justify-between">
+    <div>
+      <h1 class="text-3xl font-bold">{{ assembly.name }}</h1>
+      <p class="text-base-content/70 mt-1">{{ assembly.description|default:"No description" }}</p>
+      {% if assembly.inventor_file_path %}
+      <p class="text-sm text-base-content/60 mt-1">File: <code>{{ assembly.inventor_file_path }}</code></p>
+      {% endif %}
+    </div>
+    <div class="flex gap-2">
+      <a href="{% url 'ilogic:assembly_analysis' assembly.pk %}" class="btn btn-warning">Analyze</a>
+      <a href="{% url 'ilogic:assembly_edit' assembly.pk %}" class="btn btn-secondary">Edit</a>
+      <a href="{% url 'ilogic:assembly_list' %}" class="btn btn-outline">Back</a>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats shadow mb-6">
+    <div class="stat">
+      <div class="stat-title">Components</div>
+      <div class="stat-value text-primary">{{ components|length }}</div>
+    </div>
+    <div class="stat">
+      <div class="stat-title">Total Rules</div>
+      <div class="stat-value text-secondary">{{ total_rules }}</div>
+    </div>
+    <div class="stat">
+      <div class="stat-title">Open Issues</div>
+      <div class="stat-value {% if open_inconsistencies > 0 %}text-error{% else %}text-success{% endif %}">
+        {{ open_inconsistencies }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Components -->
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h2 class="card-title mb-4">Components</h2>
+      
+      {% if components %}
+      <div class="overflow-x-auto">
+        <table class="table table-zebra w-full">
+          <thead>
+            <tr>
+              <th>Component Name</th>
+              <th>Type</th>
+              <th>Rules</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for component in components %}
+            <tr>
+              <td>
+                <div class="font-medium">{{ component.name }}</div>
+                {% if component.inventor_instance_name %}
+                <div class="text-sm text-base-content/60">{{ component.inventor_instance_name }}</div>
+                {% endif %}
+              </td>
+              <td>{{ component.component_type|default:"-" }}</td>
+              <td>
+                <span class="badge badge-primary">{{ component.rules.count }}</span>
+              </td>
+              <td>
+                <a href="{% url 'ilogic:component_detail' component.pk %}" class="btn btn-sm btn-primary">View</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <div class="text-center py-8">
+        <p class="text-base-content/60">No components yet. Import rules to get started.</p>
+        <div class="mt-4">
+          <a href="{% url 'ilogic:import_paste' %}" class="btn btn-primary">Import Code</a>
+          <a href="{% url 'ilogic:import_markdown' %}" class="btn btn-secondary">Import Markdown</a>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
+

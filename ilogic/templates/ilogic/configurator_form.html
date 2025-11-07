@@ -1,0 +1,53 @@
+{% extends "core/base.html" %}
+
+{% block title %}{% if edit %}Edit{% else %}Create{% endif %} Configurator{% endblock %}
+
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="container mx-auto p-6">
+  <div class="mb-6">
+    <h1 class="text-3xl font-bold">{% if edit %}Edit{% else %}Create{% endif %} Configurator</h1>
+  </div>
+
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <form method="post">
+        {% csrf_token %}
+        
+        <div class="form-control mb-4">
+          <label class="label">
+            <span class="label-text font-semibold">Assembly *</span>
+          </label>
+          <select name="assembly" class="select select-bordered" required>
+            <option value="">Select an assembly</option>
+            {% for assembly in assemblies %}
+            <option value="{{ assembly.pk }}" {% if edit and configurator.assembly.pk == assembly.pk %}selected{% endif %}>{{ assembly.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-control mb-4">
+          <label class="label">
+            <span class="label-text font-semibold">Name *</span>
+          </label>
+          <input type="text" name="name" class="input input-bordered" value="{% if edit %}{{ configurator.name }}{% endif %}" required>
+        </div>
+
+        <div class="form-control mb-4">
+          <label class="label">
+            <span class="label-text font-semibold">Description</span>
+          </label>
+          <textarea name="description" class="textarea textarea-bordered" rows="3">{% if edit %}{{ configurator.description }}{% endif %}</textarea>
+        </div>
+
+        <div class="flex gap-2">
+          <button type="submit" class="btn btn-primary">{% if edit %}Update{% else %}Create{% endif %}</button>
+          <a href="{% if edit %}{% url 'ilogic:configurator_detail' configurator.pk %}{% else %}{% url 'ilogic:configurator_list' %}{% endif %}" class="btn btn-outline">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
