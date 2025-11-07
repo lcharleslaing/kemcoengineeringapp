@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Django server port - change this if you need a different port
+DJANGO_PORT=8001
+
 echo "🐍 Django Server Launcher"
 echo "========================="
 echo ""
@@ -33,11 +36,15 @@ elif command -v conda &> /dev/null; then
 fi
 
 if [ "$CONDA_ACTIVATED" = true ]; then
-    if conda activate django 2>/dev/null; then
+    # Try kemco first (home Linux setup), then django (work Windows setup), then venv
+    if conda activate kemco 2>/dev/null; then
+        echo "✓ Activated conda environment: kemco"
+        ENV_ACTIVATED=true
+    elif conda activate django 2>/dev/null; then
         echo "✓ Activated conda environment: django"
         ENV_ACTIVATED=true
     else
-        echo "⚠️  Conda found but 'django' environment not found, trying venv..."
+        echo "⚠️  Conda found but 'kemco' or 'django' environment not found, trying venv..."
     fi
 fi
 
@@ -64,8 +71,8 @@ echo "🔍 Checking Django setup..."
 
 # Check if Django is working
 if ! python -c "import django" 2>/dev/null; then
-    echo "❌ Django not found in conda environment!"
-    echo "Please make sure Django is installed in the 'django' conda environment."
+    echo "❌ Django not found in Python environment!"
+    echo "Please make sure Django is installed in your conda environment (kemco or django) or venv."
     exit 1
 fi
 
@@ -78,7 +85,7 @@ if [ ! -z "$EXISTING_PROCESS" ]; then
     echo "⚠️  Django server is already running (PID: $EXISTING_PROCESS)"
     echo "You can:"
     echo "1. Stop it with: kill $EXISTING_PROCESS"
-    echo "2. Or access it at: http://127.0.0.1:8000"
+    echo "2. Or access it at: http://127.0.0.1:$DJANGO_PORT"
     echo ""
     read -p "Stop existing server and start new one? (y/N): " -n 1 -r
     echo
@@ -87,7 +94,7 @@ if [ ! -z "$EXISTING_PROCESS" ]; then
         kill $EXISTING_PROCESS
         sleep 2
     else
-        echo "📝 Existing server will continue running at: http://127.0.0.1:8000"
+        echo "📝 Existing server will continue running at: http://127.0.0.1:$DJANGO_PORT"
         exit 0
     fi
 fi
@@ -95,10 +102,10 @@ fi
 echo "🚀 Starting Django development server..."
 echo ""
 echo "Your Django app will be available at:"
-echo "👉 http://127.0.0.1:8000"
+echo "👉 http://127.0.0.1:$DJANGO_PORT"
 echo ""
 echo "Press Ctrl+C to stop the server"
 echo ""
 
 # Start Django server
-python manage.py runserver 8000
+python manage.py runserver $DJANGO_PORT

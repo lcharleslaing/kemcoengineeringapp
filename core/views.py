@@ -168,7 +168,7 @@ def index(request):
                 "badge": "success",
                 "label": "Healthy",
                 "title": "Backend Services",
-                "detail": "Django dev server reachable at http://127.0.0.1:8000.",
+                "detail": "Django dev server reachable at http://127.0.0.1:8001.",
             },
             {
                 "badge": "info",

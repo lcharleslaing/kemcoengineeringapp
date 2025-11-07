@@ -36,20 +36,23 @@ if (process.platform === 'linux') {
   app.commandLine.appendSwitch('--disable-software-rasterizer');
 }
 
+// Django server port - change this if you need a different port
+const DJANGO_PORT = 8001;
+
 let djangoProcess = null;
 let mainWindow = null;
 
 // Cross-platform cleanup function
-function cleanupPort8000() {
+function cleanupDjangoPort() {
   const { execSync } = require('child_process');
   const isWindows = process.platform === 'win32';
   
   try {
     if (isWindows) {
       // Windows: Use PowerShell or bash (if Git Bash is available)
-      // Try to kill processes using port 8000
+      // Try to kill processes using the Django port
       try {
-        execSync('netstat -ano | findstr :8000', { stdio: 'ignore' });
+        execSync(`netstat -ano | findstr :${DJANGO_PORT}`, { stdio: 'ignore' });
         // If we found something, try to kill it (would need to parse PID)
         // For now, just try taskkill on common Python processes
         execSync('taskkill /F /IM python.exe /FI "WINDOWTITLE eq *manage.py*" 2>nul || true', { stdio: 'ignore', shell: true });
@@ -65,7 +68,7 @@ function cleanupPort8000() {
     } else {
       // Linux/Mac: Use standard Unix commands
       execSync('pkill -9 -f "manage.py runserver" 2>/dev/null || true', { stdio: 'ignore' });
-      execSync('fuser -k 8000/tcp 2>/dev/null || true', { stdio: 'ignore' });
+      execSync(`fuser -k ${DJANGO_PORT}/tcp 2>/dev/null || true`, { stdio: 'ignore' });
     }
   } catch (e) {
     // Ignore all cleanup errors - they're not critical
@@ -73,7 +76,7 @@ function cleanupPort8000() {
 }
 
 // Function to check if Django server is running
-function checkDjangoServer(port = 8000) {
+function checkDjangoServer(port = DJANGO_PORT) {
   return new Promise((resolve) => {
     const client = net.createConnection({ port }, () => {
       client.end();
@@ -86,7 +89,7 @@ function checkDjangoServer(port = 8000) {
 }
 
 // Function to wait for Django server to start
-async function waitForDjangoServer(port = 8000, maxAttempts = 30) {
+async function waitForDjangoServer(port = DJANGO_PORT, maxAttempts = 30) {
   console.log('Waiting for Django server to start...');
   for (let i = 0; i < maxAttempts; i++) {
     const isRunning = await checkDjangoServer(port);
@@ -196,18 +199,28 @@ function createWindow() {
       allowRunningInsecureContent: true
     },
     title: 'LeeCharlesLaing.net',
-    show: false // Don't show until ready
+    show: true // Show immediately
   });
 
   // Load the Django app
-  console.log('Loading Django app at http://127.0.0.1:8000');
-  mainWindow.loadURL('http://127.0.0.1:8000');
+  console.log(`Loading Django app at http://127.0.0.1:${DJANGO_PORT}`);
+  mainWindow.loadURL(`http://127.0.0.1:${DJANGO_PORT}`);
 
-  // Show window when ready
+  // Show window when ready (backup in case it was hidden)
   mainWindow.once('ready-to-show', () => {
-    console.log('Window ready, showing application...');
-    mainWindow.show();
+    console.log('Window ready, ensuring it is visible...');
+    if (!mainWindow.isVisible()) {
+      mainWindow.show();
+    }
   });
+  
+  // Fallback: Show window after 2 seconds even if ready-to-show doesn't fire
+  setTimeout(() => {
+    if (mainWindow && !mainWindow.isDestroyed() && !mainWindow.isVisible()) {
+      console.log('Showing window after timeout...');
+      mainWindow.show();
+    }
+  }, 2000);
 
   // Open DevTools in development
   if (process.env.NODE_ENV === 'development') {
@@ -276,28 +289,35 @@ ipcMain.handle('open-location', async (event, filePath) => {
 app.whenReady().then(async () => {
   console.log('Electron app is ready');
   
+  // Create window immediately - don't wait for Django
+  createWindow();
+  
   try {
     // Check if Django is already running
-    const isAlreadyRunning = await checkDjangoServer(8000);
+    const isAlreadyRunning = await checkDjangoServer(DJANGO_PORT);
     
     if (!isAlreadyRunning) {
       console.log('Django server not running, starting it...');
       await startDjangoServer();
       
-      // Wait for server to be ready
-      const serverReady = await waitForDjangoServer(8000, 20);
-      
-      if (!serverReady) {
-        console.error('Django server failed to start or become responsive');
-        console.log('You can try starting Django manually with: ./run_django.sh');
-        app.quit();
-        return;
-      }
+      // Wait for server to be ready (non-blocking)
+      waitForDjangoServer(DJANGO_PORT, 20).then((serverReady) => {
+        if (serverReady) {
+          console.log('Django server is now ready!');
+          // Reload the window to show Django content
+          if (mainWindow && !mainWindow.isDestroyed()) {
+            mainWindow.loadURL(`http://127.0.0.1:${DJANGO_PORT}`);
+          }
+        } else {
+          console.warn('Django server not ready yet, but window is open');
+          console.log('You can try starting Django manually with: ./run_django.sh');
+        }
+      }).catch((err) => {
+        console.error('Error waiting for Django:', err);
+      });
     } else {
       console.log('Django server is already running');
     }
-    
-    createWindow();
     
     // Register global keyboard shortcuts for history navigation
     globalShortcut.register('Alt+Left', () => {
@@ -314,8 +334,7 @@ app.whenReady().then(async () => {
     
   } catch (error) {
     console.error('Error during startup:', error);
-    console.log('Trying to create window anyway...');
-    createWindow();
+    console.log('Window created, but Django may not be ready');
   }
 
   app.on('activate', () => {
@@ -341,9 +360,9 @@ app.on('window-all-closed', () => {
     }
   }
   
-  // Extra cleanup: kill any remaining Django processes on port 8000
-  console.log('Cleaning up port 8000...');
-  cleanupPort8000();
+  // Extra cleanup: kill any remaining Django processes
+  console.log(`Cleaning up port ${DJANGO_PORT}...`);
+  cleanupDjangoPort();
   
   if (process.platform !== 'darwin') {
     app.quit();
@@ -361,9 +380,9 @@ app.on('before-quit', () => {
     }
   }
   
-  // Extra cleanup: kill any remaining Django processes on port 8000
-  console.log('Final cleanup of port 8000...');
-  cleanupPort8000();
+  // Extra cleanup: kill any remaining Django processes
+  console.log(`Final cleanup of port ${DJANGO_PORT}...`);
+  cleanupDjangoPort();
 });
 
 // Handle app termination
@@ -378,7 +397,7 @@ process.on('SIGTERM', () => {
   }
   
   // Force cleanup
-  cleanupPort8000();
+  cleanupDjangoPort();
   
   app.quit();
 });
@@ -394,7 +413,7 @@ process.on('SIGINT', () => {
   }
   
   // Force cleanup
-  cleanupPort8000();
+  cleanupDjangoPort();
   
   app.quit();
 });

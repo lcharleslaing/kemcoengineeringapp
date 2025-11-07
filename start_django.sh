@@ -9,34 +9,37 @@ echo "========================================="
 echo "Starting Django from: $SCRIPT_DIR"
 echo "========================================="
 
-# Kill any existing Django servers on port 8000 (multiple methods for reliability)
-echo "Cleaning up port 8000..."
+# Django server port - change this if you need a different port
+DJANGO_PORT=8001
+
+# Kill any existing Django servers on port (multiple methods for reliability)
+echo "Cleaning up port $DJANGO_PORT..."
 
 # Method 1: Kill by process name
 pkill -9 -f "manage.py runserver" 2>/dev/null
 
 # Method 2: Kill by port using lsof
-PID=$(lsof -ti:8000 2>/dev/null)
+PID=$(lsof -ti:$DJANGO_PORT 2>/dev/null)
 if [ ! -z "$PID" ]; then
-    echo "Killing process $PID on port 8000..."
+    echo "Killing process $PID on port $DJANGO_PORT..."
     kill -9 $PID 2>/dev/null
 fi
 
 # Method 3: Alternative using fuser
-fuser -k 8000/tcp 2>/dev/null
+fuser -k $DJANGO_PORT/tcp 2>/dev/null
 
 # Wait a moment for cleanup
 sleep 1
 
 # Verify port is free
-if lsof -Pi :8000 -sTCP:LISTEN -t >/dev/null 2>&1 ; then
-    echo "ERROR: Port 8000 is still in use!"
+if lsof -Pi :$DJANGO_PORT -sTCP:LISTEN -t >/dev/null 2>&1 ; then
+    echo "ERROR: Port $DJANGO_PORT is still in use!"
     echo "Please manually stop the process:"
-    lsof -i :8000
+    lsof -i :$DJANGO_PORT
     exit 1
 fi
 
-echo "✓ Port 8000 is free"
+echo "✓ Port $DJANGO_PORT is free"
 
 # Activate Python environment (conda or venv)
 # Try conda first (for Linux/home setup)
@@ -70,11 +73,15 @@ elif command -v conda &> /dev/null; then
 fi
 
 if [ "$CONDA_ACTIVATED" = true ]; then
-    if conda activate django 2>/dev/null; then
+    # Try kemco first (home Linux setup), then django (work Windows setup), then venv
+    if conda activate kemco 2>/dev/null; then
+        echo "✓ Activated conda environment: kemco"
+        ENV_ACTIVATED=true
+    elif conda activate django 2>/dev/null; then
         echo "✓ Activated conda environment: django"
         ENV_ACTIVATED=true
     else
-        echo "⚠️  Conda found but 'django' environment not found, trying venv..."
+        echo "⚠️  Conda found but 'kemco' or 'django' environment not found, trying venv..."
     fi
 fi
 
@@ -126,8 +133,8 @@ if [ ! -f "manage.py" ]; then
 fi
 
 echo "✓ Project directory verified"
-echo "Starting Django development server on port 8000..."
+echo "Starting Django development server on port $DJANGO_PORT..."
 echo "========================================="
 
 # Start Django server
-python manage.py runserver 8000
+python manage.py runserver $DJANGO_PORT
