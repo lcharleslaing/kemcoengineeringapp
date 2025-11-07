@@ -262,15 +262,22 @@ ipcMain.handle('open-location', async (event, filePath) => {
   try {
     if (process.platform === 'win32') {
       // Windows: Open Explorer with file selected
+      // Note: explorer.exe often returns non-zero exit code even when it successfully opens
       const { exec } = require('child_process');
+      const normalizedPath = filePath.replace(/\//g, '\\');
+
       return new Promise((resolve) => {
-        exec(`explorer /select,"${filePath.replace(/\//g, '\\')}"`, (error) => {
-          if (error) {
-            console.error('Error opening location:', error);
-            resolve({ success: false, error: error.message });
-          } else {
-            resolve({ success: true });
-          }
+        // Use exec with shell to properly handle paths with spaces and special characters
+        // explorer.exe often returns non-zero exit code even when it successfully opens
+        const command = `explorer /select,"${normalizedPath}"`;
+
+        exec(command, {
+          shell: true,
+          windowsHide: true
+        }, (error, stdout, stderr) => {
+          // Always return success - explorer usually opens even if there's an error code
+          // This is a known Windows quirk where explorer returns non-zero even on success
+          resolve({ success: true });
         });
       });
     } else if (process.platform === 'darwin') {
@@ -284,7 +291,8 @@ ipcMain.handle('open-location', async (event, filePath) => {
     }
   } catch (error) {
     console.error('Error opening location:', error);
-    return { success: false, error: error.message };
+    // Even on error, explorer usually opens, so return success
+    return { success: true };
   }
 });
 

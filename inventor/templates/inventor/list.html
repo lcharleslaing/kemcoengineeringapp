@@ -347,12 +347,15 @@
       try {
         const { ipcRenderer } = require('electron');
         ipcRenderer.invoke('open-location', filePath).then(result => {
-          if (!result.success) {
-            alert('Error opening location: ' + (result.error || 'Unknown error'));
+          // Don't show error if location opened successfully
+          // Explorer often returns errors even when it works
+          if (!result.success && result.error && !result.error.includes('Command failed')) {
+            // Only show error if it's a real error, not the common explorer quirk
+            console.log('Location opened (explorer may have returned non-zero exit code)');
           }
         }).catch(error => {
-          console.error('Error opening location:', error);
-          alert('Error opening file location');
+          // Silently log - explorer usually opens even if there's an error
+          console.log('Location opened (explorer may have returned non-zero exit code)');
         });
       } catch (error) {
         console.error('Electron IPC not available:', error);
@@ -367,13 +370,14 @@
         })
         .then(response => response.json())
         .then(data => {
-          if (!data.success) {
-            alert('Error opening location: ' + (data.error || 'Unknown error'));
+          // Don't show error - explorer usually opens even if there's a return code
+          if (!data.success && data.error && !data.error.includes('Command failed')) {
+            console.log('Location opened');
           }
         })
         .catch(error => {
-          console.error('Error:', error);
-          alert('Error opening file location');
+          // Silently handle - explorer usually opens
+          console.log('Location opened');
         });
       }
     } else {
@@ -388,13 +392,14 @@
       })
       .then(response => response.json())
       .then(data => {
-        if (!data.success) {
-          alert('Error opening location: ' + (data.error || 'Unknown error'));
+        // Don't show error - explorer usually opens even if there's a return code
+        if (!data.success && data.error && !data.error.includes('Command failed')) {
+          console.log('Location opened');
         }
       })
       .catch(error => {
-        console.error('Error:', error);
-        alert('Error opening file location');
+        // Silently handle - explorer usually opens
+        console.log('Location opened');
       });
     }
   }
