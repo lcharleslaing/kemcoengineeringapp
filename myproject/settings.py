@@ -166,6 +166,16 @@ LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/login/'
 
+# Session settings - unique to this project to avoid conflicts with other Electron/Django apps
+# This ensures each Electron app maintains its own separate session
+SESSION_COOKIE_NAME = 'kemcoengineeringapp_sessionid'
+SESSION_COOKIE_AGE = 1209600  # 2 weeks
+SESSION_SAVE_EVERY_REQUEST = False
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+
+# CSRF cookie settings - also unique to this project
+CSRF_COOKIE_NAME = 'kemcoengineeringapp_csrftoken'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 

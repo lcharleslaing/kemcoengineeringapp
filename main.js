@@ -196,7 +196,10 @@ function createWindow() {
       contextIsolation: false, // Disable to allow direct Node.js access
       enableRemoteModule: false,
       webSecurity: false, // Disabled for local development
-      allowRunningInsecureContent: true
+      allowRunningInsecureContent: true,
+      // Use a unique partition to isolate cookies/sessions from other Electron apps
+      // This ensures each Electron/Django project maintains its own separate session
+      partition: 'persist:kemcoengineeringapp'
     },
     title: 'LeeCharlesLaing.net',
     show: true // Show immediately
